@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+
+<head>
+    <title>简易聊天室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #messages {
+            width: 60%;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 3px 3px 3px #b1ebf5;
+        }
+
+        #ctn {
+            width: 60%;
+            margin: 0 auto;
+            padding: 10px;
+            /*            border: 1px solid #ccc;*/
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        #ctn #word {
+            float: left;
+            box-shadow: 3px 3px 3px #ccc;
+        }
+
+        #ctn input {
+            float: left;
+            width: 45px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #6a88ed;
+            color: aliceblue;
+            margin: 40px 0 0 2%;
+            box-shadow: 3px 3px 3px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <script type="text/javascript">
+        var name;
+        //window.onload=function(){
+  //      var str = prompt("请输入姓名：", "");
+  //      if (str) {
+  //          name = str + ":";
+  //      } else {
+  //          name = "游客:";
+  //      }
+        //}
+    </script> -->
+
+    <div id="messages"></div>
+    <div id="ctn">
+        <!--  <textarea rows="5" cols="80" id="word" value=""></textarea>-->
+        <input type="button" value="start" onclick="start()" />
+        <input type="button" value="end" onclick="end()" />
+        <input type="button" value="跳转" onclick="jump()" />
+    </div>
+    <div id="app" style="width:900px;height:500px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('app'));
+        var webSocket = new WebSocket('ws://192.168.0.57:8080/WeipanDemo/Weipan');
+
+        webSocket.onerror = function (event) {
+            onError(event)
+        };
+
+        webSocket.onopen = function (event) {
+            onOpen(event)
+        };
+
+        webSocket.onmessage = function (event) {
+            onMessage(event)
+        };
+
+        webSocket.onclose = function (event) {
+            console.log("client notified socket has closed", event)
+            document.getElementById('messages').innerHTML += '<br />' + "断开与服务器的连接";
+        }
+
+        function onMessage(event) {
+            document.getElementById('messages').innerHTML += '<br />' + event.data;
+            console.log(event);
+
+
+        }
+
+        function onOpen(event) {
+            document.getElementById('messages').innerHTML = '欢迎来到聊天室';
+
+            console.log(event);
+        }
+
+        function onError(event) {
+            //            alert(event.data);
+            //            alert("error");
+        }
+
+        function start() {
+            //      webSocket.send(name + document.getElementById("word").value);
+            webSocket.send("xxxxxxxxxxxxxxxxxxxxx");
+            //   document.getElementById("word").value = "";
+        }
+
+        function end() {
+            webSocket.close();
+        }
+
+        function jump() {
+            //        	window.location.href="https://www.baidu.com";
+        }
+        /*document.onkeypress = function (e) {
+            if (e && e.keyCode == 13) {
+                start();
+            }*/
+        }
+    </script>
+</body>
+
+</html>
