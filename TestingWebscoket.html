@@ -69,8 +69,8 @@
     </div>
     <div id="app" style="width:900px;height:500px;"></div>
     <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('app'));
-        var webSocket = new WebSocket('ws://192.168.0.57:8080/WeipanDemo/Weipan');
+//        var myChart = echarts.init(document.getElementById('app'));
+        var webSocket = new WebSocket('ws://192.168.0.57:8080/webSocket/websocket');
 
         webSocket.onerror = function (event) {
             onError(event)
@@ -90,16 +90,18 @@
         }
 
         function onMessage(event) {
-            document.getElementById('messages').innerHTML += '<br />' + event.data;
-            console.log(event);
-
+//            document.getElementById('messages').innerHTML += '<br />' + event.data;
+//            console.log(event);
+            console.log('aaa')
+            console.log(event.data)
 
         }
 
         function onOpen(event) {
             document.getElementById('messages').innerHTML = '欢迎来到聊天室';
 
-            console.log(event);
+//            console.log(event);
+
         }
 
         function onError(event) {
@@ -111,6 +113,7 @@
             //      webSocket.send(name + document.getElementById("word").value);
             webSocket.send("xxxxxxxxxxxxxxxxxxxxx");
             //   document.getElementById("word").value = "";
+            console.log('start!')
         }
 
         function end() {
@@ -124,7 +127,7 @@
             if (e && e.keyCode == 13) {
                 start();
             }*/
-        }
+//        }
     </script>
 </body>
 

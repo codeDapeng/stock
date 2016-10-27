@@ -11,30 +11,27 @@
 <body>
 
     <div id="app" style="width:900px;height:500px;"></div>
-
+    <button id="btn1">分时线</button>
+    <button id="btn2">5分钟线</button>
+    <button id="btn3">15分钟线</button>
+    <button id="btn4">30分钟线</button>
     <!--    <script src="http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do?p={'type':'1','contract':'OIL'}&jsonp=parseResponse "></script>-->
     <script>
         var myChart = echarts.init(document.getElementById('app'));
-        /*var a = {
-                                                'type': '1',
-                                                'contract': 'OIL'
-                                            }*/
-        //        console.log(JSON.stringify(a))
-        function getData() {
-
-
+        /*
+         *分时线绘图
+         */
+        function getData1() {
             $.ajax({
                 type: 'get',
                 //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
                 url: 'http://192.168.0.57:8080/WeipanDemo/Weipan',
                 //            dataType: 'json',
                 dataType: 'jsonp',
-                //            data: {
-                //                p: JSON.stringify(a)
-                //            },
+                data: 'value=1',
                 jsonp: 'jsonpcallback',
                 success: function (msg) {
-                    //                console.log(msg.result.dataList)
+                    //                    console.log(msg)
                     var data = [];
                     for (var i = 0; i < msg.result.dataList.length; i++) {
                         data.unshift(msg.result.dataList[i]);
@@ -128,22 +125,12 @@
                             }
 
                     }],
-                        /*timeLine: {
-                            show: true
-                        },*/
+                        //                        timeLine: {
+                        //                            show: true
+                        //                        },
 
                     };
-                                    myChart.setOption(option);
-//                    app.timeTicket = setInterval(function () {
-
-//                        for (var i = 0; i < 5; i++) {
-                            //                data.shift();
-//                            data.push(randomData());
-//                        }
-
-                        myChart.setOption(option);
-//                    }, 1000);
-
+                    myChart.setOption(option);
                 },
                 error: function (XmlHttpRequest, textStatus, errorThrown) {
                     alert("部门切换失败，请联系管理员!");
@@ -151,8 +138,138 @@
 
             })
         }
-        getData();
-        setInterval(getData,30000)
+        /*
+         *5分钟线绘图
+         */
+        function getData2(value) {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: 'http://192.168.0.57:8080/WeipanDemo/Weipan',
+                //            dataType: 'json',
+                dataType: 'jsonp',
+                data: 'value='+value,
+                jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    console.log(msg.result)
+                    var data = [];
+                    for (var i = 0; i < msg.result.dataList.length; i++) {
+                        data.unshift(msg.result.dataList[i]);
+
+                    }
+                    console.log(data);
+                    var date = [];
+                    for (var i = 0; i < msg.result.dateList.length; i++) {
+                        date.unshift(msg.result.dateList[i]);
+
+                    }
+                    console.log(date)
+                    option = {
+                        title: {
+                            text: 'Ajax轮询自动刷新 V0.0.1'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0]+' 收盘：'+params[0].value[1]+'<br/>最高：'+params[0].value[2]+' 最低：'+params[0].value[3];
+                                //                            console.log(params[0])
+
+                            },
+                            axisPointer: {
+                                type: 'line',
+                                lineStyle: {
+                                    color: '#48b',
+                                    width: 2,
+                                    type: 'solid'
+                                },
+                                crossStyle: {
+                                    color: '#1e90ff',
+                                    width: 1,
+                                    type: 'dashed'
+                                },
+                                shadowStyle: {
+                                    color: 'rgba(150,150,150,0.3)',
+                                    width: 'auto',
+                                    type: 'default'
+                                }
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            splitLine: {
+                                show: true
+                            },
+                            data: date,
+                            boundaryGap: true,
+                            axisLine: {
+                                onZero: false
+                            },
+                            splitLine: {
+                                show: false
+                            },
+                            splitNumber: 20,
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            axisTick:{
+                                alignWithLabel:true
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            //                        boundaryGap:false,
+                            //                        boundaryGap: [0, 10],
+                            scale: true,
+                            splitLine: {
+                                show: true
+                            },
+                            boundaryGap: false,
+                            spliteArea: {
+                                show: true,
+
+                            },
+
+
+                        },
+                        backgroundColor: 'rgba(68, 159, 250, 0.3)',
+                        series: [{
+                            name: '模拟数据',
+                            type: 'candlestick',
+                            //                        showSymbol: false,
+                            //                        hoverAnimation: false,
+                            data: data,
+                            smooth: false,
+                            dataFilter: 'nearst',
+                            //                        clickable:false,
+                            symbol: 'none',
+
+                        }],
+                        //                        timeLine: {
+                        //                            show: true
+                        //                        },
+
+                    };
+                    myChart.setOption(option);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("部门切换失败，请联系管理员!");
+                }
+
+            })
+        }
+        /*$('#btn1').on('click', function () {
+            getData1();
+            setInterval(getData1, 30000)
+        })*/
+//        getData2();
+        $('button').on('click',function(){
+            var val=$(this).index()
+            if(val>=2){
+                getData2(val);
+            }else{
+                getData1();
+//                setInterval(getData1, 30000)
+            }
+        })
     </script>
 </body>
 
