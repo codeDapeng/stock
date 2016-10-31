@@ -1,0 +1,114 @@
+/*
+ *prompt
+ */
+
+#promptWrap {
+    width: 100%;
+    padding: 0.2rem 0;
+    overflow: hidden;
+}
+
+#promptWrap .left {
+    width: 4.5rem;
+    /*    background: #e6e6e6;*/
+    float: left;
+}
+
+#promptWrap .left p {
+    text-align: center;
+}
+
+#promptWrap .right {
+    width: 5.5rem;
+    float: left;
+}
+
+#promptWrap .right p {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.trans{
+    background: #fff;
+    -webkit-transition: all 1.5s linear;
+    transition: all 1.5s linear;
+}
+
+@-webkit-keyframes red{
+    0%{
+        background: red
+    }
+    100%{
+        background: #fff
+    }
+}
+
+@keyframes red{
+    0%{
+        background: red
+    }
+    100%{
+        background: #fff
+    }
+}
+.red{
+    -webkit-animation: red 1.5s linear;
+    animation: red 1.5s linear;
+}
+@-webkit-keyframes green{
+    0%{
+        background: red
+    }
+    100%{
+        background: #fff
+    }
+}
+@keyframes green{
+    0%{
+        background: green
+    }
+    100%{
+        background: #fff
+    }
+}
+.green{
+    -webkit-animation: green 1.5s linear;
+    animation: green 1.5s linear;
+}
+/*
+ *button
+ */
+
+#buttonWrap {
+    width: 100%;
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+    padding: 0.2rem 0;
+}
+
+#buttonWrap span {
+    float: left;
+    width: 2.5rem;
+    text-align: center;
+}
+
+
+/*
+ *content
+ */
+
+#app {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 7rem;
+}
+
+
+/*clearBar*/
+
+.clearBar {
+    clear: both;
+    border: 1px solid #e2e2e2;
+    background: #e5e5e5;
+    height: 0.313rem;
+}

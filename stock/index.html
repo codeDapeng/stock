@@ -3,21 +3,45 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>微盘接口测试</title>
-    <script src="echarts.js"></script>
+    <title>微盘</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/echarts.js"></script>
     <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/flexible.js"></script>
 </head>
 
 <body>
+    <div id="promptWrap">
+        <div class="left">
+            <p class="name">白银（元/克）</p>
+            <p class="price"></p>
+        </div>
+        <div class="right">
+            <p>最高<span>3.999</span></p>
+            <p>昨收<span>3.906</span></p>
+            <p>最低<span>3.888</span></p>
+            <p>开盘<span>3.907</span></p>
+        </div>
+    </div>
+    <p class="clearBar"></p>
+    <div id="buttonWrap">
+        <span id="btn1">分时线</span>
+        <span id="btn2">5分钟线</span>
+        <span id="btn3">15分钟线</span>
+        <span id="btn4">30分钟线</span>
+    </div>
+    <div id="app"></div>
 
-    <div id="app" style="width:900px;height:500px;"></div>
-    <button id="btn1">分时线</button>
-    <button id="btn2">5分钟线</button>
-    <button id="btn3">15分钟线</button>
-    <button id="btn4">30分钟线</button>
+
     <!--    <script src="http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do?p={'type':'1','contract':'OIL'}&jsonp=parseResponse "></script>-->
     <script>
         var myChart = echarts.init(document.getElementById('app'));
+        /*
+         *初始化
+         */
+        getData1();
+        getData3();
         /*
          *分时线绘图
          */
@@ -37,13 +61,13 @@
                         data.unshift(msg.result.dataList[i]);
 
                     }
-                    //                console.log(data);
+                    console.log(data);
                     var date = [];
                     for (var i = 0; i < msg.result.dateList.length; i++) {
                         date.unshift(msg.result.dateList[i]);
 
                     }
-                    //                console.log(date)
+                    console.log(date)
                     option = {
                         title: {
                             text: 'Ajax轮询自动刷新 V0.0.1'
@@ -71,16 +95,20 @@
                                     color: 'rgba(150,150,150,0.3)',
                                     width: 'auto',
                                     type: 'default'
+
                                 }
                             }
                         },
                         xAxis: {
-                            //                        type: 'time',
+                            //                            type: 'value',
                             splitLine: {
                                 show: true
                             },
                             data: date,
                             boundaryGap: false,
+                            textStyle: {
+                                color: '#fff'
+                            }
                         },
                         yAxis: {
                             type: 'value',
@@ -101,33 +129,35 @@
                             },
 
                         },
-                        backgroundColor: 'rgba(68, 159, 250, 0.3)',
                         series: [{
                             name: '模拟数据',
                             type: 'line',
                             //                        showSymbol: false,
                             //                        hoverAnimation: false,
                             data: data,
-                            smooth: false,
+                            smooth: true,
                             dataFilter: 'nearst',
                             //                        clickable:false,
                             symbol: 'none',
                             areaStyle: {
                                 normal: {
-                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                        offset: 0,
-                                        color: 'rgb(255, 158, 68)'
-                    }, {
-                                        offset: 1,
-                                        color: 'rgb(255, 70, 131)'
-                    }])
+                                    color: 'skyblue'
+                                }
+                            },
+                            lineStyle: {
+                                normal: {
+                                    color: '#5083e3',
+                                    width: 2
                                 }
                             }
 
                     }],
-                        //                        timeLine: {
-                        //                            show: true
-                        //                        },
+                        backgroundColor: '#fff',
+                        textStyle: {
+                            color: '#333',
+                            fontStyle: 'normal',
+                            //                            fontSize:10,
+                        }
 
                     };
                     myChart.setOption(option);
@@ -139,7 +169,7 @@
             })
         }
         /*
-         *5分钟线绘图
+         *5,15,30分钟线绘图
          */
         function getData2(value) {
             $.ajax({
@@ -148,22 +178,22 @@
                 url: 'http://192.168.0.57:8080/WeipanDemo/Weipan',
                 //            dataType: 'json',
                 dataType: 'jsonp',
-                data: 'value='+value,
+                data: 'value=' + value,
                 jsonp: 'jsonpcallback',
                 success: function (msg) {
-                    console.log(msg.result)
+                    //                    console.log(msg.result)
                     var data = [];
                     for (var i = 0; i < msg.result.dataList.length; i++) {
                         data.unshift(msg.result.dataList[i]);
 
                     }
-                    console.log(data);
+                    //                    console.log(data);
                     var date = [];
                     for (var i = 0; i < msg.result.dateList.length; i++) {
                         date.unshift(msg.result.dateList[i]);
 
                     }
-                    console.log(date)
+                    //                    console.log(date)
                     option = {
                         title: {
                             text: 'Ajax轮询自动刷新 V0.0.1'
@@ -171,7 +201,7 @@
                         tooltip: {
                             trigger: 'axis',
                             formatter: function (params) {
-                                return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0]+' 收盘：'+params[0].value[1]+'<br/>最高：'+params[0].value[2]+' 最低：'+params[0].value[3];
+                                return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0] + ' 收盘：' + params[0].value[1] + '<br/>最高：' + params[0].value[2] + ' 最低：' + params[0].value[3];
                                 //                            console.log(params[0])
 
                             },
@@ -210,8 +240,8 @@
                             splitNumber: 20,
                             min: 'dataMin',
                             max: 'dataMax',
-                            axisTick:{
-                                alignWithLabel:true
+                            axisTick: {
+                                alignWithLabel: true
                             }
                         },
                         yAxis: {
@@ -230,7 +260,7 @@
 
 
                         },
-                        backgroundColor: 'rgba(68, 159, 250, 0.3)',
+                        backgroundColor: '#fff',
                         series: [{
                             name: '模拟数据',
                             type: 'candlestick',
@@ -241,11 +271,16 @@
                             dataFilter: 'nearst',
                             //                        clickable:false,
                             symbol: 'none',
-
+                            itemStyle: {
+                                normal: {
+                                    color: '#FD1050',
+                                    color0: '#0CF49B',
+                                    borderColor: '#FD1050',
+                                    borderColor0: '#0CF49B'
+                                }
+                            }
                         }],
-                        //                        timeLine: {
-                        //                            show: true
-                        //                        },
+
 
                     };
                     myChart.setOption(option);
@@ -256,21 +291,55 @@
 
             })
         }
-        /*$('#btn1').on('click', function () {
-            getData1();
-            setInterval(getData1, 30000)
-        })*/
-//        getData2();
-        $('button').on('click',function(){
-            var val=$(this).index();
 
-            if(val>=2){
-                getData2(val);
-            }else{
+
+        $('#buttonWrap span').on('click', function () {
+            var val = $(this).index();
+            console.log(val)
+            if (val >= 1) {
+                getData2(val + 1);
+            } else {
                 getData1();
-//                setInterval(getData1, 30000)
+                //                setInterval(getData1, 30000)
             }
-        })
+        });
+        /*
+         *实时行情数据
+         */
+        function getData3() {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: 'http://192.168.0.57:8080/WeipanDemo/getQuotation',
+                //            dataType: 'json',
+                dataType: 'jsonp',
+                //                data: 'value=1',
+                jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    var price = $('#promptWrap .left .price').html();
+                    $('#promptWrap .left .price').html(msg.result.silver);
+                    //                    console.log(msg);
+                    console.log(msg.result.silver);
+                    //                    console.log($('#promptWrap .left .price').html());
+                    if (price <= msg.result.silver) {
+                        console.log('red');
+                        $('#promptWrap .left').addClass('red');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('red');
+                        }, 1500)
+
+                    } else {
+                        console.log('green');
+                        $('#promptWrap .left').addClass('green');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('green');
+                        }, 1500)
+                    }
+
+                }
+            })
+        }
+        setInterval(getData3, 5000)
     </script>
 </body>
 

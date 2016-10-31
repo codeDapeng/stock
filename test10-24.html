@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微盘接口测试</title>
+</head>
+<body>
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script>
+        $.ajax({
+            type:'get',
+            url:'http://120.24.231.10:8001/app-api/api/KLine/getNewKLine.do',
+//            dataType: 'json',
+            success:function(data){
+                console.log(data)
+            }
+        })
+    </script>
+</body>
+</html>
