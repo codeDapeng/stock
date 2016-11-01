@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <title>微盘</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="js/echarts.js"></script>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/flexible.js"></script>
 </head>
 
 <body>
+    <header>
+        <span class="left">个人资产：<span id="money">123456</span>元</span>
+        <span class="right">银元券：<span id="ticket">654321</span>张</span>
+    </header>
     <div id="promptWrap">
         <div class="left">
-            <p class="name">白银（元/克）</p>
-            <p class="price"></p>
+            <p class="name">白银（元/克）<span>粤贵银>></span></p>
+            <p class="price colRed"><span></span><img src="images/up.jpg" alt=""></p>
         </div>
         <div class="right">
-            <p>最高<span>3.999</span></p>
-            <p>昨收<span>3.906</span></p>
-            <p>最低<span>3.888</span></p>
-            <p>开盘<span>3.907</span></p>
+            <p class="p1">最高<span> 3.999</span></p>
+            <p class="p2">昨收<span> 3.906</span></p>
+            <p class="p3">最低<span> 3.888</span></p>
+            <p class="p4">开盘<span> 3.907</span></p>
         </div>
     </div>
     <p class="clearBar"></p>
@@ -32,7 +36,10 @@
         <span id="btn4">30分钟线</span>
     </div>
     <div id="app"></div>
-
+    <div id="chooseBtnWrap">
+        <span id="buyUp">↑ 买涨</span>
+        <span id="buyDown">↓ 买跌</span>
+    </div>
 
     <!--    <script src="http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do?p={'type':'1','contract':'OIL'}&jsonp=parseResponse "></script>-->
     <script>
@@ -59,7 +66,6 @@
                     var data = [];
                     for (var i = 0; i < msg.result.dataList.length; i++) {
                         data.unshift(msg.result.dataList[i]);
-
                     }
                     console.log(data);
                     var date = [];
@@ -70,7 +76,7 @@
                     console.log(date)
                     option = {
                         title: {
-                            text: 'Ajax轮询自动刷新 V0.0.1'
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
                         },
                         tooltip: {
                             trigger: 'axis',
@@ -97,7 +103,17 @@
                                     type: 'default'
 
                                 }
+                            },
+                            textStyle: {
+                                fontSize: 24
                             }
+                        },
+                        grid: {
+                            left: 60,
+                            right: 40,
+                            top: 15,
+                            containLabel: true,
+
                         },
                         xAxis: {
                             //                            type: 'value',
@@ -106,8 +122,12 @@
                             },
                             data: date,
                             boundaryGap: false,
-                            textStyle: {
-                                color: '#fff'
+                            axisLabel: {
+                                interval: 10,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 24
+                                }
                             }
                         },
                         yAxis: {
@@ -127,7 +147,12 @@
 
                                 }
                             },
-
+                            axisLabel: {
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 24
+                                }
+                            }
                         },
                         series: [{
                             name: '模拟数据',
@@ -149,14 +174,15 @@
                                     color: '#5083e3',
                                     width: 2
                                 }
-                            }
+                            },
+
 
                     }],
                         backgroundColor: '#fff',
                         textStyle: {
                             color: '#333',
                             fontStyle: 'normal',
-                            //                            fontSize:10,
+                            //                            fontSize:20,
                         }
 
                     };
@@ -196,14 +222,13 @@
                     //                    console.log(date)
                     option = {
                         title: {
-                            text: 'Ajax轮询自动刷新 V0.0.1'
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
                         },
                         tooltip: {
                             trigger: 'axis',
                             formatter: function (params) {
                                 return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0] + ' 收盘：' + params[0].value[1] + '<br/>最高：' + params[0].value[2] + ' 最低：' + params[0].value[3];
                                 //                            console.log(params[0])
-
                             },
                             axisPointer: {
                                 type: 'line',
@@ -237,11 +262,18 @@
                             splitLine: {
                                 show: false
                             },
-                            splitNumber: 20,
+
                             min: 'dataMin',
                             max: 'dataMax',
                             axisTick: {
                                 alignWithLabel: true
+                            },
+                            axisLabel: {
+                                interval: 5,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 24
+                                }
                             }
                         },
                         yAxis: {
@@ -316,21 +348,28 @@
                 //                data: 'value=1',
                 jsonp: 'jsonpcallback',
                 success: function (msg) {
-                    var price = $('#promptWrap .left .price').html();
-                    $('#promptWrap .left .price').html(msg.result.silver);
+                    var price = $('#promptWrap .left .price span').html();
+                    $('#promptWrap .left .price span').html(msg.result.silver);
                     //                    console.log(msg);
                     console.log(msg.result.silver);
+
                     //                    console.log($('#promptWrap .left .price').html());
                     if (price <= msg.result.silver) {
                         console.log('red');
                         $('#promptWrap .left').addClass('red');
+                        $('#promptWrap .left .price').removeClass('colGreen');
+                        $('#promptWrap .left .price').addClass('colRed');
+                        $('#promptWrap .left .price img').attr('src', 'images/up.jpg');
                         setTimeout(function () {
                             $('#promptWrap .left').removeClass('red');
-                        }, 1500)
+                        }, 1500);
 
                     } else {
                         console.log('green');
                         $('#promptWrap .left').addClass('green');
+                        $('#promptWrap .left .price').removeClass('colRed');
+                        $('#promptWrap .left .price').addClass('colGreen');
+                        $('#promptWrap .left .price img').attr('src', 'images/down.jpg');
                         setTimeout(function () {
                             $('#promptWrap .left').removeClass('green');
                         }, 1500)
