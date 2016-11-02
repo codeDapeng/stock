@@ -1,167 +1,179 @@
+
+
+
 /*
  *header
  */
-header{
+
+header {
     width: 100%;
     background: #2887ee;
     color: #fff;
-    font-size: 0.375rem;
-    height: 0.9375rem;
+    font-size: 3.75vw;
+    height: 9.375vw;
     overflow: hidden;
 }
-header .left{
+
+header .left {
     display: block;
     width: 49%;
     float: left;
     border-right: 1px solid #fff;
     text-align: center;
-    line-height: 0.468rem;
-    margin-top: 0.234rem;
+    line-height: 4.68vw;
+    margin-top: 2.34vw;
 }
-header .left #money{
-    font-size: 0.5rem;
+
+header .left #money {
+    font-size: 5vw;
 }
-header .right{
+
+header .right {
     display: block;
     width: 50%;
     float: left;
     text-align: center;
-    line-height: 0.468rem;
-    margin-top: 0.234rem;
+    line-height: 4.68vw;
+    margin-top: 2.34vw;
 }
-header .right #ticket{
-    font-size: 0.5rem;
+
+header .right #ticket {
+    font-size: 5vw;
 }
+
+
 /*
  *prompt
  */
 
 #promptWrap {
     width: 100%;
-    padding: 0.1rem 0;
+    padding: 1vw 0;
     overflow: hidden;
 }
+
 #promptWrap .left {
-    width: 4.5rem;
+    width: 45vw;
     /*    background: #e6e6e6;*/
     float: left;
-    padding: 0.368rem 0;
+    padding: 3.68vw 0;
 }
-#promptWrap .left .name{
-    font-size: 0.375rem;
+
+#promptWrap .left .name {
+    font-size: 3.75vw;
     color: #333;
 }
-#promptWrap .left .name span{
+
+#promptWrap .left .name span {
     color: #fff;
-    font-size: 0.3125rem;
-    padding: 0.03rem;
+    font-size: 3.125vw;
+    padding: 0.3vw;
     background: #f54337;
-    border-radius: 0.1rem;
+    border-radius: 1vw;
 }
-#promptWrap .left .price{
-    font-size: 0.625rem;
-    margin-top: 0.3125rem;
+
+#promptWrap .left .price {
+    font-size: 6.25vw;
+    margin-top: 3.125vw;
 }
-#promptWrap .left .price img{
-    width: 0.468rem;
-    margin-left: 0.36rem;
+
+#promptWrap .left .price img {
+    width: 4.68vw;
+    margin-left: 3.6vw;
 }
+
 #promptWrap .left p {
     text-align: center;
 }
 
 #promptWrap .right {
-    width: 5.5rem;
+    width: 55vw;
     float: left;
-
 }
 
 #promptWrap .right p {
     float: left;
     width: 50%;
     text-align: center;
-    font-size: 0.375rem;
+    font-size: 3.75vw;
 }
-#promptWrap .right .p1{
-    margin: 0.368rem 0 0.468rem 0;
+
+#promptWrap .right .p1 {
+    margin: 3.68vw 0 4.68vw 0;
 }
-#promptWrap .right .p2{
-    margin: 0.368rem 0 0.468rem 0;
+
+#promptWrap .right .p2 {
+    margin: 3.68vw 0 4.68vw 0;
 }
-@-webkit-keyframes red{
-    0%{
+
+@-webkit-keyframes red {
+    0% {
         background: red
     }
-    100%{
+    100% {
         background: #fff
     }
 }
 
-@keyframes red{
-    0%{
+@keyframes red {
+    0% {
         background: rgba(245, 67, 55, 0.55)
     }
-    100%{
+    100% {
         background: #fff
     }
 }
-.red{
+
+.red {
     -webkit-animation: red 1.5s linear;
     animation: red 1.5s linear;
 }
-@-webkit-keyframes green{
-    0%{
+
+@-webkit-keyframes green {
+    0% {
         background: rgba(19, 185, 77, 0.55)
     }
-    100%{
+    100% {
         background: #fff
     }
 }
-@keyframes green{
-    0%{
+
+@keyframes green {
+    0% {
         background: rgba(19, 185, 77, 0.55)
     }
-    100%{
+    100% {
         background: #fff
     }
 }
-.green{
+
+.green {
     -webkit-animation: green 1.5s linear;
     animation: green 1.5s linear;
 }
 
-.colRed{
-    color: #f54337;
-}
-.colGreen{
-    color: #13b94d;
-}
-/*clearBar*/
 
-.clearBar {
-    clear: both;
-    border: 1px solid #e2e2e2;
-    background: #e5e5e5;
-    height: 0.313rem;
-}
 /*
  *button
  */
 
 #buttonWrap {
     width: 100%;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #eeeeee;
     overflow: hidden;
-
 }
 
 #buttonWrap span {
     float: left;
-    width: 2.5rem;
+    width: 25vw;
     text-align: center;
-    font-size: 0.375rem;
+    font-size: 3.75vw;
     color: #333;
-    margin: 0.468rem 0 .3125rem 0;
+    padding: 4.68vw 0 3.125vw 0;
+}
+
+.buttonChoose {
+    border-bottom: 2px solid #2887ee;
 }
 
 
@@ -170,136 +182,44 @@ header .right #ticket{
  */
 
 #app {
-/*    border: 1px solid #ccc;*/
-    width: 100%;
-    height: 8rem;
+/*        border: 1px solid #ccc;*/
+/*    width: 100%;*/
+    height: 80vw;
     background: skyblue;
 }
-
-
 
 
 /*
  *chooseBtnWrap
  */
-#chooseBtnWrap{
-/*    border: 1px solid #ccc;*/
+
+#chooseBtnWrap {
+    /*    border: 1px solid #ccc;*/
     width: 100%;
-    margin-top: 0.7rem;
+    margin: 3.125vw 0;
+    overflow: hidden;
 }
-#chooseBtnWrap #buyUp{
+
+#chooseBtnWrap #buyUp {
     display: block;
     float: left;
-    background: red;
     color: #fff;
     width: 40%;
     margin: 0 5%;
     text-align: center;
-    line-height: 1rem;
-    font-size: 0.5rem;
-    border-radius: 0.15rem;
+    line-height: 10vw;
+    font-size: 4vw;
+    border-radius: 1.5vw;
 }
-#chooseBtnWrap #buyDown{
+
+#chooseBtnWrap #buyDown {
     display: block;
     float: left;
-    background: green;
     color: #fff;
     width: 40%;
     margin: 0 5%;
     text-align: center;
-    line-height: 1rem;
-    font-size: 0.5rem;
-    border-radius: 0.15rem;
+    line-height: 10vw;
+    font-size: 4vw;
+    border-radius: 1.5vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

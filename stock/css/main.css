@@ -1,0 +1,51 @@
+/*
+ *公共通用样式
+ */
+
+.colRed {
+    color: #f54337!important;
+}
+
+.colGreen {
+    color: #13b94d!important;
+}
+
+.bgRed {
+    background: #f54337!important;
+}
+
+.bgGreen {
+    background: #13b94d!important;
+}
+.borderGold{
+    border: 2px solid #ffbc00 !important;
+}
+.clearBar {
+    clear: both;
+    border: 1px solid #e2e2e2;
+    background: #e5e5e5;
+    height: 3.13vw;
+}
+
+
+/*
+ *公用footer
+ */
+
+#footerNav {
+    width: 100%;
+    border-top: 1px solid #eeeeee;
+    text-align: center;
+    margin-top: 6.25vw;
+}
+
+#footerNav a {
+    float: left;
+    margin: 3.125vw 7.85vw;
+}
+
+#footerNav a p {
+    text-align: center;
+    font-size: 3.125vw;
+    color: #333;
+}

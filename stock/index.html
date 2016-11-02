@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>微盘</title>
+    <!--    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/echarts.js"></script>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/flexible.js"></script>
@@ -19,28 +22,47 @@
     <div id="promptWrap">
         <div class="left">
             <p class="name">白银（元/克）<span>粤贵银>></span></p>
-            <p class="price colRed"><span></span><img src="images/up.jpg" alt=""></p>
+            <p class="price colRed"><span></span><img src="img/up.jpg" alt=""></p>
         </div>
         <div class="right">
-            <p class="p1">最高<span> 3.999</span></p>
-            <p class="p2">昨收<span> 3.906</span></p>
-            <p class="p3">最低<span> 3.888</span></p>
-            <p class="p4">开盘<span> 3.907</span></p>
+            <p class="p1">最高 <span></span></p>
+            <p class="p2">昨收 <span></span></p>
+            <p class="p3">最低 <span></span></p>
+            <p class="p4">开盘 <span></span></p>
         </div>
     </div>
     <p class="clearBar"></p>
     <div id="buttonWrap">
-        <span id="btn1">分时线</span>
+        <span id="btn1" class="buttonChoose">分时线</span>
         <span id="btn2">5分钟线</span>
         <span id="btn3">15分钟线</span>
         <span id="btn4">30分钟线</span>
     </div>
     <div id="app"></div>
+    <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
     <div id="chooseBtnWrap">
-        <span id="buyUp">↑ 买涨</span>
-        <span id="buyDown">↓ 买跌</span>
+        <span id="buyUp" class="bgRed"><img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span>
+        <span id="buyDown" class="bgGreen"><img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span>
     </div>
-
+    <p style="text-align:center;color:#2887ee;font-size:3.125vw">注：由银元劵购买白银所产生的亏损不计入资产</p>
+    <footer id="footerNav">
+        <a href="index.html">
+            <img src="img/idx2.jpg" alt="">
+            <p>首页</p>
+        </a>
+        <a href="">
+            <img src="img/order.jpg" alt="">
+            <p>订单</p>
+        </a>
+        <a href="">
+            <img src="img/msg.jpg" alt="">
+            <p>资讯</p>
+        </a>
+        <a href="">
+            <img src="img/person.jpg" alt="">
+            <p>个人中心</p>
+        </a>
+    </footer>
     <!--    <script src="http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do?p={'type':'1','contract':'OIL'}&jsonp=parseResponse "></script>-->
     <script>
         var myChart = echarts.init(document.getElementById('app'));
@@ -105,13 +127,14 @@
                                 }
                             },
                             textStyle: {
-                                fontSize: 24
+                                fontSize: 15
                             }
                         },
                         grid: {
-                            left: 60,
-                            right: 40,
-                            top: 15,
+                            left: 20,
+                            right: 20,
+                            top: 20,
+                            bottom: 20,
                             containLabel: true,
 
                         },
@@ -126,7 +149,7 @@
                                 interval: 10,
                                 margin: 15,
                                 textStyle: {
-                                    fontSize: 24
+                                    fontSize: 15
                                 }
                             }
                         },
@@ -150,7 +173,7 @@
                             axisLabel: {
                                 margin: 15,
                                 textStyle: {
-                                    fontSize: 24
+                                    fontSize: 15
                                 }
                             }
                         },
@@ -269,10 +292,10 @@
                                 alignWithLabel: true
                             },
                             axisLabel: {
-                                interval: 5,
+                                interval: 4,
                                 margin: 15,
                                 textStyle: {
-                                    fontSize: 24
+                                    fontSize: 15
                                 }
                             }
                         },
@@ -305,10 +328,10 @@
                             symbol: 'none',
                             itemStyle: {
                                 normal: {
-                                    color: '#FD1050',
-                                    color0: '#0CF49B',
-                                    borderColor: '#FD1050',
-                                    borderColor0: '#0CF49B'
+                                    color: '#f54337',
+                                    color0: '#13b94d',
+                                    borderColor: '#f54337',
+                                    borderColor0: '#13b94d'
                                 }
                             }
                         }],
@@ -324,19 +347,23 @@
             })
         }
 
-
+         /*
+          *点击切换视图
+          */
         $('#buttonWrap span').on('click', function () {
+            $('#buttonWrap span').removeClass('buttonChoose');
+            $(this).addClass('buttonChoose');
             var val = $(this).index();
             console.log(val)
             if (val >= 1) {
                 getData2(val + 1);
             } else {
                 getData1();
-                //                setInterval(getData1, 30000)
+                setInterval(getData1, 30000)
             }
         });
         /*
-         *实时行情数据
+         *实时行情数据(prompt)
          */
         function getData3() {
             $.ajax({
@@ -350,8 +377,12 @@
                 success: function (msg) {
                     var price = $('#promptWrap .left .price span').html();
                     $('#promptWrap .left .price span').html(msg.result.silver);
+                    $('#promptWrap .right .p1 span').html(msg.XAG1.HIGH);
+                    $('#promptWrap .right .p2 span').html(msg.XAG1.PRECLOSE);
+                    $('#promptWrap .right .p3 span').html(msg.XAG1.LOW);
+                    $('#promptWrap .right .p4 span').html(msg.XAG1.OPEN);
                     //                    console.log(msg);
-                    console.log(msg.result.silver);
+                    console.log(msg);
 
                     //                    console.log($('#promptWrap .left .price').html());
                     if (price <= msg.result.silver) {
@@ -359,7 +390,7 @@
                         $('#promptWrap .left').addClass('red');
                         $('#promptWrap .left .price').removeClass('colGreen');
                         $('#promptWrap .left .price').addClass('colRed');
-                        $('#promptWrap .left .price img').attr('src', 'images/up.jpg');
+                        $('#promptWrap .left .price img').attr('src', 'img/up.jpg');
                         setTimeout(function () {
                             $('#promptWrap .left').removeClass('red');
                         }, 1500);
@@ -369,7 +400,7 @@
                         $('#promptWrap .left').addClass('green');
                         $('#promptWrap .left .price').removeClass('colRed');
                         $('#promptWrap .left .price').addClass('colGreen');
-                        $('#promptWrap .left .price img').attr('src', 'images/down.jpg');
+                        $('#promptWrap .left .price img').attr('src', 'img/down.jpg');
                         setTimeout(function () {
                             $('#promptWrap .left').removeClass('green');
                         }, 1500)
@@ -378,7 +409,8 @@
                 }
             })
         }
-        setInterval(getData3, 5000)
+        setInterval(getData3, 5000);
+
     </script>
 </body>
 
