@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>买涨</title>
+    <title>买跌</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/buyUp&Down.css">
@@ -13,17 +13,17 @@
 </head>
 
 <body>
-    <header class="bgRed">
-        <p>买涨</p>
+    <header class="bgGreen">
+        <p>买跌</p>
         <div id="tab">
-            <span id="cash" class="tabChoose">使用现金</span>
+            <span id="cash" class="tabChoose2">使用现金</span>
             <span id="ticket">使用银元券</span>
         </div>
     </header>
     <div id="content1">
         <div id="priceChoose">
             <div class="priceItem borderBlue">
-                <p class="p1 colRed">¥8</p>
+                <p class="p1 colGreen">¥8</p>
                 <p class="p2">100克银币</p>
                 <p class="p3">盈亏波动0.1元</p>
             </div>
@@ -81,9 +81,9 @@
     <script>
         $('#priceChoose .priceItem').on('click', function () {
             $('#priceChoose .priceItem').removeClass('borderBlue');
-            $('#priceChoose .priceItem .p1').removeClass('colRed');
+            $('#priceChoose .priceItem .p1').removeClass('colGreen');
             $(this).addClass('borderBlue');
-            $(this).find('.p1').addClass('colRed');
+            $(this).find('.p1').addClass('colGreen');
         });
     </script>
 </body>

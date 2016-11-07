@@ -41,8 +41,8 @@
     <div id="app"></div>
     <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
     <div id="chooseBtnWrap">
-        <span id="buyUp" class="bgRed"><img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span>
-        <span id="buyDown" class="bgGreen"><img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span>
+        <a href="buyUp.html"><span id="buyUp" class="bgRed"><img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span></a>
+        <a href="buyDown.html"><span id="buyDown" class="bgGreen"><img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span></a>
     </div>
     <p style="text-align:center;color:#2887ee;font-size:3.125vw">注：由银元劵购买白银所产生的亏损不计入资产</p>
     <footer id="footerNav">
@@ -58,7 +58,7 @@
             <img src="img/msg.jpg" alt="">
             <p>资讯</p>
         </a>
-        <a href="">
+        <a href="personal.html">
             <img src="img/person.jpg" alt="">
             <p>个人中心</p>
         </a>
@@ -133,7 +133,7 @@
                         grid: {
                             left: 20,
                             right: 20,
-                            top: 20,
+                            top: 40,
                             bottom: 20,
                             containLabel: true,
 
@@ -173,34 +173,70 @@
                             axisLabel: {
                                 margin: 15,
                                 textStyle: {
-                                    fontSize: 15
-                                }
-                            }
+                                    fontSize: 10
+                                },
+                                inside: true
+                            },
+                            axisTick: {
+                                inside: true
+                            },
                         },
                         series: [{
-                            name: '模拟数据',
-                            type: 'line',
-                            //                        showSymbol: false,
-                            //                        hoverAnimation: false,
-                            data: data,
-                            smooth: true,
-                            dataFilter: 'nearst',
-                            //                        clickable:false,
-                            symbol: 'none',
-                            areaStyle: {
-                                normal: {
-                                    color: 'skyblue'
-                                }
-                            },
-                            lineStyle: {
-                                normal: {
-                                    color: '#5083e3',
-                                    width: 2
-                                }
-                            },
+                                name: '模拟数据',
+                                type: 'line',
+                                //                        showSymbol: false,
+                                //                        hoverAnimation: false,
+                                data: data,
+                                smooth: true,
+                                dataFilter: 'nearst',
+                                //                        clickable:false,
+                                symbol: 'none',
+                                areaStyle: {
+                                    normal: {
+                                        color: 'skyblue'
+                                    }
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: '#5083e3',
+                                        width: 2
+                                    }
+                                },
+                                markPoint: {
+                                    symbol: 'pin',
+                                    label: {
+                                        normal: {
+                                            textStyle: {
+                                                color: '#fff'
+                                            }
+                                        }
+                                    },
+                                    itemStyle: {
+                                        normal: {
+                                            color: 'rgba(40, 135, 238, 0.41)'
+                                        },
+                                    },
+                                    data: [
+                                        {
+                                            name: '最大值',
+                                            type: 'max'
+                                        },
+                                        {
+                                            name: '最大值',
+                                            type: 'min',
+                                            symbolRotate: 180,
+                                            label: {
+                                                normal: {
+                                                    position:['10%','50%']
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
 
+                        },
 
-                    }],
+                        ],
                         backgroundColor: '#fff',
                         textStyle: {
                             color: '#333',
@@ -220,7 +256,7 @@
         /*
          *5,15,30分钟线绘图
          */
-        function getData2(value) {
+        function getData2(value, time) {
             $.ajax({
                 type: 'get',
                 //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
@@ -292,7 +328,7 @@
                                 alignWithLabel: true
                             },
                             axisLabel: {
-                                interval: 4,
+                                interval: time,
                                 margin: 15,
                                 textStyle: {
                                     fontSize: 15
@@ -312,7 +348,12 @@
                                 show: true,
 
                             },
-
+                            axisTick: {
+                                inside: true
+                            },
+                            axisLabel: {
+                                inside: true
+                            }
 
                         },
                         backgroundColor: '#fff',
@@ -347,16 +388,23 @@
             })
         }
 
-         /*
-          *点击切换视图
-          */
+        /*
+         *点击切换视图
+         */
         $('#buttonWrap span').on('click', function () {
             $('#buttonWrap span').removeClass('buttonChoose');
             $(this).addClass('buttonChoose');
             var val = $(this).index();
             console.log(val)
             if (val >= 1) {
-                getData2(val + 1);
+                if (val == 1) {
+                    getData2(val + 1, 10)
+                } else if (val == 2) {
+                    getData2(val + 1, 7);
+                } else {
+                    getData2(val + 1, 5);
+                }
+
             } else {
                 getData1();
                 setInterval(getData1, 30000)
@@ -410,7 +458,6 @@
             })
         }
         setInterval(getData3, 5000);
-
     </script>
 </body>
 

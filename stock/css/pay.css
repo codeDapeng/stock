@@ -1,0 +1,76 @@
+header {
+    overflow: hidden;
+}
+
+header p {
+    text-align: center;
+    color: #fff;
+}
+
+header .num {
+    font-size: 7.81vw;
+    margin: 10.5vw 0 3.125vw 0;
+}
+
+header .balance {
+    font-size: 3.75vw;
+}
+
+#content {
+    /*    width: 100%;*/
+    padding: 4.68vw;
+}
+
+#content .p1{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2.5vw;
+}
+#content .p1 span{
+    display: block;
+    float: left;
+    width: 49%;
+    text-align: center;
+    font-size: 4.21vw;
+
+}
+#content .p1 span img{
+    width: 3.5vw;
+    margin:0 2vw 0 0;
+}
+#content .p2{
+    font-size: 4.375vw;
+    color: #333;
+    margin-top: 7.81vw;
+    margin-bottom: 7vw;
+}
+#content .choose{
+    overflow: hidden;
+}
+#content .choose div {
+    border: 1px solid #e2e2e2;
+    font-size: 4.375vw;
+    width: 28.125vw;
+    height: 12.5vw;
+    line-height: 12.5vw;
+    text-align: center;
+    float: left;
+    border-radius: 1vw;
+    margin-bottom: 3vw;
+}
+.changeCol{
+    border: 1px solid #429de3!important;
+    color: #429de3;
+}
+#content .btn{
+    display: block;
+    width: 100%;
+    background: #48a5f2;
+    line-height: 12.5vw;
+    border-radius: 1vw;
+    text-align: center;
+    color: #fff;
+    font-size: 4.375vw;
+    margin-top: 9.375vw;
+    margin-bottom: 3.125vw;
+}

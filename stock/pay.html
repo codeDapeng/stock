@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>提现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/pay.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/flexible.js"></script>
+</head>
+
+<body>
+    <header class="bigBgBlue">
+        <p class="num">9999.99</p>
+        <p class="balance">账户余额（元）</p>
+    </header>
+    <div id="content">
+        <p class="p1">
+            <span class="colBlue sp1" style="border-right:1px solid #ccc;"><img src="img/wechat.jpg" alt="">微信支付</span>
+            <span class="sp2"><img src="img/zfb.jpg" alt="">支付宝支付</span>
+        </p>
+        <p class="p2">选择金额（元）</p>
+        <div class="choose">
+            <div class="changeCol">10元</div>
+            <div style="margin:0 2vw 0 2vw">50元</div>
+            <div>100元</div>
+            <div>500元</div>
+            <div style="margin:0 2vw 0 2vw">2000元</div>
+
+        </div>
+        <span class="btn">支付</span>
+
+    </div>
+    <!--<footer id="footerNav">
+        <a href="index.html">
+            <img src="img/idx.jpg" alt="">
+            <p>首页</p>
+        </a>
+        <a href="">
+            <img src="img/order.jpg" alt="">
+            <p>订单</p>
+        </a>
+        <a href="">
+            <img src="img/msg.jpg" alt="">
+            <p>资讯</p>
+        </a>
+        <a href="personal.html">
+            <img src="img/person2.jpg" alt="">
+            <p>个人中心</p>
+        </a>
+    </footer>-->
+    <script type="text/javascript">
+        $('.choose div').click(function () {
+            $('.choose div').removeClass('changeCol');
+            $(this).addClass('changeCol');
+        });
+        $('.p1 span').on('click',function(){
+            $('.p1 span').removeClass('colBlue')
+            $('.p1 .sp1').find('img').attr('src','img/wechat2.jpg');
+            $('.p1 .sp2').find('img').attr('src','img/zfb.jpg');
+            if($(this).index()==0){
+                $(this).addClass('colBlue');
+                $(this).find('img').attr('src','img/wechat.jpg');
+            }else{
+                $(this).addClass('colBlue');
+                $(this).find('img').attr('src','img/zfb2.jpg');
+            }
+        });
+    </script>
+</body>
+
+</html>

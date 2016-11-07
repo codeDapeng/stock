@@ -33,6 +33,18 @@ form .p1 .getCode {
     display: inline-block;
     font-size: 4.375vw;
     color: #429de3;
+    float: right;
+    line-height: 14vw;
+    margin-right: 2vw;
+}
+form .p1 .hide {
+    display: inline-block;
+    font-size: 4.375vw;
+    color: #429de3;
+    display: none;
+    float: right;
+    line-height: 14vw;
+    margin-right: 2vw;
 }
 
 form .p2 {

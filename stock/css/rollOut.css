@@ -1,0 +1,82 @@
+header {
+    overflow: hidden;
+}
+
+header p {
+    text-align: center;
+    color: #fff;
+}
+
+header .num {
+    font-size: 7.81vw;
+    margin: 10.5vw 0 3.125vw 0;
+}
+
+header .balance {
+    font-size: 3.75vw;
+}
+
+#content {
+    /*    width: 100%;*/
+    padding: 4.68vw;
+}
+
+#content .inp {
+    width: 100%;
+    text-indent: 3.9vw;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 1vw;
+    line-height: 12.5vw;
+    font-size: 4.375vw;
+    margin-bottom: 4.6vw;
+}
+
+#content .prompt {
+    font-size: 3.75vw;
+    color: #999;
+    margin: 0 0 2vw 0;
+}
+
+#content .select1 {
+    width: 100%;
+/*    margin-left: 3.125vw;*/
+    border: 1px solid #ccc;
+    height: 12.5vw;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 35vw;
+    font-size: 5vw;
+    color: #333;
+    background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
+    margin-bottom: 3.125vw;
+    border-radius: 1vw;
+}
+#content .select2 {
+    width: 100%;
+/*    margin-left: 3.125vw;*/
+    border: 1px solid #ccc;
+    height: 12.5vw;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 40vw;
+    font-size: 5vw;
+    color: #333;
+    background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
+    margin-bottom: 3.125vw;
+    border-radius: 1vw;
+}
+#content .btn{
+    display: block;
+    width: 100%;
+    background: #48a5f2;
+    line-height: 12.5vw;
+    border-radius: 1vw;
+    text-align: center;
+    color: #fff;
+    font-size: 4.375vw;
+    margin-top: 9.375vw;
+    margin-bottom: 3.125vw;
+}
