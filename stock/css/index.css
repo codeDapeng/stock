@@ -223,3 +223,37 @@ header .right #ticket {
     font-size: 4vw;
     border-radius: 1.5vw;
 }
+
+#chooseBtnWrap  ul{
+/*    width: 100%;*/
+    margin-left: 3vw;;
+}
+#chooseBtnWrap ul li{
+    float: left;
+    border-right: 1px solid #eee;
+    padding: 0 2vw;
+}
+#chooseBtnWrap ul li p{
+    text-align: center;
+    font-size: 3.75vw;
+}
+#chooseBtnWrap ul li p:first-child{
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1vw;
+}
+#chooseBtnWrap ul li p:last-child{
+    color: #666;
+    margin-top: 1vw;
+}
+#chooseBtnWrap #soldAll {
+    display: block;
+    float: right;
+    color: #fff;
+    width: 25%;
+    margin: 0 5vw 0 0;
+    text-align: center;
+    line-height: 10vw;
+    font-size: 4vw;
+    border-radius: 1.5vw;
+}
