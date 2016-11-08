@@ -38,7 +38,7 @@
                 <p class="p3">盈亏波动10元</p>
             </div>
         </div>
-        <p class="pricePrompt">选择手数（每手<span>8</span>元，最多可购买10手）</p>
+        <p class="pricePrompt">选择手数（每手<span id="perPrice">8</span>元，最多可购买10手）</p>
         <select class="select1 colRed">
             <option value="">1</option>
             <option value="">2</option>
@@ -69,9 +69,10 @@
             <option value="">50%</option>
         </select>
         <div class="totalWrap">
-            <span class="s1 colRed">¥ <span class="totalPrice">56</span></span>
+            <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>
             <span class="s2">手续费：<span class="totalCost">4.2元</span></span>
-            <a href=""><span class="s3">余额不足，去充值</span></a>
+            <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+            <a href="" id="goPay"><span class="s3">购买</span></a>
         </div>
     </div>
     <!--        <div id="content2"></div>-->
@@ -79,12 +80,54 @@
 
 
     <script>
+
         $('#priceChoose .priceItem').on('click', function () {
+            var hands=$('.select1').find("option:selected").text();
             $('#priceChoose .priceItem').removeClass('borderBlue');
             $('#priceChoose .priceItem .p1').removeClass('colRed');
             $(this).addClass('borderBlue');
             $(this).find('.p1').addClass('colRed');
+            if ($(this).index() == 0) {
+                $('#perPrice').html('8');
+                $('.totalWrap .totalPrice').html(hands*8);
+                testPrice(hands*8);
+            } else if ($(this).index() == 1) {
+                $('#perPrice').html('80');
+                $('.totalWrap .totalPrice').html(hands*80);
+                testPrice(hands*80);
+            } else if ($(this).index() == 2) {
+                $('#perPrice').html('200');
+                $('.totalWrap .totalPrice').html(hands*200);
+                testPrice(hands*200);
+            }
         });
+        $('.select1').change(function(){
+            var priceLevel=$('#perPrice').html();
+            var hands=$('.select1').find("option:selected").text();
+            $('.totalWrap .totalPrice').html(hands*priceLevel);
+        });
+        /*
+         *用户余额
+         */
+        function testPrice(a){
+            var a=100;
+            if($('.totalWrap .totalPrice').html()<=a){
+                $('#goPay').css({
+                    display:'block'
+                });
+                $('#needRecharge').css({
+                    display:'none'
+                });
+            }else{
+                $('#goPay').css({
+                    display:'none'
+                });
+                $('#needRecharge').css({
+                    display:'block'
+                });
+            }
+
+        }
     </script>
 </body>
 

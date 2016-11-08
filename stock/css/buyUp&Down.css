@@ -94,7 +94,7 @@ header #tab span {
     appearance: none;
     padding-left: 46vw;
     font-size: 5vw;
-    color: #13b94d;
+/*    color: #13b94d;*/
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
@@ -109,7 +109,7 @@ header #tab span {
     appearance: none;
     padding-left: 43.5vw;
     font-size: 5vw;
-    color: #13b94d;
+/*    color: #13b94d;*/
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
@@ -122,7 +122,7 @@ header #tab span {
 }
 #content1 .totalWrap .s1{
     font-size: 2.8vw;
-    color: #13b94d;
+/*    color: #13b94d;*/
     margin-right: 12.5vw;
     float: left;
 }
