@@ -52,24 +52,24 @@
             </a>
         </div>
         <div class="p2">
-           <ul>
-               <li>
-                   <p>4.0千克</p>
-                   <p>白银</p>
-               </li>
-               <li>
-                   <p>4.375</p>
-                   <p>建仓价</p>
-               </li>
-               <li>
-                   <p>4.635</p>
-                   <p>保本价</p>
-               </li>
-               <li style="border:none;">
-                   <p class="colRed">999.00</p>
-                   <p>盈利</p>
-               </li>
-           </ul>
+            <ul>
+                <li>
+                    <p class="l1">4.0千克</p>
+                    <p>白银</p>
+                </li>
+                <li>
+                    <p class="l2">4.375</p>
+                    <p>建仓价</p>
+                </li>
+                <li>
+                    <p class="l3">4.635</p>
+                    <p>保本价</p>
+                </li>
+                <li style="border:none;">
+                    <p class="colRed l4">999.00</p>
+                    <p>盈利</p>
+                </li>
+            </ul>
             <span id="soldAll" class="bgRed">平仓</span>
         </div>
     </div>
@@ -487,6 +487,34 @@
             })
         }
         setInterval(getData3, 5000);
+        /*
+         *建仓、保本、盈利
+         */
+        function getData4() {
+            $.ajax({
+                type: 'get',
+                url: '',
+                dataType: 'json',
+                //                dataType: 'jsonp',
+                //                data: 'value=1',
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    $('#chooseBtnWrap .p2 .l1').html(msg);
+                    $('#chooseBtnWrap .p2 .l2').html(msg);
+                    $('#chooseBtnWrap .p2 .l3').html(msg);
+                    $('#chooseBtnWrap .p2 .l4').html(msg);
+                    if ($('#chooseBtnWrap .p2 .l4').html() >= 0) {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colRed');
+                    } else {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
+                    }
+
+                }
+            });
+        }
+        setInterval(getData4,5000);
     </script>
 </body>
 
