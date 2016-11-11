@@ -20,7 +20,7 @@
             <span id="ticket">使用银元券</span>
         </div>
     </header>
-    <div id="content1">
+    <div id="content1" class="content">
         <div id="priceChoose">
             <div class="priceItem borderBlue">
                 <p class="p1 colRed">¥8</p>
@@ -75,62 +75,96 @@
             <a href="" id="goPay"><span class="s3">购买</span></a>
         </div>
     </div>
-    <!--        <div id="content2"></div>-->
+
 
 
 
     <script>
-
         $('#priceChoose .priceItem').on('click', function () {
-            var hands=$('.select1').find("option:selected").text();
+            var hands = $('.select1').find("option:selected").text();
             $('#priceChoose .priceItem').removeClass('borderBlue');
             $('#priceChoose .priceItem .p1').removeClass('colRed');
             $(this).addClass('borderBlue');
             $(this).find('.p1').addClass('colRed');
             if ($(this).index() == 0) {
                 $('#perPrice').html('8');
-                $('.totalWrap .totalPrice').html(hands*8);
-                testPrice(hands*8);
+                $('.totalWrap .totalPrice').html(hands * 8);
+                testPrice(hands * 8);
             } else if ($(this).index() == 1) {
                 $('#perPrice').html('80');
-                $('.totalWrap .totalPrice').html(hands*80);
-                testPrice(hands*80);
+                $('.totalWrap .totalPrice').html(hands * 80);
+                testPrice(hands * 80);
             } else if ($(this).index() == 2) {
                 $('#perPrice').html('200');
-                $('.totalWrap .totalPrice').html(hands*200);
-                testPrice(hands*200);
+                $('.totalWrap .totalPrice').html(hands * 200);
+                testPrice(hands * 200);
             }
         });
-        $('.select1').change(function(){
-            var priceLevel=$('#perPrice').html();
-            var hands=$('.select1').find("option:selected").text();
-            $('.totalWrap .totalPrice').html(hands*priceLevel);
+        $('.select1').change(function () {
+            var priceLevel = $('#perPrice').html();
+            var hands = $('.select1').find("option:selected").text();
+            $('.totalWrap .totalPrice').html(hands * priceLevel);
         });
         /*
          *用户余额
          */
-        function testPrice(a){
-            var a=100;
-            if($('.totalWrap .totalPrice').html()<=a){
+        function testPrice(a) {
+            var a = 100;
+            if ($('.totalWrap .totalPrice').html() <= a) {
                 $('#goPay').css({
-                    display:'block'
+                    display: 'block'
                 });
                 $('#needRecharge').css({
-                    display:'none'
+                    display: 'none'
                 });
-            }else{
+            } else {
                 $('#goPay').css({
-                    display:'none'
+                    display: 'none'
                 });
                 $('#needRecharge').css({
-                    display:'block'
+                    display: 'block'
                 });
             }
 
         }
+        /*
+         *使用现金，使用银元券切换
+         */
+        tab();
 
+        function tab() {
+            $('#tab #cash').on('click', function () {
+                $('#content2').css({
+                    display: 'none'
+                });
+                $('#content1').css({
+                    display: 'block'
+                });
+                $('#tab #ticket').removeClass('tabChoose');
+                $(this).addClass('tabChoose');
+            });
+            $('#tab #ticket').on('click', function () {
+                $.ajax({
+                    type: 'get',
+                    url: '',
+                    dataType: 'json',
+                    //                dataType: 'jsonp',
+                    //                data: 'value=1',
+                    //jsonp: 'jsonpcallback',
+                    success: function (msg) {
 
-
+                    }
+                });
+                $('#content1').css({
+                    display: 'none'
+                });
+                $('#content2').css({
+                    display: 'block'
+                });
+                $('#tab #cash').removeClass('tabChoose');
+                $(this).addClass('tabChoose');
+            });
+        }
     </script>
 </body>
 
