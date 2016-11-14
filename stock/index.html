@@ -92,6 +92,12 @@
             <p>个人中心</p>
         </a>
     </footer>
+
+    <!--买涨买跌弹出层-->
+    <div id="buyAlert"></div>
+
+
+
     <script>
         var myChart = echarts.init(document.getElementById('app'));
         /*
@@ -513,9 +519,9 @@
                 }
             });
         }
-        setInterval(getData4,5000);
-
+        setInterval(getData4, 5000);
     </script>
+
 </body>
 
 </html>
