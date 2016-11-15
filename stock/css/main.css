@@ -22,6 +22,12 @@
 .borderBlue{
     border: 2px solid #5083e3 !important;
 }
+.borderRed{
+    border: 1px solid #f54337 !important;
+}
+.borderGreen{
+    border: 1px solid #13b94d !important;
+}
 .clearBar {
     clear: both;
     border: 1px solid #e2e2e2;

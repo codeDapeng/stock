@@ -42,14 +42,14 @@
     <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
     <div id="chooseBtnWrap">
         <div class="p1">
-            <a href="buyUp.html">
-                <span id="buyUp" class="bgRed">
+            <!--            <a href="buyUp.html">-->
+            <span id="buyUp" class="bgRed">
         <img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span>
-            </a>
-            <a href="buyDown.html">
-                <span id="buyDown" class="bgGreen">
+            <!--            </a>-->
+            <!--            <a href="buyDown.html">-->
+            <span id="buyDown" class="bgGreen">
         <img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span>
-            </a>
+            <!--            </a>-->
         </div>
         <div class="p2">
             <ul>
@@ -94,9 +94,122 @@
     </footer>
 
     <!--买涨买跌弹出层-->
-    <div id="buyAlert"></div>
-
-
+    <div id="alertWrap" style="display:none;">
+        <div id="buyAlert">
+            <div class="bgRed alertHeader">
+                <p>买涨</p>
+                <div id="tab">
+                    <span id="cash" class="tabChoose">使用现金</span>
+                    <span id="ticket">使用银元券</span>
+                </div>
+            </div>
+            <div id="content1" class="content">
+                <div id="priceChoose">
+                    <div class="priceItem borderBlue">
+                        <p class="p1 colRed">¥8</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">¥80</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">¥200</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+                    </div>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="totalWrap">
+                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>
+                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>
+                    <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+                    <a href="" id="goPay"><span class="s3">购买</span></a>
+                </div>
+            </div>
+            <div id="content2" class="content" style="display:none;">
+                <div id="priceChoose">
+                    <div class="priceItem borderBlue">
+                        <p class="p1 colRed">¥8</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">¥80</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">¥200</p>
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+                    </div>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="totalWrap">
+                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>
+                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>
+                    <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+                    <a href="" id="goPay"><span class="s3">购买</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--over!-->
 
     <script>
         var myChart = echarts.init(document.getElementById('app'));
@@ -520,6 +633,190 @@
             });
         }
         setInterval(getData4, 5000);
+        /*
+         *买涨btn
+         */
+        buyUp();
+        function buyUp() {
+            $('#chooseBtnWrap .p1 #buyUp').on('click', function () {
+                $('#alertWrap').css({
+                    display: 'block'
+                })
+                $('#content1 #priceChoose .priceItem').on('click', function () {
+                    var hands = $('.pricePrompt .div1 .show').html();
+                    $('#priceChoose .priceItem').removeClass('borderBlue');
+                    $('#priceChoose .priceItem .p1').removeClass('colRed');
+                    $(this).addClass('borderBlue');
+                    $(this).find('.p1').addClass('colRed');
+                    if ($(this).index() == 0) {
+                        $('#perPrice').html('8');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 8);
+                        testPrice(hands * 8);
+                    } else if ($(this).index() == 1) {
+                        $('#perPrice').html('80');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 80);
+                        testPrice(hands * 80);
+                    } else if ($(this).index() == 2) {
+                        $('#perPrice').html('200');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 200);
+                        testPrice(hands * 200);
+                    }
+                });
+
+            });
+        }
+        /*
+         *用户余额
+         */
+        function testPrice(a) {
+            var a = 100;
+            if ($('.totalWrap .totalPrice').html() <= a) {
+                $('#goPay').css({
+                    display: 'block'
+                });
+                $('#needRecharge').css({
+                    display: 'none'
+                });
+            } else {
+                $('#goPay').css({
+                    display: 'none'
+                });
+                $('#needRecharge').css({
+                    display: 'block'
+                });
+            }
+
+        }
+
+        changeShow('#content1');
+        function changeShow(a) {
+            $('.pricePrompt .div1 .jia').on('click', function () {
+                var show = $(a+' .pricePrompt .div1 .show').html();
+                var totalPrice=$(a+' .totalWrap .totalPrice').html();
+                if (show >= 10) {
+                    $(a+' .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    $(a+' .pricePrompt .div1 .show').html(show);
+                    if(show==1){
+                        $(a+' .totalWrap .totalPrice').html(totalPrice*show);
+                    }else{
+                        $(a+' .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
+                    }
+                }
+
+            });
+            $('.pricePrompt .div1 .jian').on('click', function () {
+                var show = $(a+' .pricePrompt .div1 .show').html();
+                var totalPrice=$(a+' .totalWrap .totalPrice').html();
+                if (show <= 1) {
+                    $(a+' .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $(a+' .pricePrompt .div1 .show').html(show);
+                    $(a+' .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
+                }
+            });
+            $('.pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show >= 100) {
+                    $(this).parent().find('.show').html(100 + "%");
+                } else {
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+
+            });
+            $('.pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+        /*
+         *使用现金，使用银元券切换
+         */
+        tab();
+        function tab() {
+            $('#tab #cash').on('click', function () {
+                $('#content1 .pricePrompt .div1 .show').html(1);
+                $('#content1 .totalWrap .totalPrice').html(8);
+                $('#content2').css({
+                    display: 'none'
+                });
+                $('#content1').css({
+                    display: 'block'
+                });
+                $('#tab #ticket').removeClass('tabChoose');
+                $(this).addClass('tabChoose');
+                $('#content1 #priceChoose .priceItem').removeClass('borderBlue');
+                $('#content1 #priceChoose .priceItem .p1').removeClass('colRed');
+                $('#content1 #priceChoose .priceItem:first').addClass('borderBlue');
+                $('#content1 #priceChoose .priceItem .p1:first').addClass('colRed');
+
+            });
+            $('#tab #ticket').on('click', function () {
+                $('#content2 .pricePrompt .div1 .show').html(1);
+                $('#content2 .totalWrap .totalPrice').html(8);
+                $.ajax({
+                    type: 'get',
+                    url: 'test.json',
+                    //                    dataType: 'json',
+                    //                dataType: 'jsonp',
+                    success: function (msg) {
+                        changeShow('#content2');
+                        if (msg == '') {
+                            alert('没有银元券，别瞎点！')
+                        } else {
+                            console.log(msg);
+                            $('#content1').css({
+                                display: 'none'
+                            });
+                            $('#content2').css({
+                                display: 'block'
+                            });
+                            $('#tab #cash').removeClass('tabChoose');
+                            $('#tab #ticket').addClass('tabChoose');
+                            $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
+                            $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
+                            $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
+                            $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
+                            $('#content2 #priceChoose .priceItem').on('click', function () {
+                                var hands = $('#content2 .pricePrompt .div1 .show').html();
+                                $('#priceChoose .priceItem').removeClass('borderBlue');
+                                $('#priceChoose .priceItem .p1').removeClass('colRed');
+                                $(this).addClass('borderBlue');
+                                $(this).find('.p1').addClass('colRed');
+
+                                if ($(this).index() == 0) {
+                                    $('#perPrice').html('8');
+                                    $('.totalWrap .totalPrice').html(hands * 8);
+                                    testPrice(hands * 8);
+
+
+                                } else if ($(this).index() == 1) {
+                                    $('#perPrice').html('80');
+                                    $('.totalWrap .totalPrice').html(hands * 80);
+                                    testPrice(hands * 80);
+
+
+                                } else if ($(this).index() == 2) {
+                                    $('#perPrice').html('200');
+                                    $('.totalWrap .totalPrice').html(hands * 200);
+                                    testPrice(hands * 200);
+
+                                }
+                            });
+                        }
+
+                    }
+                });
+            });
+        }
     </script>
 
 </body>
