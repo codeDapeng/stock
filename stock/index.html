@@ -688,33 +688,85 @@
 
         }
 
-        changeShow('#content1');
-        function changeShow(a) {
-            $('.pricePrompt .div1 .jia').on('click', function () {
-                var show = $(a+' .pricePrompt .div1 .show').html();
-                var totalPrice=$(a+' .totalWrap .totalPrice').html();
+        changeShow();
+        function changeShow() {
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content1 .pricePrompt .div1 .jia').on('click', function () {
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice=$('#content1 .totalWrap .totalPrice').html();
+                console.log(show);
                 if (show >= 10) {
-                    $(a+' .pricePrompt .div1 .show').html(10);
+                    $('#content1 .pricePrompt .div1 .show').html(10);
                 } else {
                     show++;
-                    $(a+' .pricePrompt .div1 .show').html(show);
+                    $('#content1 .pricePrompt .div1 .show').html(show);
                     if(show==1){
-                        $(a+' .totalWrap .totalPrice').html(totalPrice*show);
+                        $('#content1 .totalWrap .totalPrice').html(totalPrice*show);
                     }else{
-                        $(a+' .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
+                        $('#content1 .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
                     }
                 }
 
             });
             $('.pricePrompt .div1 .jian').on('click', function () {
-                var show = $(a+' .pricePrompt .div1 .show').html();
-                var totalPrice=$(a+' .totalWrap .totalPrice').html();
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice=$('#content1 .totalWrap .totalPrice').html();
                 if (show <= 1) {
-                    $(a+' .pricePrompt .div1 .show').html(1);
+                    $('#content1 .pricePrompt .div1 .show').html(1);
                 } else {
                     show--;
-                    $(a+' .pricePrompt .div1 .show').html(show);
-                    $(a+' .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
+                    $('#content1 .pricePrompt .div1 .show').html(show);
+                    $('#content1 .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
+                }
+            });
+            $('.pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show >= 100) {
+                    $(this).parent().find('.show').html(100 + "%");
+                } else {
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+
+            });
+            $('.pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+        function changeShow2() {
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .jia').on('click', function () {
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice=$('#content2 .totalWrap .totalPrice').html();
+                console.log(show);
+                if (show >= 10) {
+                    $('#content2 .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    if(show==1){
+                        $('#content2 .totalWrap .totalPrice').html(totalPrice*show);
+                    }else{
+                        $('#content2 .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
+                    }
+                }
+
+            });
+            $('.pricePrompt .div1 .jian').on('click', function () {
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice=$('#content2 .totalWrap .totalPrice').html();
+                if (show <= 1) {
+                    $('#content2 .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    $('#content2 .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
                 }
             });
             $('.pricePrompt .div2 .jia').on('click', function () {
@@ -743,6 +795,7 @@
         tab();
         function tab() {
             $('#tab #cash').on('click', function () {
+
                 $('#content1 .pricePrompt .div1 .show').html(1);
                 $('#content1 .totalWrap .totalPrice').html(8);
                 $('#content2').css({
@@ -768,7 +821,7 @@
                     //                    dataType: 'json',
                     //                dataType: 'jsonp',
                     success: function (msg) {
-                        changeShow('#content2');
+                        changeShow2();
                         if (msg == '') {
                             alert('没有银元券，别瞎点！')
                         } else {
