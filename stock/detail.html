@@ -12,6 +12,7 @@
     <script src="js/iscroll.js"></script>
     <script src="js/flexible.js"></script>
     <script>
+
         var myScroll,
             pullDownEl, pullDownOffset,
             pullUpEl, pullUpOffset,
@@ -23,16 +24,19 @@
         // 每次加载需要显示的条数
         var length = 10;
         console.log("每次加载需要显示的条数" + length);
-
         function pullUpAction() {
             ++page;
             console.log("页数" + page);
             setTimeout(function () {
                 var el, li, i;
                 el = document.getElementById('listWrap');
+
                 for (i = 0; i < length; i++) {
                     li = document.createElement('div');
                     li.innerHTML = '<div class="brief"><span class="date">11-15</span><span class="type">白银</span><span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span><span class="money">0.00元</span><img class="img2" src="img/btnDown.jpg" alt=""><ul class="list"><li><span class="name">建仓价</span><span>4.135</span></li><li><span class="name">平仓价</span><span>9.321</span></li><li><span class="name">花费</span><span>40.00</span></li><li><span class="name">购买方式</span><span>赢家</span></li><li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li><li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li><li><span class="name">平仓类型</span><span>爆仓平仓</span></li></ul></div>';
+
+
+
                     el.appendChild(li, el.childNodes[0]);
                 }
                 myScroll.refresh();
@@ -42,13 +46,17 @@
 
 
         function loaded() {
+
+
+//            pullDownEl = document.getElementById('pullDown');
+//            pullDownOffset = pullDownEl.offsetHeight;
             pullUpEl = document.getElementById('pullUp');
             pullUpOffset = pullUpEl.offsetHeight;
 
             myScroll = new iScroll('wrapper', {
                 scrollbarClass: 'myScrollbar',
                 useTransition: false,
-                topOffset: pullDownOffset,
+//                topOffset: pullDownOffset,
                 onRefresh: function () {
                     if (pullUpEl.className.match('loading')) {
                         pullUpEl.className = '';
@@ -87,7 +95,8 @@
         function getLiLength(scroller) {
             var y = Math.abs(scroller.y);
             var startY = Math.abs(scroller.minScrollY);
-            var li = document.getElementsByTagName('li');
+            var listWrap = document.getElementById('listWrap');
+            var li = listWrap.getElementsByTagName('div');
             var len = Math.round((y - startY) / li[0].offsetHeight);
             return len;
         }
@@ -97,12 +106,20 @@
         }, false);
         document.addEventListener('DOMContentLoaded', loaded, false);
     </script>
+
 </head>
 
 <body>
+
+    <header><img src="img/person_5.jpg" alt="">交易明细</header>
     <div id="wrapper">
         <div id="scroller">
-            <header><img src="img/person_5.jpg" alt="">交易明细</header>
+<!--
+            <div id="pullDown">
+                <span class="pullDownIcon"></span>
+                <span class="pullDownLabel"> </span>
+            </div>
+-->
             <div id="listWrap">
                 <div class="brief">
                     <span class="date">11-15</span>
@@ -120,6 +137,150 @@
                         <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
                     </ul>
                 </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <!--<div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>
+                <div class="brief">
+                    <span class="date">11-15</span>
+                    <span class="type">白银</span>
+                    <span class="much"><span>1千克</span><img class="img1" src="img/up.jpg" alt=""></span>
+                    <span class="money">0.00元</span>
+                    <img class="img2" src="img/btnDown.jpg" alt="">
+                    <ul class="list">
+                        <li><span class="name">建仓价</span><span>4.135</span></li>
+                        <li><span class="name">平仓价</span><span>9.321</span></li>
+                        <li><span class="name">花费</span><span>40.00</span></li>
+                        <li><span class="name">购买方式</span><span>赢家</span></li>
+                        <li><span class="name">建仓时间</span><span>2000-11-16</span><span>10:50:23</span></li>
+                        <li><span class="name">平仓时间</span><span>2016-11-16</span><span>08:51:43</span></li>
+                        <li><span class="name">平仓类型</span><span>爆仓平仓</span></li>
+                    </ul>
+                </div>-->
             </div>
             <div id="pullUp">
                 <span class="pullUpLabel">上拉加载更多...</span>
@@ -127,11 +288,16 @@
         </div>
     </div>
     <script>
-        $('.brief').on('click', function () {
+//        $('.brief').on('click', function () {
+//            $(this).find('.img2').toggleClass('rotate180');
+//            $(this).find('.list').slideToggle();
+//        });
+        $('#listWrap').delegate('.brief','click',function(){
             $(this).find('.img2').toggleClass('rotate180');
             $(this).find('.list').slideToggle();
-        });
+        })
     </script>
+
 </body>
 
 </html>

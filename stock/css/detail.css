@@ -11,7 +11,33 @@ header img{
 #listWrap{
     overflow: hidden;
 }
+#wrapper {
+    position:absolute; z-index:1;
+    bottom:0px;
+    left:0;
+    width:100%;
+    top:14vw;
+    overflow:auto;
+
+}
+
+#scroller {
+    position:relative;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+/*    float:left;*/
+    width:100%;
+    padding:0;
+}
+#scroller .listWrap {
+    position:relative;
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    margin: .468rem .468rem 0 .468rem;
+    background: #fff;
+}
 .brief{
+
     margin: 0 4.7vw;
     line-height: 13.75vw;
     border-bottom: 4px solid #ffb535;
