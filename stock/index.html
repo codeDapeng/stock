@@ -158,7 +158,7 @@
             <div id="content2" class="content" style="display:none;">
                 <div id="priceChoose">
                     <div class="priceItem borderBlue">
-                        <p class="p1 colRed">¥8</p>
+                        <p class="p1 colRed">¥8123</p>
                         <p class="p2">100克银币</p>
                         <p class="p3">盈亏波动0.1元</p>
                     </div>
@@ -637,6 +637,7 @@
          *买涨btn
          */
         buyUp();
+
         function buyUp() {
             $('#chooseBtnWrap .p1 #buyUp').on('click', function () {
                 $('#alertWrap').css({
@@ -649,14 +650,17 @@
                     $(this).addClass('borderBlue');
                     $(this).find('.p1').addClass('colRed');
                     if ($(this).index() == 0) {
+                        $('.pricePrompt .div1 .show').html(1);
                         $('#perPrice').html('8');
                         $('#content1 .totalWrap .totalPrice').html(hands * 8);
                         testPrice(hands * 8);
                     } else if ($(this).index() == 1) {
+                        $('.pricePrompt .div1 .show').html(1);
                         $('#perPrice').html('80');
                         $('#content1 .totalWrap .totalPrice').html(hands * 80);
                         testPrice(hands * 80);
                     } else if ($(this).index() == 2) {
+                        $('.pricePrompt .div1 .show').html(1);
                         $('#perPrice').html('200');
                         $('#content1 .totalWrap .totalPrice').html(hands * 200);
                         testPrice(hands * 200);
@@ -689,34 +693,36 @@
         }
 
         changeShow();
+
         function changeShow() {
             $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
             $('#content1 .pricePrompt .div1 .jia').on('click', function () {
                 var show = $('#content1 .pricePrompt .div1 .show').html();
-                var totalPrice=$('#content1 .totalWrap .totalPrice').html();
+                var totalPrice = $('#content1 .totalWrap .totalPrice').html();
                 console.log(show);
                 if (show >= 10) {
                     $('#content1 .pricePrompt .div1 .show').html(10);
                 } else {
                     show++;
                     $('#content1 .pricePrompt .div1 .show').html(show);
-                    if(show==1){
-                        $('#content1 .totalWrap .totalPrice').html(totalPrice*show);
-                    }else{
-                        $('#content1 .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
+                    if (show == 1) {
+                        $('#content1 .totalWrap .totalPrice').html(totalPrice * show);
+                    } else {
+                        $('#content1 .totalWrap .totalPrice').html((totalPrice / (show - 1)) * show);
                     }
                 }
 
             });
             $('.pricePrompt .div1 .jian').on('click', function () {
                 var show = $('#content1 .pricePrompt .div1 .show').html();
-                var totalPrice=$('#content1 .totalWrap .totalPrice').html();
+                var totalPrice = $('#content1 .totalWrap .totalPrice').html();
                 if (show <= 1) {
                     $('#content1 .pricePrompt .div1 .show').html(1);
                 } else {
                     show--;
                     $('#content1 .pricePrompt .div1 .show').html(show);
-                    $('#content1 .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
+                    $('#content1 .totalWrap .totalPrice').html((totalPrice / (show + 1)) * show);
                 }
             });
             $('.pricePrompt .div2 .jia').on('click', function () {
@@ -739,34 +745,39 @@
                 }
             });
         }
+
         function changeShow2() {
-            $('#content2 .pricePrompt .div1 .show').html(1);
+//            alert(1);
+            //            $('#content1 .pricePrompt .div1 .show').html(1);
+            //            $('#content2 .pricePrompt .div1 .show').html(1);
             $('#content2 .pricePrompt .div1 .jia').on('click', function () {
+                //                alert(a++);
                 var show = $('#content2 .pricePrompt .div1 .show').html();
-                var totalPrice=$('#content2 .totalWrap .totalPrice').html();
+                var totalPrice = $('#content2 .totalWrap .totalPrice').html();
                 console.log(show);
                 if (show >= 10) {
                     $('#content2 .pricePrompt .div1 .show').html(10);
                 } else {
                     show++;
+                    //                    alert(show)
                     $('#content2 .pricePrompt .div1 .show').html(show);
-                    if(show==1){
-                        $('#content2 .totalWrap .totalPrice').html(totalPrice*show);
-                    }else{
-                        $('#content2 .totalWrap .totalPrice').html((totalPrice/(show-1))*show);
+                    if (show == 1) {
+                        $('#content2 .totalWrap .totalPrice').html(totalPrice * show);
+                    } else {
+                        $('#content2 .totalWrap .totalPrice').html((totalPrice / (show - 1)) * show);
                     }
                 }
 
             });
             $('.pricePrompt .div1 .jian').on('click', function () {
                 var show = $('#content2 .pricePrompt .div1 .show').html();
-                var totalPrice=$('#content2 .totalWrap .totalPrice').html();
+                var totalPrice = $('#content2 .totalWrap .totalPrice').html();
                 if (show <= 1) {
                     $('#content2 .pricePrompt .div1 .show').html(1);
                 } else {
                     show--;
                     $('#content2 .pricePrompt .div1 .show').html(show);
-                    $('#content2 .totalWrap .totalPrice').html((totalPrice/(show+1))*show);
+                    $('#content2 .totalWrap .totalPrice').html((totalPrice / (show + 1)) * show);
                 }
             });
             $('.pricePrompt .div2 .jia').on('click', function () {
@@ -792,84 +803,101 @@
         /*
          *使用现金，使用银元券切换
          */
-        tab();
-        function tab() {
-            $('#tab #cash').on('click', function () {
+        //        tab();
+        //        function tab() {
+        $('#tab #cash').on('click', function () {
 
-                $('#content1 .pricePrompt .div1 .show').html(1);
-                $('#content1 .totalWrap .totalPrice').html(8);
-                $('#content2').css({
-                    display: 'none'
-                });
-                $('#content1').css({
-                    display: 'block'
-                });
-                $('#tab #ticket').removeClass('tabChoose');
-                $(this).addClass('tabChoose');
-                $('#content1 #priceChoose .priceItem').removeClass('borderBlue');
-                $('#content1 #priceChoose .priceItem .p1').removeClass('colRed');
-                $('#content1 #priceChoose .priceItem:first').addClass('borderBlue');
-                $('#content1 #priceChoose .priceItem .p1:first').addClass('colRed');
-
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content1 .totalWrap .totalPrice').html(8);
+            $('#content2').css({
+                display: 'none'
             });
-            $('#tab #ticket').on('click', function () {
-                $('#content2 .pricePrompt .div1 .show').html(1);
-                $('#content2 .totalWrap .totalPrice').html(8);
-                $.ajax({
-                    type: 'get',
-                    url: 'test.json',
-                    //                    dataType: 'json',
-                    //                dataType: 'jsonp',
-                    success: function (msg) {
-                        changeShow2();
-                        if (msg == '') {
-                            alert('没有银元券，别瞎点！')
-                        } else {
-                            console.log(msg);
-                            $('#content1').css({
-                                display: 'none'
-                            });
-                            $('#content2').css({
-                                display: 'block'
-                            });
-                            $('#tab #cash').removeClass('tabChoose');
-                            $('#tab #ticket').addClass('tabChoose');
-                            $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
-                            $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
-                            $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
-                            $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
-                            $('#content2 #priceChoose .priceItem').on('click', function () {
-                                var hands = $('#content2 .pricePrompt .div1 .show').html();
-                                $('#priceChoose .priceItem').removeClass('borderBlue');
-                                $('#priceChoose .priceItem .p1').removeClass('colRed');
-                                $(this).addClass('borderBlue');
-                                $(this).find('.p1').addClass('colRed');
 
-                                if ($(this).index() == 0) {
-                                    $('#perPrice').html('8');
-                                    $('.totalWrap .totalPrice').html(hands * 8);
-                                    testPrice(hands * 8);
+            $('#content1').css({
+                display: 'block'
+            });
+            $('#tab #ticket').removeClass('tabChoose');
+            $(this).addClass('tabChoose');
+            $('#content1 #priceChoose .priceItem').removeClass('borderBlue');
+            $('#content1 #priceChoose .priceItem .p1').removeClass('colRed');
+            $('#content1 #priceChoose .priceItem:first').addClass('borderBlue');
+            $('#content1 #priceChoose .priceItem .p1:first').addClass('colRed');
+
+        });
+        changeShow2();
+        $('#tab #ticket').on('click', function () {
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .totalWrap .totalPrice').html(8);
+            $('#content1').css({
+                display: 'none'
+            });
+
+            $('#content2').css({
+                display: 'block'
+            });
+            $('#tab #cash').removeClass('tabChoose');
+            $('#tab #ticket').addClass('tabChoose');
+            $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
+            $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
+            $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
+            $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
+
+            $.ajax({
+                type: 'get',
+                url: 'test.json',
+                success: function (msg) {
+                    changeShow2();
+                    if (msg == '') {
+                        alert('没有银元券，别瞎点！')
+                    } else {
+                        console.log(msg);
+                        $('#content1').css({
+                            display: 'none'
+                        });
+                        $('#content2').css({
+                            display: 'block'
+                        });
+                        $('#tab #cash').removeClass('tabChoose');
+                        $('#tab #ticket').addClass('tabChoose');
+                        $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
+                        $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
+                        $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
+                        $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
+                        $('#content2 #priceChoose .priceItem').on('click', function () {
+                            var hands = $('#content2 .pricePrompt .div1 .show').html();
+                            $('#priceChoose .priceItem').removeClass('borderBlue');
+                            $('#priceChoose .priceItem .p1').removeClass('colRed');
+                            $(this).addClass('borderBlue');
+                            $(this).find('.p1').addClass('colRed');
+                            $('.pricePrompt .div1 .show').html(1);
+                            if ($(this).index() == 0) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('8');
+                                $('.totalWrap .totalPrice').html(hands * 8);
+                                testPrice(hands * 8);
 
 
-                                } else if ($(this).index() == 1) {
-                                    $('#perPrice').html('80');
-                                    $('.totalWrap .totalPrice').html(hands * 80);
-                                    testPrice(hands * 80);
+                            } else if ($(this).index() == 1) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('80');
+                                $('.totalWrap .totalPrice').html(hands * 80);
+                                testPrice(hands * 80);
+                            } else if ($(this).index() == 2) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('200');
+                                $('.totalWrap .totalPrice').html(hands * 200);
+                                testPrice(hands * 200);
 
-
-                                } else if ($(this).index() == 2) {
-                                    $('#perPrice').html('200');
-                                    $('.totalWrap .totalPrice').html(hands * 200);
-                                    testPrice(hands * 200);
-
-                                }
-                            });
-                        }
-
+                            }
+                        });
                     }
-                });
+
+                }
             });
-        }
+        });
+        //        }
     </script>
 
 </body>
