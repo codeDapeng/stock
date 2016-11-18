@@ -48,7 +48,8 @@
     width: 100%;
     border-top: 1px solid #eeeeee;
     text-align: center;
-    margin-top: 6.25vw;
+    margin-top: 2.25vw;
+    overflow: hidden;
 }
 
 #footerNav a {
