@@ -277,9 +277,10 @@ header .right #ticket {
 #buyAlert{
     width: 90.625vw;
     background: #fff;
-    margin: 20vw auto;
+    margin: 15vw auto 0;
     border-radius: 2vw;
     overflow: hidden;
+    position: relative;
 }
 #buyAlert .alertHeader {
     width: 100%;
@@ -308,7 +309,19 @@ header .right #ticket {
     line-height: 12.5vw;
     margin: 0 1.5vw;
 }
-
+/*close*/
+#close{
+    position: absolute;
+    top: 3vw;
+    right: 5vw;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 1vw;
+    text-align: center;
+    font-size: 3vw;
+    line-height: 5vw;
+    padding: 1vw;
+}
 #buyAlert .tabChoose {
     background: #fff;
     color: #f54337;
@@ -440,3 +453,44 @@ header .right #ticket {
     font-size: 4.21vw;
     color: #5083e3;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
