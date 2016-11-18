@@ -12,11 +12,11 @@ header img{
     overflow: hidden;
 }
 #wrapper {
-    position:absolute; z-index:1;
+    position:relative;
+    z-index:1;
     bottom:0px;
     left:0;
     width:100%;
-    top:14vw;
     overflow:auto;
 
 }
