@@ -10,6 +10,7 @@ header img{
 }
 #listWrap{
     overflow: hidden;
+    width:100%;
 }
 #wrapper {
     position:relative;
@@ -37,7 +38,7 @@ header img{
     background: #fff;
 }
 .brief{
-
+    width: 90.6vw;
     margin: 0 4.7vw;
     line-height: 13.75vw;
     border-bottom: 4px solid #ffb535;
@@ -51,17 +52,24 @@ header img{
 .brief span{
 /*    display: block;*/
     float: left;
-    margin-right: 9vw;
+/*    margin-right: 9vw;*/
+    width: 20vw;
+    text-align: center;
+}
+.brief .much span{
+    width: 12vw;
 }
 .brief img{
     width: 4.375vw;
-    float: right;
+/*    float: right;*/
 }
 .brief .img1{
     margin-top: 4.575vw;
     margin-left: 2vw;
+    float: left;
 }
 .brief .img2{
+    float: right;
     margin-top: 5.575vw;
 }
 .rotate180{
