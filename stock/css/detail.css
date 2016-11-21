@@ -1,126 +1,122 @@
-header{
+header {
     font-size: 4.375vw;
     color: #333;
     margin: 6.25vw 4.7vw 1.56vw;
 }
-header img{
+
+header img {
     width: 4.375vw;
     float: left;
     margin-right: 3.125vw;
 }
-#listWrap{
-    overflow: hidden;
-    width:100%;
-}
-#wrapper {
-    position:relative;
-    z-index:1;
-    bottom:0px;
-    left:0;
-    width:100%;
-    overflow:auto;
 
+#listWrap {
+    /*    overflow: hidden;*/
+    /*    width:100%;*/
+}
+
+#wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 15vw;
+    bottom: 13vh;
+    left: 0;
+    width: 100%;
+    overflow: auto;
 }
 
 #scroller {
-    position:relative;
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-/*    float:left;*/
-    width:100%;
-    padding:0;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /*    float:left;*/
+    width: 100%;
+    padding: 0;
 }
-#scroller .listWrap {
-    position:relative;
-    width:100%;
-    height:auto;
+
+
+/*
+#scroller #listWrap {
+    position: relative;
+    width: 100%;
+    height: auto;
     overflow: hidden;
-    margin: .468rem .468rem 0 .468rem;
     background: #fff;
 }
-.brief{
+*/
+
+.brief {
+    position: relative;
     width: 90.6vw;
     margin: 0 4.7vw;
     line-height: 13.75vw;
     border-bottom: 4px solid #ffb535;
-    position: relative;
-}
-.brief{
     color: #333;
     font-size: 4.375vw;
     float: left;
 }
-.brief span{
-/*    display: block;*/
+
+.brief>span {
+    /*    display: block;*/
     float: left;
-/*    margin-right: 9vw;*/
+    /*    margin-right: 9vw;*/
     width: 20vw;
     text-align: center;
 }
-.brief .much span{
+
+.brief .much span {
+    float: left;
     width: 12vw;
 }
-.brief img{
+
+.brief img {
     width: 4.375vw;
-/*    float: right;*/
+    /*    float: right;*/
 }
-.brief .img1{
+
+.brief .img1 {
     margin-top: 4.575vw;
     margin-left: 2vw;
     float: left;
 }
-.brief .img2{
+
+.brief .img2 {
     float: right;
     margin-top: 5.575vw;
 }
-.rotate180{
+
+.rotate180 {
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
 }
-.brief .much span{
-    margin-right: 0;
-}
-.brief .list{
-/*    position: absolute;*/
-/*    top: 13.75vw;*/
-/*    border: 1px solid #333;*/
+
+.brief .list {
+
     width: 81.25vw;
     margin-left: 4.75vw;
     overflow: hidden;
     display: none;
 }
-.brief .list li{
+
+.brief .list li {
     width: 100%;
     float: left;
     border-bottom: 1px solid #eee;
 }
-.brief .list li span{
+
+.brief .list li span {
     margin-right: 6vw;
 }
-.brief .list li .name{
+
+.brief .list li .name {
     width: 22vw;
-
 }
-#pullUp{
+
+#pullUp {
     text-align: center;
-
 }
-#pullUp span{
+
+#pullUp span {
     display: block;
     color: #666;
     padding-top: 10vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
