@@ -30,7 +30,8 @@ header img {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /*    float:left;*/
     width: 100%;
-    padding: 0;
+    padding-bottom: 13vh;
+
 }
 
 
