@@ -45,6 +45,14 @@ header .right .tel{
     color: #333;
     font-size: 4.375vw;
 }
+#content .ctnItem .money{
+    float: right;
+    margin-right: 5vw;
+}
+#content .ctnItem .counts{
+    float: right;
+    margin-right: 5vw;
+}
 #content .ctnItem img:last-child{
      width: 2.18vw;
     float: right;
