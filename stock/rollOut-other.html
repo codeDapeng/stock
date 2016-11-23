@@ -43,11 +43,7 @@
         <input class="inp" type="text" placeholder="开户支行">
         <input class="inp" type="text" placeholder="服务卡号">
         <input class="inp" type="text" placeholder="持卡人姓名">
-        <p class="p1">
-            <input type="text" placeholder="验证码" class="inp2">
-            <span class="getCode">发送验证码</span>
-            <span class="hide"><span>10</span>s重新发送</span>
-        </p>
+
         <span class="btn">提现</span>
         <p class="prompt">单次可提现5000元，每日累计提现20000元</p>
     </div>
@@ -69,34 +65,7 @@
             <p>个人中心</p>
         </a>
     </footer>-->
-    <script>
-        $('.getCode').on('click', function () {
-            var tel = $('.tel').val();
-            var password = $('.psw').val();
-            $('.getCode').css({
-                display: 'none'
-            })
-            $('.hide').css({
-                display: 'block'
-            })
-            var num=$('.hide span').html();
-            var time=setInterval(function () {
-                if (num > 0) {
-                    num = num - 1;
-                    $('.hide span').html(num);
-                } else {
-                    $('.hide').css({
-                        display: 'none'
-                    });
-                    $('.getCode').css({
-                        display:'block'
-                    })
-                    $('.hide span').html(3);
-                    clearInterval(time)
-                }
-            }, 1000);
-        });
-    </script>
+
 </body>
 
 </html>

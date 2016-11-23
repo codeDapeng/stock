@@ -68,6 +68,40 @@ header .balance {
     margin-bottom: 3.125vw;
     border-radius: 1vw;
 }
+
+
+#content .p1 {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    color: #ccc;
+    font-size: 4.375vw;
+    line-height: 14vw;
+    border: none;
+}
+
+#content .p1 .inp2 {
+    width: 69%;
+    border: none;
+    line-height: 14vw;
+}
+
+#content .p1 .getCode {
+    display: inline-block;
+    font-size: 4.375vw;
+    color: #429de3;
+    float: right;
+    line-height: 14vw;
+    margin-right: 2vw;
+}
+#content .p1 .hide {
+    display: inline-block;
+    font-size: 4.375vw;
+    color: #429de3;
+    display: none;
+    float: right;
+    line-height: 14vw;
+    margin-right: 2vw;
+}
 #content .btn{
     display: block;
     width: 100%;
