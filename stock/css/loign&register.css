@@ -25,7 +25,7 @@ form .p1 {
 }
 
 form .p1 .inp2 {
-    width: 70%;
+    width: 69%;
     border: none;
 }
 
@@ -55,8 +55,8 @@ form .p2 {
 }
 
 form .p2 .checkbox {
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
     border: none;
     border: 1px solid #666;
     margin-right: 2vw;
