@@ -60,10 +60,12 @@ header img {
     /*    display: block;*/
     float: left;
     /*    margin-right: 9vw;*/
-    width: 21vw;
+    width: 20vw;
     text-align: center;
 }
-
+.brief .much{
+    width: 21vw;
+}
 .brief .much span {
     float: left;
     width: 14vw;
