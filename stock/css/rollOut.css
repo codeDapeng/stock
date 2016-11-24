@@ -46,7 +46,7 @@ header .balance {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding-left: 35vw;
+/*    padding-left: 35vw;*/
     font-size: 5vw;
     color: #333;
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
@@ -61,14 +61,17 @@ header .balance {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding-left: 40vw;
+/*    padding-left: 40vw;*/
     font-size: 5vw;
     color: #333;
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
 }
-
+#content .select2 option{
+    direction: ltr;
+    white-space:pre;
+}
 
 #content .p1 {
     border-bottom: 1px solid #ccc;
