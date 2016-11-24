@@ -91,19 +91,19 @@
          *select
          */
 
-        $('#sel').on('click',function(){
+        $('#sel').on('click', function () {
             $(this).find('#menu').toggle();
         });
-        $('#sel2').on('click',function(){
+        $('#sel2').on('click', function () {
             $(this).find('#menu').toggle();
         });
         //li标签的事件监听
 
-        $('#sel #menu li').on('click',function(){
+        $('#sel #menu li').on('click', function () {
             $('#sel .title').html($(this).html());
         });
-        $('#sel2 #menu li').on('click',function(){
-           $('#sel2 .title').html($(this).html());
+        $('#sel2 #menu li').on('click', function () {
+            $('#sel2 .title').html($(this).html());
         });
         /*
          *10s倒计时
@@ -133,6 +133,14 @@
                     clearInterval(time)
                 }
             }, 1000);
+        });
+        /*
+         *input不能为空！
+         */
+        $('input').blur(function(){
+            if($(this).html()==''){
+                alert('不能为空！')
+            }
         });
     </script>
 </body>
