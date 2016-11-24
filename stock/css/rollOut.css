@@ -40,7 +40,7 @@ header .balance {
 
 #content .select1 {
     width: 100%;
-/*    margin-left: 3.125vw;*/
+    /*    margin-left: 3.125vw;*/
     border: 1px solid #ccc;
     height: 12.5vw;
     -webkit-appearance: none;
@@ -53,9 +53,9 @@ header .balance {
     margin-bottom: 3.125vw;
     border-radius: 1vw;
 }
+
 #content .select2 {
     width: 100%;
-/*    margin-left: 3.125vw;*/
     border: 1px solid #ccc;
     height: 12.5vw;
     -webkit-appearance: none;
@@ -67,10 +67,14 @@ header .balance {
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
+    width: 100%;
+
 }
+
 #content .select2 option{
     direction: ltr;
     white-space:pre;
+
 }
 
 #content .p1 {
@@ -96,6 +100,7 @@ header .balance {
     line-height: 14vw;
     margin-right: 2vw;
 }
+
 #content .p1 .hide {
     display: inline-block;
     font-size: 4.375vw;
@@ -105,7 +110,8 @@ header .balance {
     line-height: 14vw;
     margin-right: 2vw;
 }
-#content .btn{
+
+#content .btn {
     display: block;
     width: 100%;
     background: #48a5f2;
