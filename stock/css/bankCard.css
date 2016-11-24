@@ -1,0 +1,31 @@
+header {
+    font-size: 4.375vw;
+    color: #333;
+    margin: 6.25vw 4.7vw 1.56vw;
+}
+
+header img {
+    width: 4.375vw;
+    float: left;
+    margin-right: 3.125vw;
+}
+.container{
+    border: 1px solid #e0e0e0;
+    border-radius: 1vw;
+    margin: 4.6875vw;
+    padding: 6.25vw;
+}
+.container .name{
+    font-size: 4.375vw;
+    color: #333;
+    margin-bottom: 1.5vw;
+}
+.container .type{
+    font-size: 3.75vw;
+    color: #999;
+    margin-bottom: 7.81vw;
+}
+.container .num{
+    font-size: 7.6vw;
+    color: #666;
+}
