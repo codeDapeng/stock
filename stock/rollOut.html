@@ -12,6 +12,7 @@
     <script src="js/echarts.js"></script>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/flexible.js"></script>
+
 </head>
 
 <body>
@@ -28,18 +29,33 @@
             <option value="">工商银行</option>
             <option value="">建设银行</option>
         </select>
-        <select class="select2">
-            <option value="">省份</option>
-            <option value="">福建省</option>
-            <option value="">湖南省</option>
-            <option value="">山东省</option>
-        </select>
-        <select class="select2">
-            <option value="">城市</option>
-            <option value="">北京市</option>
-            <option value="">天津市</option>
-            <option value="">上海市</option>
-        </select>
+
+        <div class="select2" id="sel">
+            <div class="title">
+                省
+            </div>
+            <div class="selectList">
+                <ul id="menu">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>333</li>
+                    <li>4444444</li>
+                </ul>
+            </div>
+        </div>
+        <div class="select2" id="sel2">
+            <div class="title">
+                市
+            </div>
+            <div class="selectList">
+                <ul id="menu">
+                    <li>5</li>
+                    <li>66666</li>
+                    <li>66</li>
+                    <li>777777</li>
+                </ul>
+            </div>
+        </div>
         <input class="inp" type="text" placeholder="开户支行">
         <input class="inp" type="text" placeholder="服务卡号">
         <input class="inp" type="text" placeholder="持卡人姓名">
@@ -69,7 +85,29 @@
             <p>个人中心</p>
         </a>
     </footer>-->
+
     <script>
+        /*
+         *select
+         */
+
+        $('#sel').on('click',function(){
+            $(this).find('#menu').toggle();
+        });
+        $('#sel2').on('click',function(){
+            $(this).find('#menu').toggle();
+        });
+        //li标签的事件监听
+
+        $('#sel #menu li').on('click',function(){
+            $('#sel .title').html($(this).html());
+        });
+        $('#sel2 #menu li').on('click',function(){
+           $('#sel2 .title').html($(this).html());
+        });
+        /*
+         *10s倒计时
+         */
         $('.getCode').on('click', function () {
             var tel = $('.tel').val();
             var password = $('.psw').val();
@@ -79,8 +117,8 @@
             $('.hide').css({
                 display: 'block'
             })
-            var num=$('.hide span').html();
-            var time=setInterval(function () {
+            var num = $('.hide span').html();
+            var time = setInterval(function () {
                 if (num > 0) {
                     num = num - 1;
                     $('.hide span').html(num);
@@ -89,7 +127,7 @@
                         display: 'none'
                     });
                     $('.getCode').css({
-                        display:'block'
+                        display: 'block'
                     })
                     $('.hide span').html(3);
                     clearInterval(time)
