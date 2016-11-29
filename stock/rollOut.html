@@ -52,6 +52,15 @@
         <span class="btn">提现</span>
         <p class="prompt">单次可提现5000元，每日累计提现20000元</p>
     </div>
+    <!--loading-->
+    <div id="loading">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+        <p id="hint">提现中，请稍后</p>
+    </div>
     <!--<footer id="footerNav">
         <a href="index.html">
             <img src="img/idx.jpg" alt="">
@@ -122,10 +131,18 @@
         /*
          *input不能为空！
          */
-        $('input').blur(function(){
-            if($(this).html()==''){
+        $('input').blur(function () {
+            if ($(this).html() == '') {
                 alert('不能为空！');
             }
+        });
+        /*
+         *loading框
+         */
+        $('#content .btn').on('click',function(){
+            $('#loading').css({
+                display:'block'
+            })
         });
     </script>
 </body>
