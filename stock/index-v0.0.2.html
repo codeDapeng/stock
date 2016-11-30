@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>微盘</title>
+    <!--    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index-v0.0.2.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/flexible.js"></script>
+</head>
+
+<body>
+    <header>
+        <span class="left">个人资产：<span id="money">123456</span>元</span>
+        <span class="right">银元券：<span id="ticket">654321</span>张</span>
+    </header>
+    <div id="promptWrap">
+        <div class="left">
+            <p class="name">白银（元/克）<span>粤贵银>></span></p>
+            <p class="price colRed"><span></span><img src="img/up.jpg" alt=""></p>
+        </div>
+        <div class="right">
+            <p class="p1">最高 <span></span></p>
+            <p class="p2">昨收 <span></span></p>
+            <p class="p3">最低 <span></span></p>
+            <p class="p4">开盘 <span></span></p>
+        </div>
+    </div>
+    <p class="clearBar"></p>
+    <div id="buttonWrap">
+        <span id="btn1" class="buttonChoose">分时线</span>
+        <span id="btn2">5分钟线</span>
+        <span id="btn3">15分钟线</span>
+        <span id="btn4">30分钟线</span>
+    </div>
+    <div id="app"></div>
+    <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
+    <div id="chooseBtnWrap">
+        <div class="p1">
+            <!--            <a href="buyUp.html">-->
+            <span id="buyUp" class="bgRed">
+        <img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span>
+            <!--            </a>-->
+            <!--            <a href="buyDown.html">-->
+            <span id="buyDown" class="bgGreen">
+        <img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span>
+            <!--            </a>-->
+        </div>
+        <!--<div class="p2">
+            <ul>
+                <li>
+                    <p class="l1">4.0千克</p>
+                    <p>白银</p>
+                </li>
+                <li>
+                    <p class="l2">4.375</p>
+                    <p>建仓价</p>
+                </li>
+                <li>
+                    <p class="l3">4.635</p>
+                    <p>保本价</p>
+                </li>
+                <li style="border:none;">
+                    <p class="colRed l4">999.00</p>
+                    <p>盈利</p>
+                </li>
+            </ul>
+            <span id="soldAll" class="bgRed">平仓</span>
+        </div>-->
+    </div>
+    <p style="text-align:center;color:#2887ee;font-size:3.125vw">注：由银元劵购买白银所产生的亏损不计入资产</p>
+    <footer id="footerNav">
+        <a href="index.html">
+            <img src="img/idx2.jpg" alt="">
+            <p>首页</p>
+        </a>
+        <a href="">
+            <img src="img/order.jpg" alt="">
+            <p>订单</p>
+        </a>
+        <a href="">
+            <img src="img/msg.jpg" alt="">
+            <p>资讯</p>
+        </a>
+        <a href="personal.html">
+            <img src="img/person.jpg" alt="">
+            <p>个人中心</p>
+        </a>
+    </footer>
+
+    <!--买涨买跌弹出层-->
+    <div id="alertWrap" style="display:none;">
+        <div id="buyAlert">
+            <div class="alertHeader">
+<!--                <p>买涨</p>-->
+                <div id="tab">
+                    <span id="title" class="bgRed">建仓买涨</span>
+                    <span id="cash" class="tabChoose" style="border-right:1px solid #ccc;">使用现金</span>
+                    <span id="ticket">使用银元券</span>
+                </div>
+<!--                <div id="close">close</div>-->
+            </div>
+            <div id="content1" class="content">
+                <div id="priceChoose">
+                   <span class="sp">购买金额</span>
+                    <div class="priceItem borderBlue">
+                        <p class="p1 colRed">8</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+-->
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">80</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+-->
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">200</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+-->
+                    </div>
+                </div>
+
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">手续费</span>
+                    <span class="sp2 totalCost" style="margin-left:0">123</span>
+                    <span class="sp2">（手续费单向收取）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">总价</span>
+                    <span class="sp2 totalPrice" style="margin-left:0">8元</span>
+                </div>
+                <div class="totalWrap">
+<!--                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>-->
+<!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
+                    <span class="s3" id="cancel">取消</span>
+                    <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+                    <a href="" id="goPay"><span class="s3">购买</span></a>
+                </div>
+            </div>
+            <div id="content2" class="content" style="display:none;">
+                <div id="priceChoose">
+                   <span class="sp">购买金额</span>
+                    <div class="priceItem borderBlue">
+                        <p class="p1 colRed">8</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+-->
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">80</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+-->
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">200</p>
+<!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+-->
+                    </div>
+                </div>
+
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-100%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">手续费</span>
+                    <span class="sp2 totalCost" style="margin-left:0">123</span>
+                    <span class="sp2">（手续费单向收取）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">总价</span>
+                    <span class="sp2 totalPrice" style="margin-left:0">8元</span>
+                </div>
+                <div class="totalWrap">
+<!--                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>-->
+<!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
+                    <span class="s3" id="cancel">取消</span>
+                    <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+                    <a href="" id="goPay"><span class="s3">购买</span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--over!-->
+
+    <script>
+        var myChart = echarts.init(document.getElementById('app'));
+        /*
+         *初始化
+         */
+        getData1();
+        getData3();
+        /*
+         *分时线绘图
+         */
+        function getData1() {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: 'http://192.168.0.57:8080/WeipanDemo/Weipan',
+                //            dataType: 'json',
+                dataType: 'jsonp',
+                data: 'value=1',
+                jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    //                    console.log(msg)
+                    var data = [];
+                    for (var i = 0; i < msg.result.dataList.length; i++) {
+                        data.unshift(msg.result.dataList[i]);
+                    }
+                    console.log(data);
+                    var date = [];
+                    for (var i = 0; i < msg.result.dateList.length; i++) {
+                        date.unshift(msg.result.dateList[i]);
+
+                    }
+                    console.log(date)
+                    option = {
+                        title: {
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return '时间：' + params[0].name + '<br/>最新价格：' + params[0].value;
+                                //                            console.log(params[0])
+
+                            },
+                            axisPointer: {
+                                type: 'line',
+                                lineStyle: {
+                                    color: '#48b',
+                                    width: 1,
+                                    type: 'solid'
+                                },
+                                crossStyle: {
+                                    color: '#1e90ff',
+                                    width: 1,
+                                    type: 'dashed'
+                                },
+                                shadowStyle: {
+                                    color: 'rgba(150,150,150,0.3)',
+                                    width: 'auto',
+                                    type: 'default'
+
+                                }
+                            },
+                            textStyle: {
+                                fontSize: 15
+                            }
+                        },
+                        grid: {
+                            left: 15,
+                            right: 10,
+                            top: 5,
+                            bottom: 0,
+                            containLabel: true,
+
+                        },
+                        xAxis: {
+                            //                            type: 'value',
+//                            splitLine: {
+//                                show: true
+//                            },
+                            data: date,
+                            boundaryGap: false,
+                            axisLabel: {
+                                interval: 10,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            //                        boundaryGap:false,
+                            //                        boundaryGap: [0, 10],
+                            scale: true,
+                            splitLine: {
+                                show: false
+                            },
+                            boundaryGap: false,
+                            spliteArea: {
+                                //                            show: true,
+                                areaStyle: {
+                                    type: 'default',
+                                    //                                color: rgba(3,3,3)
+
+                                }
+                            },
+                            axisLabel: {
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                },
+                                inside: true
+                            },
+                            axisTick: {
+                                inside: true
+                            },
+                        },
+                        series: [{
+                                name: '模拟数据',
+                                type: 'line',
+                                //                        showSymbol: false,
+                                //                        hoverAnimation: false,
+                                data: data,
+                                smooth: true,
+                                dataFilter: 'nearst',
+                                //                        clickable:false,
+                                symbol: 'none',
+                                areaStyle: {
+                                    normal: {
+                                        color: 'skyblue'
+                                    }
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: '#5083e3',
+                                        width: 1
+                                    }
+                                },
+                               /* markPoint: {
+                                    symbol: 'pin',
+                                    label: {
+                                        normal: {
+                                            textStyle: {
+                                                color: '#fff'
+                                            }
+                                        }
+                                    },
+                                    itemStyle: {
+                                        normal: {
+                                            color: 'rgba(40, 135, 238, 0.41)'
+                                        },
+                                    },
+                                    data: [
+                                        {
+                                            name: '最大值',
+                                            type: 'max'
+                                        },
+                                        {
+                                            name: '最大值',
+                                            type: 'min',
+                                            symbolRotate: 180,
+                                            label: {
+                                                normal: {
+                                                    position: ['10%', '50%']
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },*/
+
+                        },
+
+                        ],
+                        backgroundColor: '#fff',
+                        textStyle: {
+                            color: '#333',
+                            fontStyle: 'normal',
+                            //                            fontSize:20,
+                        }
+
+                    };
+                    myChart.setOption(option);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("部门切换失败，请联系管理员!");
+                }
+
+            })
+        }
+        /*
+         *5,15,30分钟线绘图
+         */
+        function getData2(value, time) {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: 'http://192.168.0.57:8080/WeipanDemo/Weipan',
+                //            dataType: 'json',
+                dataType: 'jsonp',
+                data: 'value=' + value,
+                jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    //                    console.log(msg.result)
+                    var data = [];
+                    for (var i = 0; i < msg.result.dataList.length; i++) {
+                        data.unshift(msg.result.dataList[i]);
+
+                    }
+                    //                    console.log(data);
+                    var date = [];
+                    for (var i = 0; i < msg.result.dateList.length; i++) {
+                        date.unshift(msg.result.dateList[i]);
+
+                    }
+                    //                    console.log(date)
+                    option = {
+                        title: {
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0] + ' 收盘：' + params[0].value[1] + '<br/>最高：' + params[0].value[2] + ' 最低：' + params[0].value[3];
+                                //                            console.log(params[0])
+                            },
+                            axisPointer: {
+                                type: 'line',
+                                lineStyle: {
+                                    color: '#48b',
+                                    width: 2,
+                                    type: 'solid'
+                                },
+                                crossStyle: {
+                                    color: '#1e90ff',
+                                    width: 1,
+                                    type: 'dashed'
+                                },
+                                shadowStyle: {
+                                    color: 'rgba(150,150,150,0.3)',
+                                    width: 'auto',
+                                    type: 'default'
+                                }
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            splitLine: {
+                                show: true
+                            },
+                            data: date,
+                            boundaryGap: true,
+                            axisLine: {
+                                onZero: false
+                            },
+                            splitLine: {
+                                show: false
+                            },
+
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            axisLabel: {
+                                interval: time,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            //                        boundaryGap:false,
+                            //                        boundaryGap: [0, 10],
+                            scale: true,
+//                            splitLine: {
+//                                show: true
+//                            },
+                            boundaryGap: false,
+                            spliteArea: {
+                                show: true,
+
+                            },
+                            axisTick: {
+                                inside: true
+                            },
+                            axisLabel: {
+                                inside: true
+                            }
+
+                        },
+                        backgroundColor: '#fff',
+                        series: [{
+                            name: '模拟数据',
+                            type: 'candlestick',
+                            //                        showSymbol: false,
+                            //                        hoverAnimation: false,
+                            data: data,
+                            smooth: false,
+                            dataFilter: 'nearst',
+                            //                        clickable:false,
+                            symbol: 'none',
+                            itemStyle: {
+                                normal: {
+                                    color: '#f54337',
+                                    color0: '#13b94d',
+                                    borderColor: '#f54337',
+                                    borderColor0: '#13b94d'
+                                }
+                            }
+                        }],
+
+
+                    };
+                    myChart.setOption(option);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("部门切换失败，请联系管理员!");
+                }
+
+            })
+        }
+
+        /*
+         *点击切换视图
+         */
+        $('#buttonWrap span').on('click', function () {
+            $('#buttonWrap span').removeClass('buttonChoose');
+            $(this).addClass('buttonChoose');
+            var val = $(this).index();
+            console.log(val)
+            if (val >= 1) {
+                if (val == 1) {
+                    getData2(val + 1, 10)
+                } else if (val == 2) {
+                    getData2(val + 1, 7);
+                } else {
+                    getData2(val + 1, 5);
+                }
+
+            } else {
+                getData1();
+                setInterval(getData1, 30000)
+            }
+        });
+        /*
+         *实时行情数据(prompt)
+         */
+        function getData3() {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: 'http://192.168.0.57:8080/WeipanDemo/getQuotation',
+                //            dataType: 'json',
+                dataType: 'jsonp',
+                //                data: 'value=1',
+                jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    var price = $('#promptWrap .left .price span').html();
+                    $('#promptWrap .left .price span').html(msg.result.silver);
+                    $('#promptWrap .right .p1 span').html(msg.XAG1.HIGH);
+                    $('#promptWrap .right .p2 span').html(msg.XAG1.PRECLOSE);
+                    $('#promptWrap .right .p3 span').html(msg.XAG1.LOW);
+                    $('#promptWrap .right .p4 span').html(msg.XAG1.OPEN);
+                    //                    console.log(msg);
+                    console.log(msg);
+
+                    //                    console.log($('#promptWrap .left .price').html());
+                    if (price <= msg.result.silver) {
+                        console.log('red');
+                        $('#promptWrap .left').addClass('red');
+                        $('#promptWrap .left .price').removeClass('colGreen');
+                        $('#promptWrap .left .price').addClass('colRed');
+                        $('#promptWrap .left .price img').attr('src', 'img/up.jpg');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('red');
+                        }, 1500);
+
+                    } else {
+                        console.log('green');
+                        $('#promptWrap .left').addClass('green');
+                        $('#promptWrap .left .price').removeClass('colRed');
+                        $('#promptWrap .left .price').addClass('colGreen');
+                        $('#promptWrap .left .price img').attr('src', 'img/down.jpg');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('green');
+                        }, 1500)
+                    }
+
+                }
+            })
+        }
+        setInterval(getData3, 5000);
+        /*
+         *建仓、保本、盈利
+         */
+        function getData4() {
+            $.ajax({
+                type: 'get',
+                url: '',
+                dataType: 'json',
+                //                dataType: 'jsonp',
+                //                data: 'value=1',
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    $('#chooseBtnWrap .p2 .l1').html(msg);
+                    $('#chooseBtnWrap .p2 .l2').html(msg);
+                    $('#chooseBtnWrap .p2 .l3').html(msg);
+                    $('#chooseBtnWrap .p2 .l4').html(msg);
+                    if ($('#chooseBtnWrap .p2 .l4').html() >= 0) {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colRed');
+                    } else {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
+                    }
+
+                }
+            });
+        }
+        setInterval(getData4, 5000);
+        /*
+         *买涨btn
+         */
+        buyUp();
+
+        function buyUp() {
+            $('#chooseBtnWrap .p1 #buyUp').on('click', function () {
+                $('#alertWrap').slideDown(800);
+                $('#content1 #priceChoose .priceItem').on('click', function () {
+                    var hands = $('.pricePrompt .div1 .show').html();
+                    $('#priceChoose .priceItem').removeClass('borderBlue');
+                    $('#priceChoose .priceItem .p1').removeClass('colRed');
+                    $(this).addClass('borderBlue');
+                    $(this).find('.p1').addClass('colRed');
+                    if ($(this).index() == 0) {
+                        $('.pricePrompt .div1 .show').html(1);
+                        $('#perPrice').html('8');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 8);
+                        testPrice(hands * 8);
+                    } else if ($(this).index() == 1) {
+                        $('.pricePrompt .div1 .show').html(1);
+                        $('#perPrice').html('80');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 80);
+                        testPrice(hands * 80);
+                    } else if ($(this).index() == 2) {
+                        $('.pricePrompt .div1 .show').html(1);
+                        $('#perPrice').html('200');
+                        $('#content1 .totalWrap .totalPrice').html(hands * 200);
+                        testPrice(hands * 200);
+                    }
+                });
+            });
+            $('#cancel').on('click',function(){
+                $('#alertWrap').slideUp(800);
+            });
+        }
+        /*
+         *用户余额
+         */
+        function testPrice(a) {
+            var a = 100;
+            if ($('.totalWrap .totalPrice').html() <= a) {
+                $('#goPay').css({
+                    display: 'block'
+                });
+                $('#needRecharge').css({
+                    display: 'none'
+                });
+            } else {
+                $('#goPay').css({
+                    display: 'none'
+                });
+                $('#needRecharge').css({
+                    display: 'block'
+                });
+            }
+
+        }
+
+        changeShow();
+
+        function changeShow() {
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content1 .pricePrompt .div1 .jia').on('click', function () {
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content1 .totalWrap .totalPrice').html();
+                console.log(show);
+                if (show >= 10) {
+                    $('#content1 .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    $('#content1 .pricePrompt .div1 .show').html(show);
+                    if (show == 1) {
+                        $('#content1 .totalWrap .totalPrice').html(totalPrice * show);
+                    } else {
+                        $('#content1 .totalWrap .totalPrice').html((totalPrice / (show - 1)) * show);
+                    }
+                }
+
+            });
+            $('.pricePrompt .div1 .jian').on('click', function () {
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content1 .totalWrap .totalPrice').html();
+                if (show <= 1) {
+                    $('#content1 .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $('#content1 .pricePrompt .div1 .show').html(show);
+                    $('#content1 .totalWrap .totalPrice').html((totalPrice / (show + 1)) * show);
+                }
+            });
+            $('.pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show >= 100) {
+                    $(this).parent().find('.show').html(100 + "%");
+                } else {
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+
+            });
+            $('.pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+
+        function changeShow2() {
+//            alert(1);
+            //            $('#content1 .pricePrompt .div1 .show').html(1);
+            //            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .jia').on('click', function () {
+                //                alert(a++);
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content2 .totalWrap .totalPrice').html();
+                console.log(show);
+                if (show >= 10) {
+                    $('#content2 .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    //                    alert(show)
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    if (show == 1) {
+                        $('#content2 .totalWrap .totalPrice').html(totalPrice * show);
+                    } else {
+                        $('#content2 .totalWrap .totalPrice').html((totalPrice / (show - 1)) * show);
+                    }
+                }
+
+            });
+            $('.pricePrompt .div1 .jian').on('click', function () {
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content2 .totalWrap .totalPrice').html();
+                if (show <= 1) {
+                    $('#content2 .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    $('#content2 .totalWrap .totalPrice').html((totalPrice / (show + 1)) * show);
+                }
+            });
+            $('.pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show >= 100) {
+                    $(this).parent().find('.show').html(100 + "%");
+                } else {
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+
+            });
+            $('.pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+        /*
+         *使用现金，使用银元券切换
+         */
+        //        tab();
+        //        function tab() {
+        $('#tab #cash').on('click', function () {
+
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content1 .totalWrap .totalPrice').html(8);
+            $('#content2').css({
+                display: 'none'
+            });
+
+            $('#content1').css({
+                display: 'block'
+            });
+            $('#tab #ticket').removeClass('tabChoose');
+            $(this).addClass('tabChoose');
+            $('#content1 #priceChoose .priceItem').removeClass('borderBlue');
+            $('#content1 #priceChoose .priceItem .p1').removeClass('colRed');
+            $('#content1 #priceChoose .priceItem:first').addClass('borderBlue');
+            $('#content1 #priceChoose .priceItem .p1:first').addClass('colRed');
+
+        });
+        changeShow2();
+        $('#tab #ticket').on('click', function () {
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .totalWrap .totalPrice').html(8);
+            $('#content1').css({
+                display: 'none'
+            });
+
+            $('#content2').css({
+                display: 'block'
+            });
+            $('#tab #cash').removeClass('tabChoose');
+            $('#tab #ticket').addClass('tabChoose');
+            $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
+            $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
+            $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
+            $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
+
+            $.ajax({
+                type: 'get',
+                url: 'test.json',
+                success: function (msg) {
+                    changeShow2();
+                    if (msg == '') {
+                        alert('没有银元券，别瞎点！')
+                    } else {
+                        console.log(msg);
+                        $('#content1').css({
+                            display: 'none'
+                        });
+                        $('#content2').css({
+                            display: 'block'
+                        });
+                        $('#tab #cash').removeClass('tabChoose');
+                        $('#tab #ticket').addClass('tabChoose');
+                        $('#content2 #priceChoose .priceItem').removeClass('borderBlue');
+                        $('#content2 #priceChoose .priceItem .p1').removeClass('colRed');
+                        $('#content2 #priceChoose .priceItem:first').addClass('borderBlue');
+                        $('#content2 #priceChoose .priceItem .p1:first').addClass('colRed');
+                        $('#content2 #priceChoose .priceItem').on('click', function () {
+                            var hands = $('#content2 .pricePrompt .div1 .show').html();
+                            $('#priceChoose .priceItem').removeClass('borderBlue');
+                            $('#priceChoose .priceItem .p1').removeClass('colRed');
+                            $(this).addClass('borderBlue');
+                            $(this).find('.p1').addClass('colRed');
+                            $('.pricePrompt .div1 .show').html(1);
+                            if ($(this).index() == 0) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('8');
+                                $('.totalWrap .totalPrice').html(hands * 8);
+                                testPrice(hands * 8);
+
+
+                            } else if ($(this).index() == 1) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('80');
+                                $('.totalWrap .totalPrice').html(hands * 80);
+                                testPrice(hands * 80);
+                            } else if ($(this).index() == 2) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                $('#perPrice').html('200');
+                                $('.totalWrap .totalPrice').html(hands * 200);
+                                testPrice(hands * 200);
+
+                            }
+                        });
+                    }
+
+                }
+            });
+        });
+        //        }
+    </script>
+
+</body>
+
+</html>
