@@ -21,7 +21,9 @@
 .bgGreen {
     background: #13b94d!important;
 }
-
+.bgBlue{
+    background: #5083e3 !important;
+}
 .borderBlue {
     border: 2px solid #5083e3 !important;
 }
