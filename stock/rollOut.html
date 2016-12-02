@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>提现</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/rollOut.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="js/echarts.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <!--    <script src="js/echarts.js"></script>-->
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/flexible.js"></script>
+    <script type="text/javascript" src="js/alertPopShow.js"></script>
 
 </head>
 
@@ -52,6 +54,7 @@
         <span class="btn">提现</span>
         <p class="prompt">单次可提现5000元，每日累计提现20000元</p>
     </div>
+
     <!--loading-->
     <div id="loading">
         <div class="spinner">
@@ -139,10 +142,38 @@
         /*
          *loading框
          */
-        $('#content .btn').on('click',function(){
-            $('#loading').css({
-                display:'block'
-            })
+        //        $('#content .btn').on('click', function () {
+        //            $('#loading').css({
+        //                display: 'block'
+        //            })
+        //        });
+        /*
+         *alert
+         */
+        $('.btn').on('click', function () {
+            popTipShow.confirm('请再次核对提现信息', '<ul><li><div class="dv1">提现至</div><div><p>中国建设银行</p><p>6217000056788765168</p></div></li><li><div class="dv1">提现金额</div><div>3.60</div></li><li><div class="dv1">实际到账金额</div><div>1.60</div></li><li><div class="dv1">手续费</div><div>2.00</div></li></ul>', ['确 定', '取 消'],
+                function (e) {
+                    //callback 处理按钮事件
+                    var button = $(e.target).attr('class');
+                    if (button == 'ok') {
+                        //按下确定按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("操作成功", "top", 2000);
+                        }, 300);
+                    }
+
+                    if (button == 'cancel') {
+                        //按下取消按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("您选择“取消”了", "bottom", 2000);
+                        }, 300);
+                    }
+                }
+            );
         });
     </script>
 </body>

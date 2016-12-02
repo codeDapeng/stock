@@ -89,6 +89,7 @@ header .balance {
 #content .p1 .inp2 {
     width: 69%;
     border: none;
+    border:1px solid #ccc;
     line-height: 14vw;
 }
 
