@@ -302,12 +302,12 @@ header .right #ticket {
 #buyAlert .alertHeader #tab {
     /*    width: 50%;*/
 /*    margin: 3.28vw auto;*/
+    box-sizing: border-box;
 }
 
 #buyAlert .alertHeader #tab span {
     font-size: 4.375vw;
     float: left;
-/*    border: 1px solid #fff;*/
 /*    border-radius: 1vw;*/
     width: 35vw;
     line-height: 12.5vw;
@@ -316,6 +316,7 @@ header .right #ticket {
 #buyAlert .alertHeader #tab #title {
     width: 29vw;
     color: #fff;
+    line-height: 12.8vw;
 }
 /*close*/
 #close{
@@ -360,7 +361,7 @@ header .right #ticket {
     font-size: 4vw;
     line-height: 7.3vw;
 /*    margin-right: 4vw;*/
-    width: 24vw;
+    width: 27vw;
     color: #999999;
 }
 #buyAlert .content #priceChoose .priceItem {
@@ -410,7 +411,7 @@ header .right #ticket {
 }
 #buyAlert .content .pricePrompt .sp1{
     float: left;
-    width: 24vw;
+    width: 27vw;
 /*    margin-right: 4vw;*/
     color: #999999;
 }

@@ -133,7 +133,7 @@ function callback(func, result) {
                 e, d, f;
             this.isHide() || (a = g.scrollTop, g = g.scrollLeft, e = b.clientWidth, b = b.clientHeight, d = c.width(), f = c.height(), c.css({
 //                top: a + (b - f) / 2,
-                top: 30+'vh',
+                top: 20+'vh',
                 left: g + (e - d) / 2
             }))
         },
