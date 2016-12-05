@@ -51,8 +51,8 @@
 body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 ul,dl,ol{list-style:none;}
-img,fieldset,input[type="submit"]{border:0 none;}
-img{display:inline-block;overflow:hidden;vertical-align:top;}
+/*img,fieldset,input[type="submit"]{border:0 none;}*/
+/*img{display:inline-block;overflow:hidden;vertical-align:top;}*/
 em{font-style:normal;}
 strong{font-weight:normal;}
 table{border-collapse:collapse;border-spacing:0;}

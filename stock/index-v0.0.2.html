@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index-v0.0.2.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
     <script src="js/echarts.js"></script>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/flexible.js"></script>
+    <script type="text/javascript" src="js/alertPopShow.js"></script>
 </head>
 
 <body>
@@ -172,7 +174,7 @@
 <!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
                     <span class="s3" id="cancel">取消</span>
                     <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
-                    <a href="" id="goPay"><span class="s3">购买</span></a>
+                    <span id="goPay" class="s3">购买</span>
                 </div>
             </div>
             <div id="content2" class="content" style="display:none;">
@@ -937,6 +939,34 @@
             });
         });
         //        }
+         /*
+         *alert
+         */
+        $('#goPay').on('click', function () {
+            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">购买方向</div><div>买涨</div></li><li><div class="dv1">花费金额（元）</div><div>8</div></li><li><div class="dv1">手续费（元）</div><div>2</div></li><li><div class="dv1">数量（手）</div><div>1</div></li><li><div class="dv1">止盈点</div><div>30%</div></li><li><div class="dv1">止损点</div><div>10%</div></li></ul>', ['确 定', '取 消'],
+                function (e) {
+                    //callback 处理按钮事件
+                    var button = $(e.target).attr('class');
+                    if (button == 'ok') {
+                        //按下确定按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("操作成功", "top", 2000);
+                        }, 300);
+                    }
+
+                    if (button == 'cancel') {
+                        //按下取消按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("您选择“取消”了", "bottom", 2000);
+                        }, 300);
+                    }
+                }
+            );
+        });
     </script>
 
 </body>
