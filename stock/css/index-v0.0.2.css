@@ -353,14 +353,15 @@ header .right #ticket {
 
 #buyAlert .content #priceChoose {
     overflow: hidden;
-    margin: 4.68vw 0 4.68vw 10vw;
+    margin: 4.68vw 0 6.25vw 6vw;
 }
 #buyAlert .content #priceChoose .sp{
     float: left;
-    font-size: 3.125vw;
-    line-height: 10.3vw;
+    font-size: 4vw;
+    line-height: 7.3vw;
 /*    margin-right: 4vw;*/
-    width: 17vw;
+    width: 22vw;
+    color: #999999;
 }
 #buyAlert .content #priceChoose .priceItem {
     float: left;
@@ -368,13 +369,15 @@ header .right #ticket {
     text-align: center;
     border-radius: 1vw;
     width: 15vw;
-    height: 7.5vw;
+    height: 6.5vw;
 }
 
 #buyAlert .content #priceChoose .priceItem .p1 {
     color: #333;
-    font-size: 6.25vw;
+    font-size: 4vw;
+    line-height: 6.5vw;
 /*    margin: 1.5vw 0;*/
+
 }
 
 #buyAlert .content #priceChoose .priceItem .p2 {
@@ -397,17 +400,19 @@ header .right #ticket {
     margin-bottom: 3.125vw;*/
     width: 100%;
 /*    background: #666;*/
-    font-size: 3.125vw;
-    margin: 0 0 0 10vw;
-    line-height: 10.3vw;
+    font-size: 4vw;
+    margin: 0 0 0 6vw;
+    line-height: 7.3vw;
     overflow: hidden;
 /*    margin-bottom: 6.25vw;*/
-    margin-bottom: 3.25vw;
+    margin-bottom: 6.25vw;
+/*    color: #999999;*/
 }
 #buyAlert .content .pricePrompt .sp1{
     float: left;
-    width: 17vw;
+    width: 22vw;
 /*    margin-right: 4vw;*/
+    color: #999999;
 }
 #buyAlert .content .pricePrompt .sp2{
     float: left;
@@ -417,9 +422,9 @@ header .right #ticket {
 /*    display: inline-block;*/
     border: 1px solid #333;
     border-radius: 1vw;
-    font-size: 5vw;
-    line-height: 10.3vw;
-    width: 43.75vw;
+    font-size: 4vw;
+    line-height: 6.5vw;
+    width: 30.75vw;
     float: left;
 }
 #buyAlert .content .pricePrompt div .jia{
@@ -466,18 +471,25 @@ header .right #ticket {
 
 #buyAlert .content .totalWrap .s3 {
     float: left;
-    border: 1px solid #ccc;
+    border: 1px solid #b3b3b3;
     line-height: 10vw;
-    width: 44%;
+/*    width: 44%;*/
     text-align: center;
     border-radius: 1vw;
     margin: 2vw;
     font-size: 4.21vw;
     color: #5083e3;
 }
-
-
-
+#buyAlert .content .totalWrap #cancel{
+    width: 35%;
+    color: #999;
+}
+#buyAlert .content .totalWrap #goPay{
+    width: 53%;
+}
+#buyAlert .content .totalWrap #nomoney{
+    width: 53%;
+}
 
 
 
