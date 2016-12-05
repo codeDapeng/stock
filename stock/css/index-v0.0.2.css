@@ -360,7 +360,7 @@ header .right #ticket {
     font-size: 4vw;
     line-height: 7.3vw;
 /*    margin-right: 4vw;*/
-    width: 22vw;
+    width: 24vw;
     color: #999999;
 }
 #buyAlert .content #priceChoose .priceItem {
@@ -410,7 +410,7 @@ header .right #ticket {
 }
 #buyAlert .content .pricePrompt .sp1{
     float: left;
-    width: 22vw;
+    width: 24vw;
 /*    margin-right: 4vw;*/
     color: #999999;
 }
@@ -424,7 +424,7 @@ header .right #ticket {
     border-radius: 1vw;
     font-size: 4vw;
     line-height: 6.5vw;
-    width: 30.75vw;
+    width: 31.75vw;
     float: left;
 }
 #buyAlert .content .pricePrompt div .jia{
@@ -480,12 +480,13 @@ header .right #ticket {
     font-size: 4.21vw;
     color: #5083e3;
 }
-#buyAlert .content .totalWrap #cancel{
+#buyAlert .content .totalWrap .cancel{
     width: 35%;
     color: #999;
 }
 #buyAlert .content .totalWrap #goPay{
     width: 53%;
+    color: #fff;
 }
 #buyAlert .content .totalWrap #nomoney{
     width: 53%;

@@ -13,7 +13,9 @@
 .colBlue {
     color: #429de3!important;
 }
-
+.colWhite{
+    color: #fff !important;
+}
 .bgRed {
     background: #f54337!important;
 }
@@ -133,6 +135,7 @@
     text-align: center;
     margin-top: 2.25vw;
     overflow: hidden;
+    background: #fff;
 }
 
 #footerNav a {
