@@ -27,8 +27,9 @@ header .balance {
     border: none;
     border-bottom: 1px solid #ccc;
     border-radius: 1vw;
-    line-height: 12.5vw;
+    height: 12.5vw;
     font-size: 4.375vw;
+    line-height: 4.375vw;
     margin-bottom: 4.6vw;
 }
 
@@ -47,11 +48,12 @@ header .balance {
     -moz-appearance: none;
     appearance: none;
 /*    padding-left: 35vw;*/
-    font-size: 5vw;
-    color: #333;
+    font-size: 4.375vw;
+    color: #999;
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
+    text-indent: 3.9vw;
 }
 
 #content .select2 {
@@ -62,13 +64,13 @@ header .balance {
     -moz-appearance: none;
     appearance: none;
 /*    padding-left: 40vw;*/
-    font-size: 5vw;
-    color: #333;
+    font-size: 4.375vw;
+    color: #999;
     background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
     width: 100%;
-
+    text-indent: 3.9vw;
 }
 
 #content .select2 option{

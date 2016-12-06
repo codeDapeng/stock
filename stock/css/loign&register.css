@@ -15,7 +15,8 @@ form input {
     width: 100%;
     color: #ccc;
     font-size: 4.375vw;
-    line-height: 14vw;
+    line-height: 4.375vw;
+    height: 14vw;
     border: none;
     border-bottom: 1px solid #ccc;
 }
