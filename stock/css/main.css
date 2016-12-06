@@ -159,7 +159,9 @@
     margin: 3.125vw 0;
     width: 25%;
 }
-
+#footerNav a img{
+    width: 4.75vw;
+}
 #footerNav a p {
     text-align: center;
     font-size: 3.125vw;
