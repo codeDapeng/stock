@@ -44,7 +44,7 @@
     <div id="app"></div>
     <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
     <div id="chooseBtnWrap">
-    	#if("$!orderId"=="")
+        #if("$!orderId"=="")
         <div class="p1">
             <!--            <a href="buyUp.html">-->
             <span id="buyUp" class="bgRed">
@@ -66,13 +66,13 @@
                     <p class="l2">$buyPrice元</p>
                     <p>建仓价</p>
                 </li>
-               <!-- <li>
+                <!-- <li>
                     <p class="l3">4.635</p>
                     <p>保本价</p>
                 </li> -->
                 <li style="border:none;">
-                   <p class="colRed l4">0.00</p>
-                   <p>盈利</p>
+                    <p class="colRed l4">0.00</p>
+                    <p>盈利</p>
                 </li>
             </ul>
             <span id="soldAll" class="bgRed">平仓</span>
@@ -263,38 +263,60 @@
 
 
     <script>
-
-    	//平仓
+        //平仓
         $('#soldAll').on('click', function () {
-          //var orderId=$("#orderId").val();
-           $('#soldAll').hide();
-	        $.ajax({
-               type: 'post',
-               url: '/artiCloseOrder.jspa',
-               data: {
-                     orderId:$orderId,
-                     uid:$uid
-               },
-               dataType: "json",
-               success : function(data) {
-			     if (data.ret != null && data.ret != undefined) {
-			       if(data.info == '1078'){
-			         window.location.href="/weipanLogin.jspa?uid=$uid";
-			       }else{
-			       	 logger(data.info);
-			       	 setTimeout(function(){
-			       	 	window.location.reload();
-			       	 },1000)
-			       }
-			     }
-		    },
-		    error : function (e) {
-		    	 $('#soldAll').show();
-			    logger("网络连接超时");
-			    console.log(arguments);
-		    },
-		    timeout : 300000
-           });
+            //var orderId=$("#orderId").val();
+//            $('#soldAll').hide();
+            $.ajax({
+                type: 'post',
+                url: '/artiCloseOrder.jspa',
+                data: {
+                    orderId: $orderId,
+                    uid: $uid
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.ret != null && data.ret != undefined) {
+                        if (data.info == '1078') {
+                            window.location.href = "/weipanLogin.jspa?uid=$uid";
+                        } else {
+                            //			       	 logger(data.info);
+                            //			       	 setTimeout(function(){
+                            //			       	 	window.location.reload();
+                            //			       	 },1000)
+                            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">建仓价</div><div>1234</div></li><li><div class="dv1">数量</div><div>100</div></li><li><div class="dv1">盈亏</div><div>20.51</div></li></ul>', ['确 定', '取 消'],
+                                function (e) {
+                                    //callback 处理按钮事件
+                                    var button = $(e.target).attr('class');
+                                    if (button == 'ok') {
+                                        //按下确定按钮执行的操作
+                                        //todo ....
+                                        this.hide();
+                                        setTimeout(function () {
+                                            webToast("操作成功", "top", 2000);
+                                        }, 300);
+                                    }
+
+                                    if (button == 'cancel') {
+                                        //按下取消按钮执行的操作
+                                        //todo ....
+                                        this.hide();
+                                        setTimeout(function () {
+                                            webToast("您选择“取消”了", "bottom", 2000);
+                                        }, 300);
+                                    }
+                                }
+                            );
+                        }
+                    }
+                },
+                error: function (e) {
+                    $('#soldAll').show();
+                    logger("网络连接超时");
+                    console.log(arguments);
+                },
+                timeout: 300000
+            });
         });
         //使用余额建仓
         $("#goPayByMoney").on("click", function () {
@@ -745,22 +767,22 @@
                 //jsonp: 'jsonpcallback',
                 success: function (msg) {
 
-                	 var nowprice = msg.result.silver;
-                     var price = $('#promptWrap .left .price span').html();
-                    if("$!orderId"!=""){
-                    	var count = (nowprice - $buyPrice)*$count*$plRatio;
-                    	if("$buyDirection"==1){
-                    		$('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100 * -1+'元');
-                    	}else{
-                    		$('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100+'元');
-                    	}
-                   if (parseInt($('#chooseBtnWrap .p2 .l4').html()) >= 0) {
-                        $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
-                        $('#chooseBtnWrap .p2 .l4').addClass('colRed');
-                    } else {
-                        $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
-                        $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
-                    	}
+                    var nowprice = msg.result.silver;
+                    var price = $('#promptWrap .left .price span').html();
+                    if ("$!orderId" != "") {
+                        var count = (nowprice - $buyPrice) * $count * $plRatio;
+                        if ("$buyDirection" == 1) {
+                            $('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100 * -1 + '元');
+                        } else {
+                            $('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100 + '元');
+                        }
+                        if (parseInt($('#chooseBtnWrap .p2 .l4').html()) >= 0) {
+                            $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
+                            $('#chooseBtnWrap .p2 .l4').addClass('colRed');
+                        } else {
+                            $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
+                            $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
+                        }
                     }
                     var price = $('#promptWrap .left .price span').html();
                     $('#promptWrap .left .price span').html(msg.result.silver);
@@ -906,7 +928,7 @@
         function testPrice(a) {
 
             if ($('.totalPrice').html() <= $money) {
-            //alert($money+'-----------'+$('.totalPrice').html());
+                //alert($money+'-----------'+$('.totalPrice').html());
                 $('#goPay').css({
                     display: 'block'
                 });
@@ -992,7 +1014,7 @@
             });
             $('#content1 .pricePrompt .div2 .jian').on('click', function () {
                 var show = parseInt($(this).parent().find('.show').html());
-//                console.log(show);
+                //                console.log(show);
                 if (show <= 0) {
                     $(this).parent().find('.show').html(0 + "%");
                 } else {
@@ -1083,7 +1105,7 @@
 
 
         //
-                changeShow2();
+        changeShow2();
         $('#tab #ticket').on('click', function () {
             //$('#content1 .pricePrompt .div1 .show').html(1);
             //$('#content2 .pricePrompt .div1 .show').html(1);
@@ -1092,15 +1114,15 @@
             //    display: 'none'
             //});
 
-           // $('#content2').css({
-           //     display: 'block'
-           // });
-           // $('#tab #cash').removeClass('tabChoose');
+            // $('#content2').css({
+            //     display: 'block'
+            // });
+            // $('#tab #cash').removeClass('tabChoose');
             //$('#tab #ticket').addClass('tabChoose');
-           // $('#content2 #priceChoose .priceItem').removeClass('bgBlue');
-           // $('#content2 #priceChoose .priceItem .p1').removeClass('colWhite');
-           // $('#content2 #priceChoose .priceItem:first').addClass('bgBlue');
-           // $('#content2 #priceChoose .priceItem .p1:first').addClass('colWhite');
+            // $('#content2 #priceChoose .priceItem').removeClass('bgBlue');
+            // $('#content2 #priceChoose .priceItem .p1').removeClass('colWhite');
+            // $('#content2 #priceChoose .priceItem:first').addClass('bgBlue');
+            // $('#content2 #priceChoose .priceItem .p1:first').addClass('colWhite');
 
             $.ajax({
                 type: 'get',
@@ -1108,13 +1130,13 @@
                 success: function (msg) {
 
                     if (msg == '' || msg.code == '200') {
-                            logger('当前没有银元券！');
-                    }else if(msg.code == '500'){
-                        	 logger('连接异常！');
-                    }else if(msg.code == '1078'){
-                          window.location.href="/weipanLogin.jspa?uid=$uid";
-                    }else {
-                    	//alert('aaaaaaaa')
+                        logger('当前没有银元券！');
+                    } else if (msg.code == '500') {
+                        logger('连接异常！');
+                    } else if (msg.code == '1078') {
+                        window.location.href = "/weipanLogin.jspa?uid=$uid";
+                    } else {
+                        //alert('aaaaaaaa')
                         console.log(msg);
                         $('#content1').css({
                             display: 'none'
@@ -1145,7 +1167,7 @@
 
                             } else if ($(this).index() == 2) {
                                 $('.pricePrompt .div1 .show').html(1);
-                               //$('#perPrice').html('8');
+                                //$('#perPrice').html('8');
                                 $('#content2 .totalPrice').html(80);
                                 testPrice(80);
                             } else if ($(this).index() == 3) {
@@ -1179,50 +1201,50 @@
             var hands = $(this).parent().parent().find('.div1 .show').html();
             var totalCost = $(this).parent().parent().find('.totalCost').html();
             //            console.log(totalPrice)
-            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">购买方向</div><div>' + title + '</div></li><li><div class="dv1">花费金额（元）</div><div>' + totalPrice + '</div></li><li><div class="dv1">手续费（元）</div><div>'+totalCost+'</div></li><li><div class="dv1">数量（手）</div><div>' + hands + '</div></li><li><div class="dv1">止盈点</div><div>' + high + '</div></li><li><div class="dv1">止损点</div><div>' + low + '</div></li></ul>', ['确 定', '取 消'],
+            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">购买方向</div><div>' + title + '</div></li><li><div class="dv1">花费金额（元）</div><div>' + totalPrice + '</div></li><li><div class="dv1">手续费（元）</div><div>' + totalCost + '</div></li><li><div class="dv1">数量（手）</div><div>' + hands + '</div></li><li><div class="dv1">止盈点</div><div>' + high + '</div></li><li><div class="dv1">止损点</div><div>' + low + '</div></li></ul>', ['确 定', '取 消'],
                 function (e) {
                     //callback 处理按钮事件
                     var button = $(e.target).attr('class');
                     if (button == 'ok') {
                         //按下确定按钮执行的操作
-                        var price = totalPrice/hands;
-			            var productId = "";
-			            if (price == "8") {
-			                productId = 4;
-			            } else if (price == "80") {
-			                productId = 10;
-			            } else if (price == "200") {
-			                productId = 11;
-			            }
-			            var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" +hands+ "&isJuan=0";
-			            if (high != "0%") {
-			                param += "&toplimit=" + high;
-			            }
-			            if (low != "0%") {
-			                param += "&bottomlimit=" + low;
-			            }
-			            $.ajax({
-			                type: 'get',
-			                url: 'createOrder.jspa',
-			                dataType: 'json',
-			                data: param,
-			                success: function (data) {
-			                    logger(data.msg);
-			                    setTimeout(function () {
-			                        if (data.ret == "0" ) {
-			                            window.location.reload();
-			                        } else if (data.ret == "-2") {
-			                            window.loacation.href = "/weipanLogin.jspa?uid=$uid";
-			                        } else if(data.ret == "-1"){
-			                        	logger("建仓失败！");
-			                        }
-			                    }, 2000);
+                        var price = totalPrice / hands;
+                        var productId = "";
+                        if (price == "8") {
+                            productId = 4;
+                        } else if (price == "80") {
+                            productId = 10;
+                        } else if (price == "200") {
+                            productId = 11;
+                        }
+                        var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" + hands + "&isJuan=0";
+                        if (high != "0%") {
+                            param += "&toplimit=" + high;
+                        }
+                        if (low != "0%") {
+                            param += "&bottomlimit=" + low;
+                        }
+                        $.ajax({
+                            type: 'get',
+                            url: 'createOrder.jspa',
+                            dataType: 'json',
+                            data: param,
+                            success: function (data) {
+                                logger(data.msg);
+                                setTimeout(function () {
+                                    if (data.ret == "0") {
+                                        window.location.reload();
+                                    } else if (data.ret == "-2") {
+                                        window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                                    } else if (data.ret == "-1") {
+                                        logger("建仓失败！");
+                                    }
+                                }, 2000);
 
-			                },
-			                error: function (XmlHttpRequest, textStatus, errorThrown) {
-			                    logger("出现错误，请联系管理员!");
-			                }
-			            });
+                            },
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                logger("出现错误，请联系管理员!");
+                            }
+                        });
 
                         this.hide();
                         setTimeout(function () {
@@ -1249,7 +1271,7 @@
             } else {
                 title = '买跌';
             }
-             var totalPrice = $(this).parent().parent().find('.totalPrice').html();
+            var totalPrice = $(this).parent().parent().find('.totalPrice').html();
             var high = $(this).parent().parent().find('.high').html();
             var low = $(this).parent().parent().find('.low').html();
             var hands = $(this).parent().parent().find('.div1 .show').html();
@@ -1261,44 +1283,44 @@
                     var button = $(e.target).attr('class');
                     if (button == 'ok') {
                         //按下确定按钮执行的操作
-                        var price = totalPrice/hands;
-			            var productId = "";
-			            if (price == "8") {
-			                productId = 4;
-			            } else if (price == "80") {
-			                productId = 10;
-			            } else if (price == "200") {
-			                productId = 11;
-			            }
-			            var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" +hands+ "&isJuan=1";
-			            if (high != "0%") {
-			                param += "&toplimit=" + high;
-			            }
-			            if (low != "0%") {
-			                param += "&bottomlimit=" + low;
-			            }
-			            $.ajax({
-			                type: 'get',
-			                url: 'createOrder.jspa',
-			                dataType: 'json',
-			                data: param,
-			                success: function (data) {
-			                    logger(data.msg);
-			                    setTimeout(function () {
-			                        if (data.ret == "0" ) {
-			                            window.location.reload();
-			                        } else if (data.ret == "-2") {
-			                            window.loacation.href = "/weipanLogin.jspa?uid=$uid";
-			                        } else if(data.ret == "-1"){
-			                        	logger("建仓失败！");
-			                        }
-			                    }, 2000);
+                        var price = totalPrice / hands;
+                        var productId = "";
+                        if (price == "8") {
+                            productId = 4;
+                        } else if (price == "80") {
+                            productId = 10;
+                        } else if (price == "200") {
+                            productId = 11;
+                        }
+                        var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" + hands + "&isJuan=1";
+                        if (high != "0%") {
+                            param += "&toplimit=" + high;
+                        }
+                        if (low != "0%") {
+                            param += "&bottomlimit=" + low;
+                        }
+                        $.ajax({
+                            type: 'get',
+                            url: 'createOrder.jspa',
+                            dataType: 'json',
+                            data: param,
+                            success: function (data) {
+                                logger(data.msg);
+                                setTimeout(function () {
+                                    if (data.ret == "0") {
+                                        window.location.reload();
+                                    } else if (data.ret == "-2") {
+                                        window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                                    } else if (data.ret == "-1") {
+                                        logger("建仓失败！");
+                                    }
+                                }, 2000);
 
-			                },
-			                error: function (XmlHttpRequest, textStatus, errorThrown) {
-			                    logger("出现错误，请联系管理员!");
-			                }
-			            });
+                            },
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                logger("出现错误，请联系管理员!");
+                            }
+                        });
 
                         this.hide();
                         setTimeout(function () {
