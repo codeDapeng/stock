@@ -63,14 +63,16 @@ header .right #ticket {
 #promptWrap .left .name {
     font-size: 3.75vw;
     color: #333;
+    padding: 0 2vw;
 }
 
 #promptWrap .left .name span {
     color: #fff;
-    font-size: 3.125vw;
-    padding: 0.3vw;
+    font-size: 3.7vw;
+    padding: 0 0.5vw;
     background: #f54337;
     border-radius: 1vw;
+    float: right;
 }
 
 #promptWrap .left .price {
