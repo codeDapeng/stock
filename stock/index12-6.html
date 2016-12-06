@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>微盘</title>
     <!--    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/index-v0.0.2.css">
     <link rel="stylesheet" href="css/main.css">
@@ -417,6 +417,7 @@
          */
         getData1();
         getData3();
+        setInterval(getData1, 30000);
         /*
          *分时线绘图
          */
@@ -743,7 +744,7 @@
             console.log(val)
             if (val >= 1) {
                 if (val == 1) {
-                    getData2(val + 1, 10)
+                    getData2(val + 1, 10);
                 } else if (val == 2) {
                     getData2(val + 1, 7);
                 } else {
@@ -752,7 +753,7 @@
 
             } else {
                 getData1();
-                setInterval(getData1, 30000)
+                setInterval(getData1, 30000);
             }
         });
         /*
