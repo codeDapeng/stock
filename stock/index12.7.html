@@ -265,7 +265,7 @@
                     <!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
 
                     <span class="s3 cancel">取消</span>
-                    <a href="" id="noTicket" style="display:none;"><span class="s3">体验券不足</span></a>
+                    <span id="noTicket" class="s3" style="display:none;width:53%;color:#fff">体验券不足</span>
                     <span class="s3" id="goPay">购买</span>
                 </div>
             </div>
@@ -743,10 +743,13 @@
                 $('#content1 #goPay').removeClass('bgGreen');
                 $('#content2 #goPay').removeClass('bgRed');
                 $('#content2 #goPay').removeClass('bgGreen');
+                $('#content2 #noTicket').removeClass('bgRed');
+                $('#content2 #noTicket').removeClass('bgGreen');
                 $('#title').addClass('bgRed');
                 $('#title').html('建仓买涨');
                 $('#content1 #goPay').addClass('bgRed');
                 $('#content2 #goPay').addClass('bgRed');
+                $('#content2 #noTicket').addClass('bgRed');
             } else if (a == 1) {
                 //alert('green')
                 $('#title').removeClass('bgRed');
@@ -758,6 +761,7 @@
                 $('#title').addClass('bgGreen');
                 $('#content1 #goPay').addClass('bgGreen');
                 $('#content2 #goPay').addClass('bgGreen');
+                $('#content2 #noTicket').addClass('bgGreen');
                 $('#title').html('建仓买跌');
                 $('#title').html('建仓买跌');
             }
@@ -820,12 +824,16 @@
         /*
          *优惠券数量判断
          */
+        var ticket8;
+        var ticket80;
+        var ticket200;
         function testTicket(show) {
-            var type = $('#perPrice').val();
+            var type = parseInt($('#perPrice').val());
             switch (type) {
             case 8:
                 {
-                    if (show >= ticket8) {
+                //console.log(type+'>>>>'+show+'>>>>'+ticket8)
+                    if (show > ticket8) {
                         $('#content2 #goPay').css({
                             display: 'none'
                         });
@@ -844,7 +852,7 @@
                 break;
             case 80:
                 {
-                    if (show >= ticket80) {
+                    if (show > ticket80) {
                         $('#content2 #goPay').css({
                             display: 'none'
                         });
@@ -863,7 +871,7 @@
                 break;
             case 200:
                 {
-                    if (show >= ticket200) {
+                    if (show > ticket200) {
                         $('#content2 #goPay').css({
                             display: 'none'
                         });
@@ -958,9 +966,7 @@
                 }
             });
         }
-        var ticket8;
-        var ticket80;
-        var ticket200;
+
 
         function changeShow2() {
             $('#content2 .pricePrompt .div1 .jia').on('click', function () {
@@ -970,16 +976,15 @@
                 console.log(show);
                 if (show >= 10) {
                     $('#content2 .pricePrompt .div1 .show').html(10);
+
                 } else {
                     show++;
                     $('#content2 .pricePrompt .div1 .show').html(show);
-
-                }
-
-                if (show == 1) {
-                    $('#content2 .totalPrice').html(totalPrice * show);
-                } else {
-                    $('#content2 .totalPrice').html((totalPrice / (show - 1)) * show);
+               		if (show == 1) {
+                    	$('#content2 .totalPrice').html(totalPrice * show);
+               		} else {
+                    	$('#content2 .totalPrice').html((totalPrice / (show - 1)) * show);
+                	}
                 }
                 testTicket(show);
             });
@@ -1044,6 +1049,9 @@
         changeShow2();
         $('#tab #ticket').on('click', function () {
             $('#perPrice').val('8');
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .totalPrice').html(8);
+            testTicket(1);
             $.ajax({
                 type: 'get',
                 url: 'getSecuritisCout.jspa?uid=$uid',
