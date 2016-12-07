@@ -48,10 +48,10 @@
     color: #b2b2b2;
     padding-left: 1vw;
 }
-#thelist li .p2 span:nth-child(odd){
+#thelist li .p2 span:nth-child(even){
     margin-right: 1.5vw;
 }
-#thelist li .p2 span:nth-child(even){
+#thelist li .p2 span:nth-child(odd){
     margin-right: 3vw;
 }
 /**************************************************************/
