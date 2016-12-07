@@ -50,7 +50,8 @@ header .balance {
 /*    padding-left: 35vw;*/
     font-size: 4.375vw;
     color: #999;
-    background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
+    background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
+    background-size: 3.75vw;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
     text-indent: 3.9vw;
@@ -66,7 +67,8 @@ header .balance {
 /*    padding-left: 40vw;*/
     font-size: 4.375vw;
     color: #999;
-    background: url('../img/btnDowm.jpg') no-repeat scroll 83vw center transparent;
+    background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
+    background-size: 3.75vw;
     margin-bottom: 3.125vw;
     border-radius: 1vw;
     width: 100%;
