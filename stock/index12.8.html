@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>麻辣微盘</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index-v0.0.2.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/flexible.js"></script>
+    <script type="text/javascript" src="js/alertPopShow.js"></script>
+    <script src="js/layer.js"></script>
+</head>
+
+<body>
+    <header>
+        <span class="left">个人资产：<span id="money">$!money</span>元</span>
+        <span class="right">银元券：<span id="ticket">$couponNum</span>张</span>
+    </header>
+    <div id="promptWrap">
+        <div class="left">
+            <p class="name">白银（元/克）<span>哈贵银>></span></p>
+            <p class="price colRed"><span></span><img src="img/up.jpg" alt=""></p>
+        </div>
+        <div class="right">
+            <p class="p1">最高 <span></span></p>
+            <p class="p2">昨收 <span></span></p>
+            <p class="p3">最低 <span></span></p>
+            <p class="p4">开盘 <span></span></p>
+        </div>
+    </div>
+    <p class="clearBar"></p>
+    <div id="buttonWrap">
+        <span id="btn1" class="buttonChoose">分时线</span>
+        <span id="btn2">5分钟线</span>
+        <span id="btn3">15分钟线</span>
+        <span id="btn4">30分钟线</span>
+    </div>
+    <div id="app"></div>
+    <p style="text-align:center;color:#666;font-size:3.125vw">交易时间：周一8:00至周六4:00，每日4:00至6:00休市结算</p>
+    <div id="chooseBtnWrap">
+        #if("$!orderId"=="")
+        <div class="p1">
+            <!--            <a href="buyUp.html">-->
+            <span id="buyUp" class="bgRed">
+        <img style="width:2.5vw" src="img/up2.jpg" alt=""> 买涨</span>
+            <!--            </a>-->
+            <!--            <a href="buyDown.html">-->
+            <span id="buyDown" class="bgGreen">
+        <img style="width:2.5vw" src="img/down2.jpg" alt=""> 买跌</span>
+            <!--            </a>-->
+        </div>
+        #else
+        <div class="p2">
+            <ul>
+                <li>
+                    <p class="l1">$weight千克</p>
+                    <p>白银</p>
+                </li>
+                <li>
+                    <p class="l2">$buyPrice元</p>
+                    <p>建仓价</p>
+                </li>
+                <!-- <li>
+                    <p class="l3">4.635</p>
+                    <p>保本价</p>
+                </li> -->
+                <li style="border:none;">
+                    <p class="colRed l4">0.00</p>
+                    <p>盈利</p>
+                </li>
+            </ul>
+            <span id="soldAll" class="bgRed">平仓</span>
+        </div>
+        #end
+
+    </div>
+    <p style="text-align:center;color:#2887ee;font-size:3.125vw">注：由银元劵购买白银所产生的亏损不计入资产</p>
+    <footer id="footerNav" style="position:fixed;top:90vh;">
+        <a href="goIndex.jspa?uid=$uid">
+            <img src="img/idx2.jpg" alt="">
+            <p>首页</p>
+        </a>
+        <a href="getOrderLogList.jspa?uid=$uid&type=all">
+            <img src="img/order.jpg" alt="">
+            <p>订单明细</p>
+        </a>
+        <a href="goPayDetail.jspa?uid=$uid&type=re">
+            <img src="img/msg.jpg" alt="">
+            <p>充值明细</p>
+        </a>
+        <a href="goPersonal.jspa?uid=$uid">
+            <img src="img/person.jpg" alt="">
+            <p>个人中心</p>
+        </a>
+    </footer>
+
+    <!--买涨买跌弹出层-->
+
+    <div id="alertWrap" style="display:none;">
+        <div id="buyAlert">
+            <div class="alertHeader">
+                <input type="hidden" id="colType" value="">
+                <!--                <p>买涨</p>-->
+                <div id="tab">
+                    <span id="title" class="bgRed">建仓买涨</span>
+                    <span id="cash" class="tabChoose" style="border-right:1px solid #ccc;">使用现金</span>
+                    <span id="ticket">使用银元券</span>
+                </div>
+                <!--                <div id="close">close</div>-->
+            </div>
+            <div id="content1" class="content">
+                <div id="priceChoose">
+                    <span class="sp">购买金额</span>
+                    <div class="priceItem bgBlue">
+                        <p class="p1 colWhite">8</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+-->
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">80</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+-->
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">200</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+-->
+                    </div>
+                </div>
+
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show low" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-50%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show high" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-50%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">手续费（元）</span>
+                    <span class="sp2 totalCost colRed" style="margin-left:0">0</span>
+                    <span class="sp2" style="color:#999">（手续费单向收取）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">总价（元）</span>
+                    <span class="sp2 totalPrice colRed" style="margin-left:0">8</span>
+                </div>
+                <div class="totalWrap">
+                    <!--                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>-->
+                    <!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
+
+                    <span class="s3 cancel">取消</span>
+                    <a href="/goPay.jspa?uid=$uid" id="needRecharge" style="display:none;"><span class="s3" id="nomoney">余额不足，去充值</span></a>
+                    <span id="goPay" class="s3">购买</span>
+                </div>
+            </div>
+            <div id="content2" class="content" style="display:none;">
+                <div id="priceChoose">
+                    <span class="sp">购买金额</span>
+                    <div class="priceItem bgBlue">
+                        <p class="p1 colWhite">8</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动0.1元</p>
+-->
+                    </div>
+                    <div class="priceItem" style="margin: 0 3vw;">
+                        <p class="p1">80</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动1元</p>
+-->
+                    </div>
+                    <div class="priceItem">
+                        <p class="p1">200</p>
+                        <!--
+                        <p class="p2">100克银币</p>
+                        <p class="p3">盈亏波动10元</p>
+-->
+                    </div>
+                </div>
+
+                <div class="pricePrompt">
+                    <span class="sp1">选择手数</span>
+                    <div class="div1">
+                        <span class="jian">－</span>
+                        <span class="show" style="border-left:1px solid #333;border-right:1px solid #333">1</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（1-10）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止损</span>
+                    <div class="div2 borderRed">
+                        <span class="jian">－</span>
+                        <span class="show low" style="border-left:1px solid #f54337;border-right:1px solid #f54337">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-50%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">设置止盈</span>
+                    <div class="div2 borderGreen">
+                        <span class="jian">－</span>
+                        <span class="show high" style="border-left:1px solid #13b94d;border-right:1px solid #13b94d">0%</span>
+                        <span class="jia">＋</span>
+                    </div>
+                    <span class="sp2">（0-50%）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">手续费（元）</span>
+                    <span class="sp2 totalCost colRed" style="margin-left:0">0</span>
+                    <span class="sp2" style="color:#999">（手续费单向收取）</span>
+                </div>
+                <div class="pricePrompt">
+                    <span class="sp1">总价（元）</span>
+                    <span class="sp2 totalPrice colRed" style="margin-left:0">8</span>
+                </div>
+                <div class="totalWrap">
+                    <!--                    <span class="s1 colRed">¥ <span class="totalPrice">8</span></span>-->
+                    <!--                    <span class="s2">手续费：<span class="totalCost">4.2元</span></span>-->
+
+                    <span class="s3 cancel">取消</span>
+                    <a href="" id="needRecharge" style="display:none;"><span class="s3">余额不足，去充值</span></a>
+                    <span class="s3" id="goPay">购买</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--over!-->
+
+
+    <script>
+        //平仓
+        $('#soldAll').on('click', function () {
+            //var orderId=$("#orderId").val();
+            //           $('#soldAll').hide();
+            popTipShow.confirm('快速平仓', '<ul><li><div class="dv1">建仓价</div><div>'+$buyPrice+'</div></li><li><div class="dv1">数量</div><div>'+$weight克+'</div></li><li><div class="dv1">盈亏（元）</div><div>'+$(this).parent().find('.l3').html()+'</div></li></ul>', ['确 定', '取 消'],
+                function (e) {
+                    //callback 处理按钮事件
+                    var button = $(e.target).attr('class');
+                    if (button == 'ok') {
+                        //按下确定按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        $.ajax({
+                            type: 'post',
+                            url: '/artiCloseOrder.jspa',
+                            data: {
+                                orderId: $orderId,
+                                uid: $uid
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.ret != null && data.ret != undefined) {
+                                    if (data.info == '1078') {
+                                        window.location.href = "/weipanLogin.jspa?uid=$uid";
+                                    } else {
+                                        //			       	 logger(data.info);
+                                        setTimeout(function () {
+                                            window.location.reload();
+                                        }, 1000)
+
+                                    }
+                                }
+                            },
+                            error: function (e) {
+                                $('#soldAll').show();
+                                logger("网络连接超时");
+                                console.log(arguments);
+                            },
+                            timeout: 300000
+                        });
+
+                        setTimeout(function () {
+                            webToast("操作成功", "top", 2000);
+                        }, 300);
+                    }
+
+                    if (button == 'cancel') {
+                        //按下取消按钮执行的操作
+                        //todo ....
+
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("您选择“取消”了", "bottom", 2000);
+                        }, 300);
+                    }
+                }
+            );
+
+        });
+        //使用余额建仓
+        $("#goPayByMoney").on("click", function () {
+            var price = $('#perPrice').val();
+            var productId = "";
+            if (price == "8") {
+                productId = 4;
+            } else if (price == "80") {
+                productId = 10;
+            } else if (price == "200") {
+                productId = 11;
+            }
+
+            var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" + $('#content1 .pricePrompt .div1 .show').html() + "&isJuan=0";
+            var topLimit = $('#content1 .pricePrompt .div2 #topLimit').text();
+            if (topLimit != "0%") {
+                param += "&toplimit=" + topLimit;
+            }
+            var bottomLimit = $('#content1 .pricePrompt .div2 #bottomLimit').text();
+            if (bottomLimit != "0%") {
+                param += "&bottomlimit=" + bottomLimit
+            }
+
+            $.ajax({
+                type: 'get',
+                url: 'createOrder.jspa',
+                dataType: 'json',
+                data: param,
+                success: function (data) {
+                    logger(data.msg);
+                    setTimeout(function () {
+                        if (data.ret == "0" || data.ret == "-1") {
+                            window.location.reload();
+                        } else if (data.ret == "-2") {
+                            window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                        }
+                    }, 2000);
+
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    logger("出现错误，请联系管理员!");
+                }
+            });
+        });
+
+        //使用兑换券建仓
+        $("#goPayByCoupon").on('click', function () {
+            if ($('#content2 .pricePrompt .div1 .show').html() == 0) {
+                logger("手数为0，无法购买！");
+            } else {
+                //var price=$('#perPrice').val();
+                var productId = "";
+                if (price == "8") {
+                    productId = 4;
+                } else if (price == "80") {
+                    productId = 10;
+                } else if (price == "200") {
+                    productId = 11;
+                }
+
+                var param = "uid=$uid&productId=" + productId + "&type=2&sl=" + $('#content2 .pricePrompt .div1 .show').html() + "&isJuan=1";
+                var topLimit = $('#content2 .pricePrompt .div2 #topLimit').text();
+                if (topLimit != "0%") {
+                    param += "&toplimit=" + topLimit;
+                }
+                var bottomLimit = $('#content2 .pricePrompt .div2 #bottomLimit').text();
+                if (bottomLimit != "0%") {
+                    param += "&bottomlimit=" + bottomLimit
+                }
+                console.log(param);
+                $.ajax({
+                    type: 'GET',
+                    url: 'createOrder.jspa',
+                    data: param,
+                    dataType: "json",
+                    success: function (data) {
+                        logger(data.msg);
+                        setTimeout(function () {
+                            if (data.ret == "0") {
+                                window.location.reload();
+                            } else if (data.ret == "-2") {
+                                window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                            }
+                        }, 3000)
+                    },
+                    error: function (e) {
+                        //alert("网络连接超时");
+                        console.log(e);
+                    },
+                    timeout: 300000
+                });
+            }
+
+        });
+        var myChart = echarts.init(document.getElementById('app'));
+        /*
+         *初始化
+         */
+        getData1();
+        getData3();
+        /*
+         *分时线绘图
+         */
+        function getData1() {
+            $.ajax({
+                type: 'get',
+                url: '/getOneMinute.jspa',
+                //            dataType: 'json',
+                dataType: 'json',
+                data: 'value=1',
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    //                    console.log(msg)
+                    var data = [];
+                    for (var i = 0; i < msg.result.dataList.length; i++) {
+                        data.unshift(msg.result.dataList[i]);
+                    }
+                    console.log(data);
+                    var date = [];
+                    for (var i = 0; i < msg.result.dateList.length; i++) {
+                        date.unshift(msg.result.dateList[i]);
+
+                    }
+                    console.log(date)
+                    option = {
+                        title: {
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return '时间：' + params[0].name + '<br/>最新价格：' + params[0].value;
+                                //                            console.log(params[0])
+
+                            },
+                            axisPointer: {
+                                type: 'line',
+                                lineStyle: {
+                                    color: '#48b',
+                                    width: 1,
+                                    type: 'solid'
+                                },
+                                crossStyle: {
+                                    color: '#1e90ff',
+                                    width: 1,
+                                    type: 'dashed'
+                                },
+                                shadowStyle: {
+                                    color: 'rgba(150,150,150,0.3)',
+                                    width: 'auto',
+                                    type: 'default'
+
+                                }
+                            },
+                            textStyle: {
+                                fontSize: 15
+                            }
+                        },
+                        grid: {
+                            left: 15,
+                            right: 10,
+                            top: 5,
+                            bottom: 0,
+                            containLabel: true,
+
+                        },
+                        xAxis: {
+                            //                            type: 'value',
+                            //                            splitLine: {
+                            //                                show: true
+                            //                            },
+                            data: date,
+                            boundaryGap: false,
+                            axisLabel: {
+                                interval: 10,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            //                        boundaryGap:false,
+                            //                        boundaryGap: [0, 10],
+                            scale: true,
+                            splitLine: {
+                                show: false
+                            },
+                            boundaryGap: false,
+                            spliteArea: {
+                                //                            show: true,
+                                areaStyle: {
+                                    type: 'default',
+                                    //                                color: rgba(3,3,3)
+
+                                }
+                            },
+                            axisLabel: {
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                },
+                                inside: true
+                            },
+                            axisTick: {
+                                inside: true
+                            },
+                        },
+                        series: [{
+                                name: '模拟数据',
+                                type: 'line',
+                                //                        showSymbol: false,
+                                //                        hoverAnimation: false,
+                                data: data,
+                                smooth: true,
+                                dataFilter: 'nearst',
+                                //                        clickable:false,
+                                symbol: 'none',
+                                areaStyle: {
+                                    normal: {
+                                        color: 'skyblue'
+                                    }
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: '#5083e3',
+                                        width: 1
+                                    }
+                                },
+                                /* markPoint: {
+                                     symbol: 'pin',
+                                     label: {
+                                         normal: {
+                                             textStyle: {
+                                                 color: '#fff'
+                                             }
+                                         }
+                                     },
+                                     itemStyle: {
+                                         normal: {
+                                             color: 'rgba(40, 135, 238, 0.41)'
+                                         },
+                                     },
+                                     data: [
+                                         {
+                                             name: '最大值',
+                                             type: 'max'
+                                         },
+                                         {
+                                             name: '最大值',
+                                             type: 'min',
+                                             symbolRotate: 180,
+                                             label: {
+                                                 normal: {
+                                                     position: ['10%', '50%']
+                                                 }
+                                             }
+                                         }
+                                     ]
+                                 },*/
+
+                        },
+
+                        ],
+                        backgroundColor: '#fff',
+                        textStyle: {
+                            color: '#333',
+                            fontStyle: 'normal',
+                            //                            fontSize:20,
+                        }
+
+                    };
+                    myChart.setOption(option);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("部门切换失败，请联系管理员!");
+                }
+
+            })
+        }
+        /*
+         *5,15,30分钟线绘图
+         */
+        function getData2(value, time) {
+            $.ajax({
+                type: 'get',
+                //            url: 'http://112.74.212.112:8090/app-api/api/KLine/getNewKLine.do',
+                url: '/getMoreMinute.jspa',
+                //            dataType: 'json',
+                dataType: 'json',
+                data: 'value=' + value,
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    //                    console.log(msg.result)
+                    var data = [];
+                    for (var i = 0; i < msg.result.dataList.length; i++) {
+                        data.unshift(msg.result.dataList[i]);
+
+                    }
+                    //                    console.log(data);
+                    var date = [];
+                    for (var i = 0; i < msg.result.dateList.length; i++) {
+                        date.unshift(msg.result.dateList[i]);
+
+                    }
+                    //                    console.log(date)
+                    option = {
+                        title: {
+                            //                            text: 'Ajax轮询自动刷新 V0.0.1'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                return '时间：' + params[0].name + '<br/>开盘：' + params[0].value[0] + ' 收盘：' + params[0].value[1] + '<br/>最高：' + params[0].value[2] + ' 最低：' + params[0].value[3];
+                                //                            console.log(params[0])
+                            },
+                            axisPointer: {
+                                type: 'line',
+                                lineStyle: {
+                                    color: '#48b',
+                                    width: 2,
+                                    type: 'solid'
+                                },
+                                crossStyle: {
+                                    color: '#1e90ff',
+                                    width: 1,
+                                    type: 'dashed'
+                                },
+                                shadowStyle: {
+                                    color: 'rgba(150,150,150,0.3)',
+                                    width: 'auto',
+                                    type: 'default'
+                                }
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            splitLine: {
+                                show: true
+                            },
+                            data: date,
+                            boundaryGap: true,
+                            axisLine: {
+                                onZero: false
+                            },
+                            splitLine: {
+                                show: false
+                            },
+
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            axisTick: {
+                                alignWithLabel: true
+                            },
+                            axisLabel: {
+                                interval: time,
+                                margin: 15,
+                                textStyle: {
+                                    fontSize: 10
+                                }
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            //                        boundaryGap:false,
+                            //                        boundaryGap: [0, 10],
+                            scale: true,
+                            //                            splitLine: {
+                            //                                show: true
+                            //                            },
+                            boundaryGap: false,
+                            spliteArea: {
+                                show: true,
+
+                            },
+                            axisTick: {
+                                inside: true
+                            },
+                            axisLabel: {
+                                inside: true
+                            }
+
+                        },
+                        backgroundColor: '#fff',
+                        series: [{
+                            name: '模拟数据',
+                            type: 'candlestick',
+                            //                        showSymbol: false,
+                            //                        hoverAnimation: false,
+                            data: data,
+                            smooth: false,
+                            dataFilter: 'nearst',
+                            //                        clickable:false,
+                            symbol: 'none',
+                            itemStyle: {
+                                normal: {
+                                    color: '#f54337',
+                                    color0: '#13b94d',
+                                    borderColor: '#f54337',
+                                    borderColor0: '#13b94d'
+                                }
+                            }
+                        }],
+
+
+                    };
+                    myChart.setOption(option);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("部门切换失败，请联系管理员!");
+                }
+
+            })
+        }
+
+        /*
+         *点击切换视图
+         */
+        $('#buttonWrap span').on('click', function () {
+            $('#buttonWrap span').removeClass('buttonChoose');
+            $(this).addClass('buttonChoose');
+            var val = $(this).index();
+            console.log(val)
+            if (val >= 1) {
+                if (val == 1) {
+                    getData2(val + 1, 10)
+                } else if (val == 2) {
+                    getData2(val + 1, 7);
+                } else {
+                    getData2(val + 1, 5);
+                }
+
+            } else {
+                getData1();
+                setInterval(getData1, 30000)
+            }
+        });
+        /*
+         *实时行情数据(prompt)
+         */
+        function getData3() {
+            $.ajax({
+                type: 'get',
+                url: '/getQuote.jspa',
+                dataType: 'json',
+                //data: 'value=1',
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+
+                    var nowprice = msg.result.silver;
+                    var price = $('#promptWrap .left .price span').html();
+                    if ("$!orderId" != "") {
+                        var count = (nowprice - $buyPrice) * $count * $plRatio;
+                        if ("$buyDirection" == 1) {
+                            $('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100 * -1 + '元');
+                        } else {
+                            $('#chooseBtnWrap .p2 .l4').html(Math.floor(count * 100) / 100 + '元');
+                        }
+                        if (parseInt($('#chooseBtnWrap .p2 .l4').html()) >= 0) {
+                            $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
+                            $('#chooseBtnWrap .p2 .l4').addClass('colRed');
+                        } else {
+                            $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
+                            $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
+                        }
+                    }
+                    var price = $('#promptWrap .left .price span').html();
+                    $('#promptWrap .left .price span').html(msg.result.silver);
+                    $('#promptWrap .right .p1 span').html(msg.XAG1.HIGH);
+                    $('#promptWrap .right .p2 span').html(msg.XAG1.PRECLOSE);
+                    $('#promptWrap .right .p3 span').html(msg.XAG1.LOW);
+                    $('#promptWrap .right .p4 span').html(msg.XAG1.OPEN);
+                    //                    console.log(msg);
+                    console.log(msg);
+
+                    //                    console.log($('#promptWrap .left .price').html());
+                    if (price <= msg.result.silver) {
+                        console.log('red');
+                        $('#promptWrap .left').addClass('red');
+                        $('#promptWrap .left .price').removeClass('colGreen');
+                        $('#promptWrap .left .price').addClass('colRed');
+                        $('#promptWrap .left .price img').attr('src', 'img/up.jpg');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('red');
+                        }, 1500);
+
+                    } else {
+                        console.log('green');
+                        $('#promptWrap .left').addClass('green');
+                        $('#promptWrap .left .price').removeClass('colRed');
+                        $('#promptWrap .left .price').addClass('colGreen');
+                        $('#promptWrap .left .price img').attr('src', 'img/down.jpg');
+                        setTimeout(function () {
+                            $('#promptWrap .left').removeClass('green');
+                        }, 1500)
+                    }
+
+                }
+            })
+        }
+        setInterval(getData3, 5000);
+        /*
+         *建仓、保本、盈利
+         */
+        function getData4() {
+            $.ajax({
+                type: 'get',
+                url: '',
+                dataType: 'json',
+                //                dataType: 'jsonp',
+                //                data: 'value=1',
+                //jsonp: 'jsonpcallback',
+                success: function (msg) {
+                    $('#chooseBtnWrap .p2 .l1').html(msg);
+                    $('#chooseBtnWrap .p2 .l2').html(msg);
+                    $('#chooseBtnWrap .p2 .l3').html(msg);
+                    $('#chooseBtnWrap .p2 .l4').html(msg);
+                    if ($('#chooseBtnWrap .p2 .l4').html() >= 0) {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colGreen');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colRed');
+                    } else {
+                        $('#chooseBtnWrap .p2 .l4').removeClass('colRed');
+                        $('#chooseBtnWrap .p2 .l4').addClass('colGreen');
+                    }
+
+                }
+            });
+        }
+        // setInterval(getData4, 5000);
+        /*
+         *买涨btn
+         */
+
+        $('#chooseBtnWrap .p1 #buyUp').on('click', function () {
+            buy(2);
+            $('#colType').val(2);
+        });
+        $('#chooseBtnWrap .p1 #buyDown').on('click', function () {
+            buy(1);
+            $('#colType').val(1);
+        });
+
+        function buy(a) {
+            //$('#chooseBtnWrap .p1 #buyUp').on('click', function () {
+            $('#alertWrap').slideDown(800);
+            if (a == 2) {
+                //alert('red')
+                $('#title').removeClass('bgRed');
+                $('#title').removeClass('bgGreen');
+                $('#content1 #goPay').removeClass('bgRed');
+                $('#content1 #goPay').removeClass('bgGreen');
+                $('#content2 #goPay').removeClass('bgRed');
+                $('#content2 #goPay').removeClass('bgGreen');
+                $('#title').addClass('bgRed');
+                $('#title').html('建仓买涨');
+                $('#content1 #goPay').addClass('bgRed');
+                $('#content2 #goPay').addClass('bgRed');
+            } else if (a == 1) {
+                //alert('green')
+                $('#title').removeClass('bgRed');
+                $('#title').removeClass('bgGreen');
+                $('#content1 #goPay').removeClass('bgRed');
+                $('#content1 #goPay').removeClass('bgGreen');
+                $('#content2 #goPay').removeClass('bgRed');
+                $('#content2 #goPay').removeClass('bgGreen');
+                $('#title').addClass('bgGreen');
+                $('#content1 #goPay').addClass('bgGreen');
+                $('#content2 #goPay').addClass('bgGreen');
+                $('#title').html('建仓买跌');
+                $('#title').html('建仓买跌');
+            }
+            $('#content1 #priceChoose .priceItem').on('click', function () {
+
+                var hands = $('.pricePrompt .div1 .show').html();
+                $('#priceChoose .priceItem').removeClass('bgBlue');
+                $('#priceChoose .priceItem .p1').removeClass('colWhite');
+                $(this).addClass('bgBlue');
+                $(this).find('.p1').addClass('colWhite');
+                if ($(this).index() == 1) {
+                    $('.pricePrompt .div1 .show').html(1);
+                    $('#perPrice').html('8');
+                    $('#content1 .totalPrice').html(8);
+                    $('#content1 .totalCost').html(0.6);
+                    testPrice(8);
+                } else if ($(this).index() == 2) {
+                    $('.pricePrompt .div1 .show').html(1);
+                    $('#perPrice').html('80');
+                    //alert($(this).index())
+                    $('#content1 .totalPrice').html(80);
+                    $('#content1 .totalCost').html(6);
+                    testPrice(80);
+                } else if ($(this).index() == 3) {
+                    $('.pricePrompt .div1 .show').html(1);
+                    $('#perPrice').html('200');
+                    $('#content1 .totalPrice').html(200);
+                    $('#content1 .totalCost').html(24);
+                    testPrice(200);
+                }
+                //});
+            });
+            $('.cancel').on('click', function () {
+                $('#alertWrap').slideUp(800);
+            });
+        }
+        /*
+         *用户余额
+         */
+        function testPrice(a) {
+
+            if ($('.totalPrice').html() <= $money) {
+                //alert($money+'-----------'+$('.totalPrice').html());
+                $('#goPay').css({
+                    display: 'block'
+                });
+                $('#needRecharge').css({
+                    display: 'none'
+                });
+            } else {
+                $('#goPay').css({
+                    display: 'none'
+                });
+                $('#needRecharge').css({
+                    display: 'block'
+                });
+            }
+
+        }
+        /*
+         *算手续费
+         */
+        function testCost() {
+            var show = $('#content1 .pricePrompt .div1 .show').html();
+            var totalPrice = $('#content1 .totalPrice').html();
+            var buyType = parseInt(totalPrice / show);
+
+            if (buyType == 8) {
+                $('#content1 .totalCost').html((6 * show) / 10);
+            } else if (buyType == 80) {
+                $('#content1 .totalCost').html((60 * show) / 10);
+            } else {
+                $('#content1 .totalCost').html((240 * show) / 10);
+            }
+        }
+        changeShow();
+
+        function changeShow() {
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            testCost();
+            testPrice(8);
+            $('#content1 .pricePrompt .div1 .jia').on('click', function () {
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content1 .totalPrice').html();
+
+                //                console.log(buyType);
+                if (show >= 10) {
+                    $('#content1 .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    $('#content1 .pricePrompt .div1 .show').html(show);
+                    if (show == 1) {
+                        $('#content1 .totalPrice').html(totalPrice * show);
+                    } else {
+                        //console.log((totalPrice / (show - 1)) * show)
+                        $('#content1 .totalPrice').html((totalPrice / (show - 1)) * show);
+                    }
+                }
+                testCost();
+
+            });
+            $('#content1 .pricePrompt .div1 .jian').on('click', function () {
+                var show = $('#content1 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content1 .totalPrice').html();
+
+                if (show <= 1) {
+                    $('#content1 .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $('#content1 .pricePrompt .div1 .show').html(show);
+                    $('#content1 .totalPrice').html((totalPrice / (show + 1)) * show);
+                }
+                testCost();
+            });
+            $('#content1 .pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                //alert(show)
+                if (show >= 50) {
+                    $(this).parent().find('.show').html(50 + "%");
+                } else {
+                    //alert(show)
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+            $('#content1 .pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                //                console.log(show);
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+
+        function changeShow2() {
+            //            alert(1);
+            //            $('#content1 .pricePrompt .div1 .show').html(1);
+            //            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .jia').on('click', function () {
+                //                alert(a++);
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content2 .totalPrice').html();
+                console.log(show);
+                if (show >= 10) {
+                    $('#content2 .pricePrompt .div1 .show').html(10);
+                } else {
+                    show++;
+                    //                                        alert(show)
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    if (show == 1) {
+                        $('#content2 .totalPrice').html(totalPrice * show);
+                    } else {
+                        $('#content2 .totalPrice').html((totalPrice / (show - 1)) * show);
+                    }
+                }
+
+            });
+            $('#content2 .pricePrompt .div1 .jian').on('click', function () {
+                var show = $('#content2 .pricePrompt .div1 .show').html();
+                var totalPrice = $('#content2 .totalPrice').html();
+                if (show <= 1) {
+                    $('#content2 .pricePrompt .div1 .show').html(1);
+                } else {
+                    show--;
+                    $('#content2 .pricePrompt .div1 .show').html(show);
+                    $('#content2 .totalPrice').html((totalPrice / (show + 1)) * show);
+                }
+            });
+            $('#content2 .pricePrompt .div2 .jia').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show >= 50) {
+                    $(this).parent().find('.show').html(50 + "%");
+                } else {
+                    show += 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+
+            });
+            $('#content2 .pricePrompt .div2 .jian').on('click', function () {
+                var show = parseInt($(this).parent().find('.show').html());
+                if (show <= 0) {
+                    $(this).parent().find('.show').html(0 + "%");
+                } else {
+                    show -= 10;
+                    $(this).parent().find('.show').html(show + "%");
+                }
+            });
+        }
+        /*
+         *使用现金，使用银元券切换
+         */
+        $('#tab #cash').on('click', function () {
+
+            $('#content1 .pricePrompt .div1 .show').html(1);
+            $('#content2 .pricePrompt .div1 .show').html(1);
+            $('#content1 .totalPrice').html(8);
+            $('#content1 .totalCost').html(0.6);
+            $('#content2').css({
+                display: 'none'
+            });
+
+            $('#content1').css({
+                display: 'block'
+            });
+            $('#tab #ticket').removeClass('tabChoose');
+            $(this).addClass('tabChoose');
+            $('#content1 #priceChoose .priceItem').removeClass('bgBlue');
+            $('#content1 #priceChoose .priceItem .p1').removeClass('colWhite');
+            $('#content1 #priceChoose .priceItem:first').addClass('bgBlue');
+            $('#content1 #priceChoose .priceItem .p1:first').addClass('colWhite');
+
+        });
+
+
+        //
+        changeShow2();
+        $('#tab #ticket').on('click', function () {
+            //$('#content1 .pricePrompt .div1 .show').html(1);
+            //$('#content2 .pricePrompt .div1 .show').html(1);
+            //$('#content2 .totalWrap .totalPrice').html(8);
+            //$('#content1').css({
+            //    display: 'none'
+            //});
+
+            // $('#content2').css({
+            //     display: 'block'
+            // });
+            // $('#tab #cash').removeClass('tabChoose');
+            //$('#tab #ticket').addClass('tabChoose');
+            // $('#content2 #priceChoose .priceItem').removeClass('bgBlue');
+            // $('#content2 #priceChoose .priceItem .p1').removeClass('colWhite');
+            // $('#content2 #priceChoose .priceItem:first').addClass('bgBlue');
+            // $('#content2 #priceChoose .priceItem .p1:first').addClass('colWhite');
+
+            $.ajax({
+                type: 'get',
+                url: 'getSecuritisCout.jspa?uid=$uid',
+                success: function (msg) {
+
+                    if (msg == '' || msg.code == '200') {
+                        logger('当前没有银元券！');
+                    } else if (msg.code == '500') {
+                        logger('连接异常！');
+                    } else if (msg.code == '1078') {
+                        window.location.href = "/weipanLogin.jspa?uid=$uid";
+                    } else {
+                        //alert('aaaaaaaa')
+                        console.log(msg);
+                        $('#content1').css({
+                            display: 'none'
+                        });
+                        $('#content2').css({
+                            display: 'block'
+                        });
+                        $('#tab #cash').removeClass('tabChoose');
+                        $('#tab #ticket').addClass('tabChoose');
+                        $('#content2 #priceChoose .priceItem').removeClass('bgBlue');
+                        $('#content2 #priceChoose .priceItem .p1').removeClass('colWhite');
+                        $('#content2 #priceChoose .priceItem:first').addClass('bgBlue');
+                        $('#content2 #priceChoose .priceItem .p1:first').addClass('colWhite');
+                        $('#content2 #priceChoose .priceItem').on('click', function () {
+                            var hands = $('#content2 .pricePrompt .div1 .show').html();
+                            $('#priceChoose .priceItem').removeClass('bgBlue');
+                            $('#priceChoose .priceItem .p1').removeClass('colWhite');
+                            $(this).addClass('bgBlue');
+                            $(this).find('.p1').addClass('colWhite');
+                            //alert($(this).index())
+                            $('.pricePrompt .div1 .show').html(1);
+                            if ($(this).index() == 1) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                //$('#perPrice').html('8');
+                                $('#content2 .totalPrice').html(8);
+                                testPrice(8);
+
+
+                            } else if ($(this).index() == 2) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                //$('#perPrice').html('8');
+                                $('#content2 .totalPrice').html(80);
+                                testPrice(80);
+                            } else if ($(this).index() == 3) {
+                                $('.pricePrompt .div1 .show').html(1);
+                                //$('#perPrice').html('8');
+                                $('#content2 .totalPrice').html(200);
+                                testPrice(200);
+
+                            }
+                        });
+                    }
+
+                }
+            });
+        });
+        //        }
+        /*
+         *alert
+         */
+        $('#content1 #goPay').on('click', function () {
+            var val = $('#colType').val();
+            var title = '';
+            if (val == 2) {
+                title = '买涨';
+            } else {
+                title = '买跌';
+            }
+            var totalPrice = $(this).parent().parent().find('.totalPrice').html();
+            var high = $(this).parent().parent().find('.high').html();
+            var low = $(this).parent().parent().find('.low').html();
+            var hands = $(this).parent().parent().find('.div1 .show').html();
+            var totalCost = $(this).parent().parent().find('.totalCost').html();
+            //            console.log(totalPrice)
+            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">购买方向</div><div>' + title + '</div></li><li><div class="dv1">花费金额（元）</div><div>' + totalPrice + '</div></li><li><div class="dv1">手续费（元）</div><div>' + totalCost + '</div></li><li><div class="dv1">数量（手）</div><div>' + hands + '</div></li><li><div class="dv1">止盈点</div><div>' + high + '</div></li><li><div class="dv1">止损点</div><div>' + low + '</div></li></ul>', ['确 定', '取 消'],
+                function (e) {
+                    //callback 处理按钮事件
+                    var button = $(e.target).attr('class');
+                    if (button == 'ok') {
+                        //按下确定按钮执行的操作
+                        var price = totalPrice / hands;
+                        var productId = "";
+                        if (price == "8") {
+                            productId = 4;
+                        } else if (price == "80") {
+                            productId = 10;
+                        } else if (price == "200") {
+                            productId = 11;
+                        }
+                        var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" + hands + "&isJuan=0";
+                        if (high != "0%") {
+                            param += "&toplimit=" + high;
+                        }
+                        if (low != "0%") {
+                            param += "&bottomlimit=" + low;
+                        }
+                        $.ajax({
+                            type: 'get',
+                            url: 'createOrder.jspa',
+                            dataType: 'json',
+                            data: param,
+                            success: function (data) {
+                                logger(data.msg);
+                                setTimeout(function () {
+                                    if (data.ret == "0") {
+                                        window.location.reload();
+                                    } else if (data.ret == "-2") {
+                                        window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                                    } else if (data.ret == "-1") {
+                                        logger("建仓失败！");
+                                    }
+                                }, 2000);
+
+                            },
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                logger("出现错误，请联系管理员!");
+                            }
+                        });
+
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("操作成功", "top", 2000);
+                        }, 300);
+                    }
+
+                    if (button == 'cancel') {
+                        //按下取消按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("您选择“取消”了", "bottom", 2000);
+                        }, 300);
+                    }
+                }
+            );
+        });
+        $('#content2 #goPay').on('click', function () {
+            var val = $('#colType').val();
+            var title = '';
+            if (val == 2) {
+                title = '买涨';
+            } else {
+                title = '买跌';
+            }
+            var totalPrice = $(this).parent().parent().find('.totalPrice').html();
+            var high = $(this).parent().parent().find('.high').html();
+            var low = $(this).parent().parent().find('.low').html();
+            var hands = $(this).parent().parent().find('.div1 .show').html();
+            var totalCost = $(this).parent().parent().find('.totalCost').html();
+            //            console.log(totalPrice)
+            popTipShow.confirm('请再次核对购买信息', '<ul><li><div class="dv1">购买方向</div><div>' + title + '</div></li><li><div class="dv1">花费金额（元）</div><div>' + totalPrice + '</div></li><li><div class="dv1">手续费（元）</div><div>0</div></li><li><div class="dv1">数量（手）</div><div>' + hands + '</div></li><li><div class="dv1">止盈点</div><div>' + high + '</div></li><li><div class="dv1">止损点</div><div>' + low + '</div></li></ul>', ['确 定', '取 消'],
+                function (e) {
+                    //callback 处理按钮事件
+                    var button = $(e.target).attr('class');
+                    if (button == 'ok') {
+                        //按下确定按钮执行的操作
+                        var price = totalPrice / hands;
+                        var productId = "";
+                        if (price == "8") {
+                            productId = 4;
+                        } else if (price == "80") {
+                            productId = 10;
+                        } else if (price == "200") {
+                            productId = 11;
+                        }
+                        var param = "uid=$uid&productId=" + productId + "&type=" + $('#colType').val() + "&sl=" + hands + "&isJuan=1";
+                        if (high != "0%") {
+                            param += "&toplimit=" + high;
+                        }
+                        if (low != "0%") {
+                            param += "&bottomlimit=" + low;
+                        }
+                        $.ajax({
+                            type: 'get',
+                            url: 'createOrder.jspa',
+                            dataType: 'json',
+                            data: param,
+                            success: function (data) {
+                                logger(data.msg);
+                                setTimeout(function () {
+                                    if (data.ret == "0") {
+                                        window.location.reload();
+                                    } else if (data.ret == "-2") {
+                                        window.loacation.href = "/weipanLogin.jspa?uid=$uid";
+                                    } else if (data.ret == "-1") {
+                                        logger("建仓失败！");
+                                    }
+                                }, 2000);
+
+                            },
+                            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                                logger("出现错误，请联系管理员!");
+                            }
+                        });
+
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("操作成功", "top", 2000);
+                        }, 300);
+                    }
+
+                    if (button == 'cancel') {
+                        //按下取消按钮执行的操作
+                        //todo ....
+                        this.hide();
+                        setTimeout(function () {
+                            webToast("您选择“取消”了", "bottom", 2000);
+                        }, 300);
+                    }
+                }
+            );
+        });
+    </script>
+
+</body>
+
+</html>
