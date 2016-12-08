@@ -30,13 +30,14 @@ header .balance {
     height: 12.5vw;
     font-size: 4.375vw;
     line-height: 4.375vw;
-    margin-bottom: 4.6vw;
+    margin-bottom: 3vw;
 }
 
 #content .prompt {
     font-size: 3.75vw;
-    color: #999;
-    margin: 0 0 2vw 0;
+    color: #c4c3c3;
+    margin: 0 0 3vw 0;
+    text-indent: 3.5vw;
 }
 
 #content .select1 {
@@ -52,7 +53,7 @@ header .balance {
     color: #999;
     background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
     background-size: 3.75vw;
-    margin-bottom: 3.125vw;
+    margin-bottom: 3vw;
     border-radius: 1vw;
     text-indent: 3.9vw;
 }
@@ -69,7 +70,7 @@ header .balance {
     color: #999;
     background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
     background-size: 3.75vw;
-    margin-bottom: 3.125vw;
+    margin-bottom: 3vw;
     border-radius: 1vw;
     width: 100%;
     text-indent: 3.9vw;
@@ -93,27 +94,37 @@ header .balance {
 #content .p1 .inp2 {
     width: 69%;
     border: none;
-    border:1px solid #ccc;
+    border-bottom:1px solid #ccc;
     line-height: 14vw;
+    text-indent: 3.9vw;
+    font-size: 4.375vw;
 }
 
 #content .p1 .getCode {
     display: inline-block;
     font-size: 4.375vw;
-    color: #429de3;
+/*    color: #429de3;*/
     float: right;
     line-height: 14vw;
     margin-right: 2vw;
+    background: #48a5f2;
+    color: #fff;
+    font-size: 3vw;
+    border-radius: 1vw;
+    padding: 0 2vw;
 }
 
 #content .p1 .hide {
     display: inline-block;
-    font-size: 4.375vw;
-    color: #429de3;
+    font-size: 3vw;
+    color: #fff;
     display: none;
     float: right;
     line-height: 14vw;
     margin-right: 2vw;
+    background: #48a5f2;
+    border-radius: 1vw;
+    padding: 0 2vw;
 }
 
 #content .btn {

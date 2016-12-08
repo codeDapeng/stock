@@ -46,6 +46,7 @@
         <input class="inp" type="text" placeholder="开户支行">
         <input class="inp" type="text" placeholder="服务卡号">
         <input class="inp" type="text" placeholder="持卡人姓名">
+        <input class="inp" type="text" placeholder="手机号">
         <p class="p1">
             <input type="text" placeholder="验证码" class="inp2">
             <span class="getCode">发送验证码</span>
@@ -151,7 +152,7 @@
          *alert
          */
         $('.btn').on('click', function () {
-            popTipShow.confirm('请再次核对提现信息', '<ul><li><div class="dv1">提现至</div><div><p>中国建设银行</p><p>6217000056788765168</p></div></li><li><div class="dv1">提现金额</div><div>3.60</div></li><li><div class="dv1">实际到账金额</div><div>1.60</div></li><li><div class="dv1">手续费</div><div>2.00</div></li></ul>', ['确 定', '取 消'],
+            popTipShow.confirm('请再次核对提现信息', '<ul><li><div class="dv1">提现至</div><div><p>中国建设银行</p><p>6217000056788765168</p></div></li><li><div class="dv1">提现金额</div><div>3.60</div></li><li><div class="dv1">实际到账金额</div><div class="colRed">1.60</div></li><li><div class="dv1">手续费</div><div>2.00</div></li><li><div class="dv1">验证码</div><div><input style="width:50%;float:left;height:9vw;line-height:3.75vw;border:none;border-bottom:1px solid #ccc;border-radius:1vw;margin-left:2vw;" type="text"><span style="font-size:2.75vw;float:left;margin-left:2vw;background:#48a5f2;color:#fff;border-radius:1vw;padding:0 1vw;">获取验证码</span></div></li></ul>', ['确 定', '取 消'],
                 function (e) {
                     //callback 处理按钮事件
                     var button = $(e.target).attr('class');
