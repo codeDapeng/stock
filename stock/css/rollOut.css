@@ -18,7 +18,7 @@ header .balance {
 
 #content {
     /*    width: 100%;*/
-    padding: 4.68vw;
+    padding: 4.68vw 0;
 }
 
 #content .inp {
@@ -30,20 +30,24 @@ header .balance {
     height: 12.5vw;
     font-size: 4.375vw;
     line-height: 4.375vw;
-    margin-bottom: 3vw;
+    color: #999;
+/*    margin-bottom: 2.5vw;*/
 }
 
 #content .prompt {
     font-size: 3.75vw;
     color: #c4c3c3;
-    margin: 0 0 3vw 0;
+/*    margin: 0 0 2.5vw 0;*/
     text-indent: 3.5vw;
+    border-bottom: 1px solid #ccc;
+    line-height: 10vw;
 }
 
 #content .select1 {
     width: 100%;
     /*    margin-left: 3.125vw;*/
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 1px solid #ccc;
     height: 12.5vw;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -51,26 +55,28 @@ header .balance {
 /*    padding-left: 35vw;*/
     font-size: 4.375vw;
     color: #999;
-    background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
+    background: url('../img/btnDown.jpg') no-repeat scroll 93vw center transparent;
     background-size: 3.75vw;
-    margin-bottom: 3vw;
+/*    margin-bottom: 2.5vw;*/
     border-radius: 1vw;
     text-indent: 3.9vw;
 }
 
 #content .select2 {
     width: 100%;
-    border: 1px solid #ccc;
-    height: 12.5vw;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    height: 12.5vw;
+
 /*    padding-left: 40vw;*/
     font-size: 4.375vw;
     color: #999;
-    background: url('../img/btnDown.jpg') no-repeat scroll 83vw center transparent;
+    background: url('../img/btnDown.jpg') no-repeat scroll 93vw center transparent;
     background-size: 3.75vw;
-    margin-bottom: 3vw;
+/*    margin-bottom: 2.5vw;*/
     border-radius: 1vw;
     width: 100%;
     text-indent: 3.9vw;
@@ -98,6 +104,7 @@ header .balance {
     line-height: 14vw;
     text-indent: 3.9vw;
     font-size: 4.375vw;
+    color: #999;
 }
 
 #content .p1 .getCode {
@@ -105,13 +112,13 @@ header .balance {
     font-size: 4.375vw;
 /*    color: #429de3;*/
     float: right;
-    line-height: 14vw;
-    margin-right: 2vw;
+    line-height: 10vw;
+    margin:2vw 3vw 0 0;
     background: #48a5f2;
     color: #fff;
     font-size: 3vw;
     border-radius: 1vw;
-    padding: 0 2vw;
+    padding: 0 3.5vw;
 }
 
 #content .p1 .hide {
@@ -120,22 +127,23 @@ header .balance {
     color: #fff;
     display: none;
     float: right;
-    line-height: 14vw;
-    margin-right: 2vw;
+    line-height: 10vw;
+    margin:2vw 3vw 0 0;
     background: #48a5f2;
     border-radius: 1vw;
-    padding: 0 2vw;
+    padding: 0 3.5vw;
 }
 
 #content .btn {
     display: block;
-    width: 100%;
+    width: 80%;
     background: #48a5f2;
     line-height: 12.5vw;
     border-radius: 1vw;
     text-align: center;
     color: #fff;
     font-size: 4.375vw;
+    margin: 0 auto;
     margin-top: 9.375vw;
     margin-bottom: 3.125vw;
 }

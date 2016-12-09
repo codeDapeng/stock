@@ -48,7 +48,7 @@
 /* ============================================================
    样式重置
    ============================================================ */
-body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}
+/*body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,fieldset,legend,input,select,textarea,button,th,td{margin:0;padding:0;}*/
 h1,h2,h3,h4,h5,h6{font-size:100%;}
 ul,dl,ol{list-style:none;}
 /*img,fieldset,input[type="submit"]{border:0 none;}*/
@@ -67,7 +67,7 @@ input,select,textarea{outline:none;}
 a,button,input,label{-webkit-tap-highlight-color:rgba(0,0,0,0);}
 /* Android4.0下不识别选择器-webkit-transform-3d 使用它可做Android4.0下版本兼容 */
 @media all and (-webkit-transform-3d){
-    /* android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
+/*     android4.0+ ios4+ 恢复按钮被点击时产生的效果 */
     a,button,input,label{-webkit-tap-highlight-color:rgba(130,130,130,.52);outline: none;}
 }
 /*html,body{height:100%;margin: 0 auto;max-width: 640px;background-color: #eaeaee;}*/

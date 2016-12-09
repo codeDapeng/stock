@@ -160,7 +160,7 @@
     width: 25%;
 }
 #footerNav a img{
-    width: 4.75vw;
+    width: 4.75vw;height: 4.75vw;
 }
 #footerNav a p {
     text-align: center;
