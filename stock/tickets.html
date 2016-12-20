@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>代金券</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/tickets.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/flexible.js"></script>
+</head>
+
+<body>
+    <ul id="header">
+        <li class="titleChoose">8元</li>
+        <li>80元</li>
+        <li>200元</li>
+    </ul>
+    <div id="ctn1">
+        <ul id="thelist">
+            <li>
+                <p class="p1">
+                   <span class="sp5">x</span>
+                    <span class="colRed sp1" style="font-size:4.7vw;">8元</span>
+                    <span class="sp2">有效期：</span>
+                    <span class="sp2">2016-11-30</span>
+                    <span class="sp2">至</span>
+                    <span class="sp2">2016-12-1</span>
+                </p>
+            </li>
+
+        </ul>
+        <div class="click-bottom"><img src="img/loading.gif" alt="" /><span>点击加载更多</span></div>
+    </div>
+    <div id="ctn2" style="display:none;">
+        <ul id="thelist">
+            <li>
+                <p class="p1">
+                   <span class="sp5">x</span>
+                    <span class="colRed sp1" style="font-size:4.7vw;">80元</span>
+                    <span class="sp2">有效期：</span>
+                    <span class="sp2">2016-11-30</span>
+                    <span class="sp2">至</span>
+                    <span class="sp2">2016-12-1</span>
+                </p>
+            </li>
+        </ul>
+        <div class="click-bottom"><img src="img/loading.gif" alt="" /><span>点击加载更多</span></div>
+    </div>
+    <div id="ctn3" style="display:none;">
+        <ul id="thelist">
+            <li>
+                <p class="p1">
+                   <span class="sp5">x</span>
+                    <span class="colRed sp1" style="font-size:4.7vw;">200元</span>
+                    <span class="sp2">有效期：</span>
+                    <span class="sp2">2016-11-30</span>
+                    <span class="sp2">至</span>
+                    <span class="sp2">2016-12-1</span>
+                </p>
+            </li>
+        </ul>
+        <div class="click-bottom"><img src="img/loading.gif" alt="" /><span>点击加载更多</span></div>
+    </div>
+    <footer id="footerNav" style="position:fixed;top:87vh;">
+        <a href="index.html">
+            <img src="img/idx2.jpg" alt="">
+            <p>首页</p>
+        </a>
+        <a href="">
+            <img src="img/order.jpg" alt="">
+            <p>订单</p>
+        </a>
+        <a href="">
+            <img src="img/msg.jpg" alt="">
+            <p>资讯</p>
+        </a>
+        <a href="personal.html">
+            <img src="img/person.jpg" alt="">
+            <p>个人中心</p>
+        </a>
+    </footer>
+    <script>
+        /*
+         *header切换
+         */
+        $('#header li').on('click', function () {
+            $('#header li').removeClass('titleChoose');
+            $(this).addClass('titleChoose');
+            if ($(this).index() == 0) {
+                $('#ctn2').css({
+                    display: 'none'
+                });
+                $('#ctn3').css({
+                    display: 'none'
+                });
+                $('#ctn1').css({
+                    display: 'block'
+                });
+            } else if($(this).index() == 1){
+                $('#ctn1').css({
+                    display: 'none'
+                });
+                $('#ctn2').css({
+                    display: 'block'
+                });
+                $('#ctn3').css({
+                    display: 'none'
+                });
+            }else{
+                $('#ctn2').css({
+                    display: 'none'
+                });
+                $('#ctn3').css({
+                    display: 'block'
+                });
+                $('#ctn1').css({
+                    display: 'none'
+                });
+            }
+        });
+        /*
+         *加载更多
+         */
+        $("#ctn1 .click-bottom").on("click", function () {
+            $(this).find('img').show();
+            $(this).find('span').hide();
+            setTimeout("list1(8,'ctn1')", 1000);
+        });
+        $("#ctn2 .click-bottom").on("click", function () {
+            $(this).find('img').show();
+            $(this).find('span').hide();
+            setTimeout("list1(80,'ctn2')", 1000);
+        });
+        $("#ctn3 .click-bottom").on("click", function () {
+            $(this).find('img').show();
+            $(this).find('span').hide();
+            setTimeout("list1(200,'ctn3')", 1000);
+        });
+
+        function list1(num,obj) {
+            for (var k = 1; k <= 3; k++) {
+                var str = "<li><p class=\"p1\"><span class=\"sp5\">x</span><span class=\"colRed sp1\" style=\"font-size:4.7vw;\">"+num+"元</span><span class=\"sp2\">有效期：</span><span class=\"sp2\">2016-11-30</span><span class=\"sp2\">至</span><span class=\"sp2\">2016-12-1</span></p></li>";
+                $("#"+obj+" #thelist").append(str);
+//                console.log(objw)
+            }
+            $("#"+obj+" .click-bottom").find('img').hide();
+            $("#"+obj+" .click-bottom").find('span').show();
+        }
+
+    </script>
+</body>
+
+</html>
