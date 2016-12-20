@@ -25,11 +25,12 @@ header .balance {
     width: 100%;
     overflow: hidden;
     margin-top: 2.5vw;
+    text-align: center;
 }
 #content .p1 span{
     display: block;
-    float: left;
-    width: 49%;
+/*    float: left;*/
+/*    width: 49%;*/
     text-align: center;
     font-size: 4.21vw;
 
