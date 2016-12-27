@@ -146,6 +146,10 @@
                     if (button == 'ok') {
                         //按下确定按钮执行的操作
                         //todo ....
+                        var flag=0;
+                        ajax({
+                            flag=1;
+                        })
                         this.hide();
                         setTimeout(function () {
                             webToast("操作成功", "top", 2000);
